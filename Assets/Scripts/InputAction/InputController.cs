@@ -8,16 +8,14 @@ using UnityEngine.Diagnostics;
 
 namespace Core
 {
+    [DefaultExecutionOrder(-1)]
     public class InputController : Singleton<InputController>
     {
         #region Events
-
-        public delegate void StartTouch(Vector2 position, float time);
-
+        public delegate void StartTouch(Vector3 position, float time);
         public event StartTouch OnStartTouch;
-        public delegate void EndTouch(Vector2 position, float time);
-
-        public event StartTouch OnEndTouch;
+        public delegate void EndTouch(Vector3 position, float time);
+        public event EndTouch OnEndTouch;
 
         #endregion
 
@@ -44,28 +42,23 @@ namespace Core
 
         private void Start()
         {
-            _baseActions.Touch.FirstTouchPosition.started += ctx => TouchStarted(ctx);
-            _baseActions.Touch.FirstTouchPosition.canceled += ctx => TouchEnded(ctx);
+            _baseActions.Touch.FirstTouch.started += ctx => TouchStarted(ctx);
+            _baseActions.Touch.FirstTouch.canceled += ctx => TouchEnded(ctx);
         }
-
-        
 
         private void TouchStarted(InputAction.CallbackContext ctx)
         {
-            Debug.Log("Started");
-            OnStartTouch?.Invoke(Utilits.ScreenToWorld(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2 >()), (float)ctx.startTime);
-            
+            OnStartTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.startTime);
         }
         
         private void TouchEnded(InputAction.CallbackContext ctx)
         {
-            Debug.Log("Ended");
-            OnStartTouch?.Invoke(Utilits.ScreenToWorld(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2 >()), (float)ctx.startTime);
+            OnEndTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.time);
         }
 
-        public Vector2 TouchPosition()
+        public Vector3 TouchPosition()
         {
-            return Utilits.ScreenToWorld(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>());
+            return Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>());
         }
     }
 }

@@ -1,11 +1,9 @@
 using System;
+using Core.UtilitsSpace;
 
 
-public class UIEvents
+public class UIEvents : Singleton<UIEvents>
 {
-    public static UIEvents Current = new UIEvents();
-
-
     public event Action OnButtonStartGame;
     public void ButtonStartGame()
     {

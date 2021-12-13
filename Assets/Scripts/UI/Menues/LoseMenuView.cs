@@ -14,7 +14,7 @@ public class LoseMenuView : BaseMenuView
 
     private void Awake()
     {
-        _buttonRestart.onClick.AddListener(UIEvents.Current.ButtonRestartGame);
+        _buttonRestart.onClick.AddListener(UIEvents.Instance.ButtonRestartGame);
         FindMyController();
     }
 

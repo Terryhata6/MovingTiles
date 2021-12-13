@@ -14,7 +14,7 @@ namespace Core
         
         private void Start()
         {
-            UIEvents.Current.OnButtonNextLevel += LoadNextScene;
+            UIEvents.Instance.OnButtonNextLevel += LoadNextScene;
 
             if (!LevelDebug)
             {
@@ -31,7 +31,7 @@ namespace Core
         {
             if (_currentLevelController != null)
             {
-                UIEvents.Current.OnButtonStartGame -= _currentLevelController.LevelStart;
+                UIEvents.Instance.OnButtonStartGame -= _currentLevelController.LevelStart;
             }
 
             var currentLevelNumber = PlayerPrefs.GetInt("PlayerLevel");
@@ -45,7 +45,7 @@ namespace Core
         {
             if (_currentLevelController != null)
             {
-                UIEvents.Current.OnButtonStartGame -= _currentLevelController.LevelStart;
+                UIEvents.Instance.OnButtonStartGame -= _currentLevelController.LevelStart;
             }
             var currentLevelNumber = PlayerPrefs.GetInt("PlayerLevel");
             SceneManager.UnloadSceneAsync(currentLevelNumber);
@@ -63,7 +63,7 @@ namespace Core
             _currentLevelController =  FindObjectOfType<LevelController>();
             if (_currentLevelController != null)
             {
-                UIEvents.Current.OnButtonStartGame += _currentLevelController.LevelStart;
+                UIEvents.Instance.OnButtonStartGame += _currentLevelController.LevelStart;
                 return true;
             }
             else

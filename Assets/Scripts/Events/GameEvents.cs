@@ -1,11 +1,10 @@
 using System;
+using Core.UtilitsSpace;
 
 namespace Core
 {
-    public class GameEvents
+    public class GameEvents : Singleton<GameEvents>
     {
-        public static GameEvents Current = new GameEvents();
-        
         public event Action OnLevelVictory;
         public void LevelVictory()
         {
