@@ -14,8 +14,12 @@ namespace Core
         #region Events
         public delegate void StartTouch(Vector3 position, float time);
         public event StartTouch OnStartTouch;
+        
         public delegate void EndTouch(Vector3 position, float time);
         public event EndTouch OnEndTouch;
+
+        public delegate void SwipeDirection(SwipeDirections direction);
+        public event SwipeDirection OnGetSwipe;
 
         #endregion
 
@@ -54,6 +58,11 @@ namespace Core
         private void TouchEnded(InputAction.CallbackContext ctx)
         {
             OnEndTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.time);
+        }
+
+        public void GetSwipe(SwipeDirections direction)
+        {
+            OnGetSwipe?.Invoke(direction);
         }
 
         public Vector3 TouchPosition()
