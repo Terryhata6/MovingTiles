@@ -6,6 +6,7 @@ namespace Core.Entities
     {
         [SerializeField] private int _distanceFromCenter;
         [SerializeField] private int _tileIndex;
+        public bool _tileBusy = false;
         
         
         public void SetDistance(int distance)

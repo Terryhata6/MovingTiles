@@ -69,5 +69,10 @@ namespace Core
         {
             return Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>());
         }
+        
+        public Vector3 TouchPosition(out RaycastHit hit, LayerMask layerMask)
+        {
+            return Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>(), out hit, layerMask);
+        }
     }
 }
