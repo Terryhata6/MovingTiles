@@ -13,15 +13,5 @@ namespace Core.Entities
             OnCooldown = true;
         }
 
-        public void OnCollisionEnter(Collision other)
-        {
-            if (other.gameObject.layer.Equals(6f))
-            {
-                if (other.gameObject.TryGetComponent(out _tempTile))
-                {
-                    
-                }
-            }
-        }
     }
 }
