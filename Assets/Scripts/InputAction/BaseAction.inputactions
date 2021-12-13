@@ -1,0 +1,52 @@
+{
+    "name": "BaseAction",
+    "maps": [
+        {
+            "name": "Touch",
+            "id": "9a18ab29-ceb2-406e-a6b0-90dc05bf800d",
+            "actions": [
+                {
+                    "name": "FirstTouchBool",
+                    "type": "PassThrough",
+                    "id": "2581b695-0f86-4dbe-9377-8a22781610b7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "FirstTouchPosition",
+                    "type": "PassThrough",
+                    "id": "78874ac9-193e-454a-8d0d-3e8c4452c1af",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9675a72e-567d-4905-ac4f-6383b0a7c958",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstTouchBool",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82c88614-c24a-425d-83b1-32c8cc51fc5d",
+                    "path": "<Touchscreen>/primaryTouch/startPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstTouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
