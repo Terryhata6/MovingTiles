@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
+using Core.UtilitsSpace;
 using JetBrains.Annotations;
+using log4net.Core;
 using UnityEngine;
 
 namespace Core
 {
-    public class LevelController : MonoBehaviour
+    public class LevelController : Singleton<LevelController>
     {
         [Header("Properties")] [SerializeField]
         private TurnState _firsTurn;
@@ -36,8 +38,8 @@ namespace Core
                     case TurnState.Player:
                     {
                         _currentTurnState = TurnState.Enemy;
-                        yield return new WaitForSeconds(2f); //Движения врагов
-                        EndOfTurn();
+                        StartCoroutine(TilableObjectsController.Instance.ExecuteEnemiesSkills()); //Движения врагов
+                        
                         break;
                     }
                     case TurnState.Enemy:

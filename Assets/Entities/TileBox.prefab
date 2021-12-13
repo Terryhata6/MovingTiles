@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6566720877355210771}
   - component: {fileID: 1343669152803327945}
   m_Layer: 6
-  m_Name: Center
+  m_Name: TileBox
   m_TagString: Tilebox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

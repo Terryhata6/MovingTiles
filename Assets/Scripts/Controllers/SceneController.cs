@@ -60,7 +60,8 @@ namespace Core
 
         public bool FindLevelController()
         {
-            _currentLevelController =  FindObjectOfType<LevelController>();
+            //_currentLevelController =  FindObjectOfType<LevelController>();
+            _currentLevelController = LevelController.Instance;
             if (_currentLevelController != null)
             {
                 UIEvents.Instance.OnButtonStartGame += _currentLevelController.LevelStart;
