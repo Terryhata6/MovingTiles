@@ -29,8 +29,10 @@ namespace Core
         {
             while (!_gameEnd)
             {
-                Debug.Log($"Сейчас ход {_currentTurnState}");
+                
                 yield return new WaitUntil(() => _endTurn);
+                yield return new WaitForSeconds(0.5f);
+                Debug.Log($"Сейчас ход {_currentTurnState}");
                 _endTurn = false;
 
                 switch (_currentTurnState)
@@ -45,6 +47,7 @@ namespace Core
                     case TurnState.Enemy:
                     {
                         _currentTurnState = TurnState.Player;
+                        
                         break;
                     }
                 }
@@ -55,7 +58,8 @@ namespace Core
         {
             if (_currentTurnState.Equals(TurnState.Player))
             {
-                EndOfTurn();
+                StartCoroutine(TilableObjectsController.Instance.ExecuteSwipeMoving(direction));
+                /*//EndOfTurn();
                 switch (direction)
                 {
                     case SwipeDirections.Left:
@@ -80,7 +84,7 @@ namespace Core
                     }
                     default:
                         throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-                }
+                }*/
             }
             else
             {

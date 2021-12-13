@@ -29,7 +29,7 @@ namespace Core.Entities
 
         private List<TileBox> _path;
 
-        public void Move(Action CallBackMethod)
+        public void MoveToHero(Action CallBackMethod)
         {
             if (!_canMove)
             {
@@ -38,42 +38,88 @@ namespace Core.Entities
             else
             {
                 _path = TileController.Instance.FindPath(_currentTileBox);
-                /*for (int i = 0; i < _path.Count - 1; i++)
+                StartCoroutine(TryMoveToBox(_path[0], CallBackMethod));
+            }
+        }
+
+        public void MoveFromSwipe(SwipeDirections direction, Action CallbackMethod)
+        {
+            switch (direction)
+            {
+                case SwipeDirections.Left:
                 {
-                    Debug.Log("Going to path");
-                    if (_path[i].Equals(_currentTileBox))
+                    if (_currentTileBox.LeftNeighbourExists)
                     {
-                        StartCoroutine(TryMoveToBox(_path[i+1], CallBackMethod));
+                        StartCoroutine(TryMoveToBox(_currentTileBox.LeftNeighbour, CallbackMethod));
                     }
                     else
                     {
-                        Debug.Log("notThis");
+                        CallbackMethod.Invoke();
                     }
-                    
-                }*/
-                StartCoroutine(TryMoveToBox(_path[0], CallBackMethod));
+                    break;
+                }
+                case SwipeDirections.Right:
+                {
+                    if (_currentTileBox.RightNeighbourExists)
+                    {
+                        StartCoroutine(TryMoveToBox(_currentTileBox.RightNeighbour, CallbackMethod));
+                    }
+                    else
+                    {
+                        CallbackMethod.Invoke();
+                    }
+                    break;
+                }
+                case SwipeDirections.Up:
+                {
+                    if (_currentTileBox.ForwardNeighbourExists)
+                    {
+                        StartCoroutine(TryMoveToBox(_currentTileBox.ForwardNeighbour, CallbackMethod));
+                    }
+                    else
+                    {
+                        CallbackMethod.Invoke();
+                    }
+                    break;
+                }
+                case SwipeDirections.Down:
+                {
+                    if (_currentTileBox.BackNeighbourExists)
+                    {
+                        StartCoroutine(TryMoveToBox(_currentTileBox.BackNeighbour, CallbackMethod));
+                    }
+                    else
+                    {
+                        CallbackMethod.Invoke();
+                    }
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
-            
         }
 
         public IEnumerator TryMoveToBox(TileBox box, Action method)
         {
-            for (float i = 0; i < 1; i+=0.01f)
+            for (float i = 0; i < 1; i += 0.01f)
             {
                 transform.position = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position, i);
                 yield return null;
             }
 
-            _currentTileBox = box;
+            SetBox(box);
             method.Invoke();
         }
 
         public void SetBox(TileBox box)
         {
-            //MovetoBoxinstantly
+            //_currentTileBox.changeTiledObject
+            _currentTileBox = box;
+            //box.changeTiledObject;
         }
 
         private bool SkillWasExecuted = false;
+
         public void ExecuteSkill(Action CallbackMethod)
         {
             SkillWasExecuted = false;

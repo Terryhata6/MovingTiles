@@ -50,13 +50,31 @@ namespace Core
                 if (_objects[i].CanMove)
                 {
                     waitingMoves++;
-                    _objects[i].Move( () => waitingMoves--);
+                    _objects[i].MoveToHero( () => waitingMoves--);
                 }
+
+                yield return null;
             }
             yield return new WaitUntil(() => waitingMoves == 0);
             LevelController.Instance.EndOfTurn();
         }
 
-        
+
+        public IEnumerator ExecuteSwipeMoving(SwipeDirections direction)
+        {
+            waitingMoves = 0;
+            for (int i = 0; i < _objects.Count; i++)
+            {
+                if (_objects[i].CanMove)
+                {
+                    waitingMoves++;
+                    _objects[i].MoveFromSwipe( direction,() => waitingMoves--);
+                }
+                yield return null;
+            }
+            yield return new WaitUntil(() => waitingMoves == 0);
+            LevelController.Instance.EndOfTurn();
+        }
+
     }
 }

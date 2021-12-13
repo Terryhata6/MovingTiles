@@ -11,6 +11,15 @@ namespace Core.Entities
         [SerializeField] private bool _walkable = true;
         [SerializeField] public int MovingWeight = 1;
         public List<TileBox> Neighbours => _neighbours;
+
+        public TileBox LeftNeighbour;
+        public TileBox RightNeighbour;
+        public TileBox ForwardNeighbour;
+        public TileBox BackNeighbour;
+        public bool LeftNeighbourExists = false;
+        public bool RightNeighbourExists = false;
+        public bool ForwardNeighbourExists = false;
+        public bool BackNeighbourExists = false;
         public bool Walkable => _walkable;
 
 
@@ -47,6 +56,8 @@ namespace Core.Entities
                 if (!temp.Equals(this))
                 {
                     AddNeighbour(temp);
+                    LeftNeighbour = temp;
+                    LeftNeighbourExists = true;
                 }
             }
             foreach (var raycastHit in Physics.RaycastAll(transform.position, Vector3.right, distance, 1<<6))
@@ -55,6 +66,8 @@ namespace Core.Entities
                 if (!temp.Equals(this))
                 {
                     AddNeighbour(temp);
+                    RightNeighbour = temp;
+                    RightNeighbourExists = true;
                 }
             }
             foreach (var raycastHit in Physics.RaycastAll(transform.position, Vector3.forward, distance, 1<<6))
@@ -63,6 +76,8 @@ namespace Core.Entities
                 if (!temp.Equals(this))
                 {
                     AddNeighbour(temp);
+                    ForwardNeighbour = temp;
+                    ForwardNeighbourExists = true;
                 }
             }
             foreach (var raycastHit in Physics.RaycastAll(transform.position, Vector3.back, distance, 1<<6))
@@ -71,6 +86,8 @@ namespace Core.Entities
                 if (!temp.Equals(this))
                 {
                     AddNeighbour(temp);
+                    BackNeighbour = temp;
+                    BackNeighbourExists = true;
                 }
             }
 
