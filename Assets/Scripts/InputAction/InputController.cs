@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Core.UtilitsSpace;
+using UnityEngine.Diagnostics;
 
 namespace Core
 {
-    public class InputController : MonoBehaviour
+    public class InputController : Singleton<InputController>
     {
         #region Events
 
@@ -46,15 +48,24 @@ namespace Core
             _baseActions.Touch.FirstTouchPosition.canceled += ctx => TouchEnded(ctx);
         }
 
-        private void TouchEnded(InputAction.CallbackContext ctx)
-        {
-            Debug.Log("Start");
-        }
+        
 
         private void TouchStarted(InputAction.CallbackContext ctx)
         {
+            Debug.Log("Started");
+            OnStartTouch?.Invoke(Utilits.ScreenToWorld(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2 >()), (float)ctx.startTime);
+            
+        }
+        
+        private void TouchEnded(InputAction.CallbackContext ctx)
+        {
             Debug.Log("Ended");
-            //OnStartTouch?.Invoke();
+            OnStartTouch?.Invoke(Utilits.ScreenToWorld(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2 >()), (float)ctx.startTime);
+        }
+
+        public Vector2 TouchPosition()
+        {
+            return Utilits.ScreenToWorld(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>());
         }
     }
 }

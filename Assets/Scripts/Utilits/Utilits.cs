@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Core.Utilits
+namespace Core.UtilitsSpace
 {
     public class Utilits
     {
