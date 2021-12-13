@@ -9,13 +9,13 @@ public class UIController : MonoBehaviour
 
     public void Awake()
     {
-        UIEvents.Current.OnButtonStartGame += StartGame;
-        UIEvents.Current.OnButtonPauseGame += PauseGame;
-        UIEvents.Current.OnButtonResumeGame += StartGame;
-        UIEvents.Current.OnButtonNextLevel += NextLevel;
-        UIEvents.Current.OnButtonRestartGame += RestartGame;
-        GameEvents.Current.OnLevelVictory += WinGame;
-        GameEvents.Current.OnLevelFailed += LoseGame;
+        UIEvents.Instance.OnButtonStartGame += StartGame;
+        UIEvents.Instance.OnButtonPauseGame += PauseGame;
+        UIEvents.Instance.OnButtonResumeGame += StartGame;
+        UIEvents.Instance.OnButtonNextLevel += NextLevel;
+        UIEvents.Instance.OnButtonRestartGame += RestartGame;
+        GameEvents.Instance.OnLevelVictory += WinGame;
+        GameEvents.Instance.OnLevelFailed += LoseGame;
     }
 
     private void Start()

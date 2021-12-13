@@ -14,7 +14,7 @@ public class WinMenuView : BaseMenuView
 
     private void Awake()
     {
-        _buttonNext.onClick.AddListener(UIEvents.Current.ButtonNextLevel);
+        _buttonNext.onClick.AddListener(UIEvents.Instance.ButtonNextLevel);
         FindMyController();
     }
 

@@ -14,7 +14,7 @@ public class MainMenuView : BaseMenuView
 
     private void Awake()
     {
-        _buttonStart.onClick.AddListener(UIEvents.Current.ButtonStartGame);
+        _buttonStart.onClick.AddListener(UIEvents.Instance.ButtonStartGame);
         FindMyController();
     }
 

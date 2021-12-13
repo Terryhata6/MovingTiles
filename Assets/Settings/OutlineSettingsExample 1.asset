@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 130791d3e20646d2b6d81688877b0909, type: 3}
-  m_Name: OutlineSettingsExample
+  m_Name: OutlineSettingsExample 1
   m_EditorClassIdentifier: 
-  edgeColor: {r: 1, g: 1, b: 1, a: 1}
-  thickness: 1
+  edgeColor: {r: 0.9811321, g: 0.040726196, b: 0.040726196, a: 1}
+  thickness: 0
   useDepth: 1
   useNormals: 1
   useColor: 0
@@ -22,6 +22,6 @@ MonoBehaviour:
   minNormalsThreshold: 0
   maxNormalsThreshold: 10
   minColorThreshold: 0
-  maxColorThreshold: 0.25
+  maxColorThreshold: 1
   renderEvent: 500
   outlineOnly: 0

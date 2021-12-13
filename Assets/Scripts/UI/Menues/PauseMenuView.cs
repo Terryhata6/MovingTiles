@@ -15,8 +15,8 @@ public class PauseMenuView : BaseMenuView
 
     private void Awake()
     {
-        _buttonResume.onClick.AddListener(UIEvents.Current.ButtonResumeGame);
-        _buttonRestart.onClick.AddListener(UIEvents.Current.ButtonRestartGame);
+        _buttonResume.onClick.AddListener(UIEvents.Instance.ButtonResumeGame);
+        _buttonRestart.onClick.AddListener(UIEvents.Instance.ButtonRestartGame);
         FindMyController();
     }
 

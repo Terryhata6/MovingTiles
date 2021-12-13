@@ -14,7 +14,7 @@ public class InGameUIView : BaseMenuView
 
     private void Awake()
     {
-        _buttonPause.onClick.AddListener(UIEvents.Current.ButtonPauseGame);
+        _buttonPause.onClick.AddListener(UIEvents.Instance.ButtonPauseGame);
         FindMyController();
     }
 
