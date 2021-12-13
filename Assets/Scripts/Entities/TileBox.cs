@@ -7,6 +7,8 @@ namespace Core.Entities
     {
         [SerializeField] private int _hCost; //heuric distance from ending
         [SerializeField] private int _tileIndex;
+        public bool _tileBusy = false;
+
         [SerializeField] private List<TileBox> _neighbours;
         [SerializeField] private bool _walkable = true;
         [SerializeField] public int MovingWeight = 1;
@@ -29,8 +31,8 @@ namespace Core.Entities
         [HideInInspector]public int Fcost => GCost + _hCost;
         [HideInInspector]public TileBox pathfindingParent;
         #endregion
-        
-        
+
+
         public void SetDistance(int distance)
         {
             _hCost = distance * 10;

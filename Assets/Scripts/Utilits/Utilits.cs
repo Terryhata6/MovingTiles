@@ -13,5 +13,13 @@ namespace Core.UtilitsSpace
             }
             return camera.ScreenToWorldPoint(position);
         }
+        public static Vector3 GetPointFromCamera(Camera camera, Vector3 position, out RaycastHit hit, LayerMask layer)
+        {
+            if (Physics.Raycast(camera.ScreenPointToRay(position), out hit , float.MaxValue, layer))
+            {
+                return hit.point;
+            }
+            return camera.ScreenToWorldPoint(position);
+        }
     }
 }
