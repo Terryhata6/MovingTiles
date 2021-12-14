@@ -10,6 +10,7 @@ namespace Core.Entities
     public class TilableObject : BaseTilableObject, ITilable
     {
         [SerializeField] private bool _canMove;
+        [SerializeField][Range(1,2)] private int _moveDistance;
         [SerializeField] private bool _haveSkills = false;
         [SerializeField] private List<Skill> _skills = new List<Skill>();
         
