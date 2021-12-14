@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Core.UtilitsSpace
 {
-    public class SkillPointer: MonoBehaviour
+    public class PlayerSkillPointer: MonoBehaviour
     {
-
-        [SerializeField] private GameObject _skill;
+        [SerializeField] private GameObject _playerSkillInstance;
         private Vector3 _tempPos;
         private RaycastHit _hit;
         private Collider _tempCollider;
@@ -17,7 +16,7 @@ namespace Core.UtilitsSpace
 
         private void FixedUpdate()
         {
-            if (_skill.Equals(null))
+            if (_playerSkillInstance.Equals(null))
             {
                 return;
             }
@@ -36,14 +35,14 @@ namespace Core.UtilitsSpace
                 _tempPos.y = 1f;
             }
 
-            _skill.transform.position = _tempPos;
+            _playerSkillInstance.transform.position = _tempPos;
         }
 
         public void CheckTile(TileBox tile)
         {
             if (tile)
             {
-                if (tile!._tileBusy)
+                if (tile!.TileBusy)
                 {
                     Debug.Log("свободно");
                 }
@@ -56,12 +55,12 @@ namespace Core.UtilitsSpace
         
         public void SetSkill(GameObject skill)
         {
-            _skill = skill;
+            _playerSkillInstance = skill;
         }
 
         public void DropSkill()
         {
-            _skill = null;
+            _playerSkillInstance = null;
         }
     }
 }

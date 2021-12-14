@@ -15,6 +15,8 @@ namespace Core.Entities
         [SerializeField] private bool _haveSkills = false;
         [SerializeField] private List<Skill> _skills = new List<Skill>();
         [SerializeField] private TileBox _currentTileBox;
+        [SerializeField] private float _jumpHeight = .3f;
+        [SerializeField] private float _jumpSpeed = 2f;
         public bool HaveSkills => _haveSkills;
         public bool CanMove => _canMove;
 
@@ -28,7 +30,6 @@ namespace Core.Entities
 
 
         private List<TileBox> _path;
-
         public void MoveToHero(Action CallBackMethod)
         {
             if (!_canMove)
@@ -38,72 +39,96 @@ namespace Core.Entities
             else
             {
                 _path = TileController.Instance.FindPath(_currentTileBox);
-                StartCoroutine(TryMoveToBox(_path[0], CallBackMethod));
+                if (_path == null)
+                {
+                    Debug.Log($"{gameObject} doesn't have path", this);
+                    //TODO SKIP TURN FEEDBACK
+                    CallBackMethod.Invoke();
+                }
+                else
+                {
+                    StartCoroutine(TryMoveToBox(_path[0], CallBackMethod));
+                }
             }
         }
 
         public void MoveFromSwipe(SwipeDirections direction, Action CallbackMethod)
         {
-            switch (direction)
+            if (_currentTileBox.Equals(null))
             {
-                case SwipeDirections.Left:
+                //TODO Whats going with entity without tile?
+            }
+            else
+            {
+                switch (direction)
                 {
-                    if (_currentTileBox.LeftNeighbourExists)
+                    case SwipeDirections.Left:
                     {
-                        StartCoroutine(TryMoveToBox(_currentTileBox.LeftNeighbour, CallbackMethod));
+                        if (_currentTileBox.LeftNeighbourExists)
+                        {
+                            StartCoroutine(TryMoveToBox(_currentTileBox.LeftNeighbour, CallbackMethod));
+                        }
+                        else
+                        {
+                            CallbackMethod.Invoke();
+                        }
+
+                        break;
                     }
-                    else
+                    case SwipeDirections.Right:
                     {
-                        CallbackMethod.Invoke();
+                        if (_currentTileBox.RightNeighbourExists)
+                        {
+                            StartCoroutine(TryMoveToBox(_currentTileBox.RightNeighbour, CallbackMethod));
+                        }
+                        else
+                        {
+                            CallbackMethod.Invoke();
+                        }
+
+                        break;
                     }
-                    break;
+                    case SwipeDirections.Up:
+                    {
+                        if (_currentTileBox.ForwardNeighbourExists)
+                        {
+                            StartCoroutine(TryMoveToBox(_currentTileBox.ForwardNeighbour, CallbackMethod));
+                        }
+                        else
+                        {
+                            CallbackMethod.Invoke();
+                        }
+
+                        break;
+                    }
+                    case SwipeDirections.Down:
+                    {
+                        if (_currentTileBox.BackNeighbourExists)
+                        {
+                            StartCoroutine(TryMoveToBox(_currentTileBox.BackNeighbour, CallbackMethod));
+                        }
+                        else
+                        {
+                            CallbackMethod.Invoke();
+                        }
+
+                        break;
+                    }
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
                 }
-                case SwipeDirections.Right:
-                {
-                    if (_currentTileBox.RightNeighbourExists)
-                    {
-                        StartCoroutine(TryMoveToBox(_currentTileBox.RightNeighbour, CallbackMethod));
-                    }
-                    else
-                    {
-                        CallbackMethod.Invoke();
-                    }
-                    break;
-                }
-                case SwipeDirections.Up:
-                {
-                    if (_currentTileBox.ForwardNeighbourExists)
-                    {
-                        StartCoroutine(TryMoveToBox(_currentTileBox.ForwardNeighbour, CallbackMethod));
-                    }
-                    else
-                    {
-                        CallbackMethod.Invoke();
-                    }
-                    break;
-                }
-                case SwipeDirections.Down:
-                {
-                    if (_currentTileBox.BackNeighbourExists)
-                    {
-                        StartCoroutine(TryMoveToBox(_currentTileBox.BackNeighbour, CallbackMethod));
-                    }
-                    else
-                    {
-                        CallbackMethod.Invoke();
-                    }
-                    break;
-                }
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
             }
         }
 
+        private Vector3 tempVector3;
         public IEnumerator TryMoveToBox(TileBox box, Action method)
         {
-            for (float i = 0; i < 1; i += 0.01f)
+            for (float i = 0; i < 1; i += 0.01f * _jumpSpeed)
             {
-                transform.position = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position, i);
+                tempVector3=Vector3.Lerp(_currentTileBox.transform.position, box.transform.position, i);
+                tempVector3.y = Mathf.Sin(i * Mathf.PI)*_jumpHeight;
+                transform.position = tempVector3;
+                
                 yield return null;
             }
 
@@ -113,9 +138,15 @@ namespace Core.Entities
 
         public void SetBox(TileBox box)
         {
-            //_currentTileBox.changeTiledObject
+            if (box == null)
+            {
+                Debug.Log($"Enemy was destroyed becouse don't have tile");
+                Destroy(this.gameObject);
+                return;
+            }
+            _currentTileBox.ChangeTiledObject();
             _currentTileBox = box;
-            //box.changeTiledObject;
+            box.ChangeTiledObject(this);
         }
 
         private bool SkillWasExecuted = false;
