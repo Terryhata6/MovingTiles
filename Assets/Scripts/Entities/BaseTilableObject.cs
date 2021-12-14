@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Interfaces;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Core.Entities
 {
-    public class BaseTilableObject : MonoBehaviour
+    public class BaseTilableObject : MonoBehaviour, ITilable
     {
         [SerializeField] [Tooltip("INDEVELOPMENT")]
         private string _config;
@@ -30,6 +31,7 @@ namespace Core.Entities
 
 
         private List<TileBox> _path;
+
         public void MoveToHero(Action CallBackMethod)
         {
             if (!_canMove)
@@ -52,11 +54,11 @@ namespace Core.Entities
             }
         }
 
-        public void MoveFromSwipe(SwipeDirections direction, Action CallbackMethod)
+        public void MoveFromSwipe(SwipeDirections direction, Action endAnimationCallback)
         {
             if (_currentTileBox.Equals(null))
             {
-                //TODO Whats going with entity without tile?
+                //TODO Whats going with entity without tile?`
             }
             else
             {
@@ -66,11 +68,11 @@ namespace Core.Entities
                     {
                         if (_currentTileBox.LeftNeighbourExists)
                         {
-                            StartCoroutine(TryMoveToBox(_currentTileBox.LeftNeighbour, CallbackMethod));
+                            StartCoroutine(TryMoveToBox(_currentTileBox.LeftNeighbour, endAnimationCallback));
                         }
                         else
                         {
-                            CallbackMethod.Invoke();
+                            endAnimationCallback.Invoke();
                         }
 
                         break;
@@ -79,11 +81,11 @@ namespace Core.Entities
                     {
                         if (_currentTileBox.RightNeighbourExists)
                         {
-                            StartCoroutine(TryMoveToBox(_currentTileBox.RightNeighbour, CallbackMethod));
+                            StartCoroutine(TryMoveToBox(_currentTileBox.RightNeighbour, endAnimationCallback));
                         }
                         else
                         {
-                            CallbackMethod.Invoke();
+                            endAnimationCallback.Invoke();
                         }
 
                         break;
@@ -92,11 +94,11 @@ namespace Core.Entities
                     {
                         if (_currentTileBox.ForwardNeighbourExists)
                         {
-                            StartCoroutine(TryMoveToBox(_currentTileBox.ForwardNeighbour, CallbackMethod));
+                            StartCoroutine(TryMoveToBox(_currentTileBox.ForwardNeighbour, endAnimationCallback));
                         }
                         else
                         {
-                            CallbackMethod.Invoke();
+                            endAnimationCallback.Invoke();
                         }
 
                         break;
@@ -105,11 +107,11 @@ namespace Core.Entities
                     {
                         if (_currentTileBox.BackNeighbourExists)
                         {
-                            StartCoroutine(TryMoveToBox(_currentTileBox.BackNeighbour, CallbackMethod));
+                            StartCoroutine(TryMoveToBox(_currentTileBox.BackNeighbour, endAnimationCallback));
                         }
                         else
                         {
-                            CallbackMethod.Invoke();
+                            endAnimationCallback.Invoke();
                         }
 
                         break;
@@ -121,19 +123,23 @@ namespace Core.Entities
         }
 
         private Vector3 tempVector3;
-        public IEnumerator TryMoveToBox(TileBox box, Action method)
+
+        public IEnumerator TryMoveToBox(TileBox box, Action endAnimationCallBack)
         {
-            for (float i = 0; i < 1; i += 0.01f * _jumpSpeed)
+            if (!box.TileBusy)
             {
-                tempVector3=Vector3.Lerp(_currentTileBox.transform.position, box.transform.position, i);
-                tempVector3.y = Mathf.Sin(i * Mathf.PI)*_jumpHeight;
-                transform.position = tempVector3;
-                
-                yield return null;
+                for (float i = 0; i < 1; i += 0.01f * _jumpSpeed)
+                {
+                    tempVector3 = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position, i);
+                    tempVector3.y = Mathf.Sin(i * Mathf.PI) * _jumpHeight;
+                    transform.position = tempVector3;
+
+                    yield return null;
+                }
             }
 
             SetBox(box);
-            method.Invoke();
+            endAnimationCallBack.Invoke();
         }
 
         public void SetBox(TileBox box)
@@ -144,14 +150,19 @@ namespace Core.Entities
                 Destroy(this.gameObject);
                 return;
             }
-            _currentTileBox.ChangeTiledObject();
+
+            if (_currentTileBox != null)
+            {
+                _currentTileBox.ChangeTiledObject();
+            }
+
             _currentTileBox = box;
             box.ChangeTiledObject(this);
         }
 
         private bool SkillWasExecuted = false;
 
-        public void ExecuteSkill(Action CallbackMethod)
+        public void ExecuteSkill(Action EndAnimationCallback)
         {
             SkillWasExecuted = false;
             if (_haveSkills)
@@ -161,7 +172,7 @@ namespace Core.Entities
                     if (!_skills[i].OnCooldown)
                     {
                         _skills[i].Execute();
-                        CallbackMethod.Invoke();
+                        EndAnimationCallback.Invoke();
                         SkillWasExecuted = true;
                         break;
                     }
@@ -170,7 +181,7 @@ namespace Core.Entities
 
             if (!SkillWasExecuted)
             {
-                CallbackMethod.Invoke();
+                EndAnimationCallback.Invoke();
             }
         }
     }

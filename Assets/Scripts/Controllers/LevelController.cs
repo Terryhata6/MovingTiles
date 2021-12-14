@@ -10,7 +10,7 @@ namespace Core
     public class LevelController : Singleton<LevelController>
     {
         [Header("Properties")] [SerializeField]
-        private TurnState _firsTurn;
+        private TurnState _firstTurn;
 
         private bool _gameEnd = false;
         private bool _endTurn = false;
@@ -23,7 +23,7 @@ namespace Core
             TilableObjectsController.Instance.SpawnStartEnemyes();
             
             
-            _currentTurnState = _firsTurn;
+            _currentTurnState = _firstTurn;
 
             InputController.Instance.OnGetSwipe += GetSwipe;
             _turnsCoroutine = StartCoroutine(Turns()); //After All Initializations
