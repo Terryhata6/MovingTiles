@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Core.Interfaces;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
@@ -9,10 +10,10 @@ namespace Core.Entities
     {
         [SerializeField] private int _hCost; //heuric distance from ending
         [SerializeField] private int _tileIndex;
-        [SerializeField] private BaseTilableObject _currentTilableObject;
+        [SerializeField] private ITilable _currentTilableObject;
         [SerializeField] private List<TileBox> _neighbours;
         [SerializeField] private bool _walkable = true;
-        [SerializeField] public int MovingWeight = 1;
+        [SerializeField] private int _movingWeight = 1;
         [SerializeField] public MMFeedbacks _mmFeedbacks; 
         public List<TileBox> Neighbours => _neighbours;
 
@@ -26,9 +27,20 @@ namespace Core.Entities
         public bool BackNeighbourExists = false;
         public bool Walkable => _walkable;
         public bool TileBusy => !_currentTilableObject.Equals(null);
-        public BaseTilableObject TiledObject => _currentTilableObject;
-
+        public ITilable TiledObject => _currentTilableObject;
+        public int MovingWeight
+        {
+            get
+            {
+                if (TileBusy)
+                {
+                    return 100*_movingWeight;
+                }
+                return _movingWeight;
+            }
+        }
         #region Pathfinding fields
+
         [HideInInspector]public int GCost = 0; //From startNode to current
         [HideInInspector]public int HCost => _hCost * 10; //heuric distance from ending
         [HideInInspector]public int FCost => GCost + _hCost;
@@ -116,10 +128,9 @@ namespace Core.Entities
         public void ChangeTiledObject()
         {
             ChangeTiledObject(null);
-            
         }
 
-        public void ChangeTiledObject(BaseTilableObject obj)
+        public void ChangeTiledObject(ITilable obj)
         {
             _currentTilableObject = obj;
             
