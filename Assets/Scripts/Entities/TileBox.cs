@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace Core.Entities
@@ -7,11 +9,11 @@ namespace Core.Entities
     {
         [SerializeField] private int _hCost; //heuric distance from ending
         [SerializeField] private int _tileIndex;
-        public bool _tileBusy = false;
-
+        [SerializeField] private BaseTilableObject _currentTilableObject;
         [SerializeField] private List<TileBox> _neighbours;
         [SerializeField] private bool _walkable = true;
         [SerializeField] public int MovingWeight = 1;
+        [SerializeField] public MMFeedbacks _mmFeedbacks; 
         public List<TileBox> Neighbours => _neighbours;
 
         public TileBox LeftNeighbour;
@@ -23,19 +25,25 @@ namespace Core.Entities
         public bool ForwardNeighbourExists = false;
         public bool BackNeighbourExists = false;
         public bool Walkable => _walkable;
-
+        public bool TileBusy => !_currentTilableObject.Equals(null);
+        public BaseTilableObject TiledObject => _currentTilableObject;
 
         #region Pathfinding fields
         [HideInInspector]public int GCost = 0; //From startNode to current
-        [HideInInspector]public int HCost => _hCost; //heuric distance from ending
-        [HideInInspector]public int Fcost => GCost + _hCost;
+        [HideInInspector]public int HCost => _hCost * 10; //heuric distance from ending
+        [HideInInspector]public int FCost => GCost + _hCost;
         [HideInInspector]public TileBox pathfindingParent;
         #endregion
 
 
+        public void Awake()
+        {
+            ExecuteSpawnAnimation();
+        }
+
         public void SetDistance(int distance)
         {
-            _hCost = distance * 10;
+            _hCost = distance;
         }
 
         public void SetTileIndex(int index)
@@ -48,51 +56,73 @@ namespace Core.Entities
             _neighbours.Add(neighbour);
         }
 
-        public void FindNeighbours()
+        public void ExecuteSpawnAnimation()
         {
-            TileBox temp;
-            var distance = TileController.Instance.Step;
-            foreach (var raycastHit in Physics.RaycastAll(transform.position, Vector3.left, distance, 1<<6))
+            //_mmFeedbacks.AutoPlayOnEnable = true;
+        }
+
+        TileBox tempTileBox;
+        private int neighbourHitsCount;
+        public void FindNeighbours(float distance, RaycastHit[] hits){
+
+            neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.left, hits, distance, 1 << 6);
+            for (int i = 0; i < neighbourHitsCount; i++)
             {
-                temp = raycastHit.collider.GetComponent<TileBox>();
-                if (!temp.Equals(this))
+                tempTileBox = hits[i].collider.GetComponent<TileBox>();
+                if (!tempTileBox.Equals(this))
                 {
-                    AddNeighbour(temp);
-                    LeftNeighbour = temp;
+                    AddNeighbour(tempTileBox);
+                    LeftNeighbour = tempTileBox;
                     LeftNeighbourExists = true;
                 }
             }
-            foreach (var raycastHit in Physics.RaycastAll(transform.position, Vector3.right, distance, 1<<6))
+            neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.right, hits, distance, 1 << 6);
+            for (int i = 0; i < neighbourHitsCount; i++)
             {
-                temp = raycastHit.collider.GetComponent<TileBox>();
-                if (!temp.Equals(this))
+                tempTileBox = hits[i].collider.GetComponent<TileBox>();
+                if (!tempTileBox.Equals(this))
                 {
-                    AddNeighbour(temp);
-                    RightNeighbour = temp;
+                    AddNeighbour(tempTileBox);
+                    RightNeighbour = tempTileBox;
                     RightNeighbourExists = true;
                 }
             }
-            foreach (var raycastHit in Physics.RaycastAll(transform.position, Vector3.forward, distance, 1<<6))
+            neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.forward, hits, distance, 1 << 6);
+            for (int i = 0; i < neighbourHitsCount; i++)
             {
-                temp = raycastHit.collider.GetComponent<TileBox>();
-                if (!temp.Equals(this))
+                tempTileBox = hits[i].collider.GetComponent<TileBox>();
+                if (!tempTileBox.Equals(this))
                 {
-                    AddNeighbour(temp);
-                    ForwardNeighbour = temp;
+                    AddNeighbour(tempTileBox);
+                    ForwardNeighbour = tempTileBox;
                     ForwardNeighbourExists = true;
                 }
             }
-            foreach (var raycastHit in Physics.RaycastAll(transform.position, Vector3.back, distance, 1<<6))
+            neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.back, hits, distance, 1 << 6);
+            for (int i = 0; i < neighbourHitsCount; i++)
             {
-                temp = raycastHit.collider.GetComponent<TileBox>();
-                if (!temp.Equals(this))
+                tempTileBox = hits[i].collider.GetComponent<TileBox>();
+                if (!tempTileBox.Equals(this))
                 {
-                    AddNeighbour(temp);
-                    BackNeighbour = temp;
+                    AddNeighbour(tempTileBox);
+                    BackNeighbour = tempTileBox;
                     BackNeighbourExists = true;
                 }
             }
 
+        }
+
+
+        public void ChangeTiledObject()
+        {
+            ChangeTiledObject(null);
+            
+        }
+
+        public void ChangeTiledObject(BaseTilableObject obj)
+        {
+            _currentTilableObject = obj;
+            
         }
     }
 }

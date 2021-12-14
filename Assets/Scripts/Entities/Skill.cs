@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Core.Entities
 {
-    
     public class Skill
     {
         public TileBox _tempTile;
