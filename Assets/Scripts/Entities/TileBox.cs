@@ -10,13 +10,13 @@ namespace Core.Entities
     {
         [SerializeField] private int _hCost; //heuric distance from ending
         [SerializeField] private int _tileIndex;
-        [SerializeField] private ITilable _currentTilableObject;
+        [SerializeField] private BaseTilableObject _currentTilableObject;
         [SerializeField] private List<TileBox> _neighbours;
         [SerializeField] private bool _walkable = true;
         [SerializeField] private int _movingWeight = 1;
         [SerializeField] public MMFeedbacks _mmFeedbacks; 
         public List<TileBox> Neighbours => _neighbours;
-
+        public bool WillFree;
         public TileBox LeftNeighbour;
         public TileBox RightNeighbour;
         public TileBox ForwardNeighbour;
@@ -26,15 +26,15 @@ namespace Core.Entities
         public bool ForwardNeighbourExists = false;
         public bool BackNeighbourExists = false;
         public bool Walkable => _walkable;
-        public bool TileBusy => !_currentTilableObject.Equals(null);
-        public ITilable TiledObject => _currentTilableObject;
+        public bool TileBusy => _currentTilableObject != null;
+        public BaseTilableObject TiledObject => _currentTilableObject;
         public int MovingWeight
         {
             get
             {
                 if (TileBusy)
                 {
-                    return 100*_movingWeight;
+                    return 1000*_movingWeight;
                 }
                 return _movingWeight;
             }
@@ -128,12 +128,13 @@ namespace Core.Entities
         public void ChangeTiledObject()
         {
             ChangeTiledObject(null);
+            WillFree = true;
         }
 
-        public void ChangeTiledObject(ITilable obj)
+        public void ChangeTiledObject(BaseTilableObject obj)
         {
             _currentTilableObject = obj;
-            
+            WillFree = false;
         }
     }
 }

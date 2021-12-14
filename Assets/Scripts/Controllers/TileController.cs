@@ -5,6 +5,7 @@ using Core.Entities;
 using Core.UtilitsSpace;
 using UnityEngine;
 using UnityEngine.WSA;
+using Random = UnityEngine.Random;
 
 namespace Core
 {
@@ -15,6 +16,7 @@ namespace Core
         [SerializeField] private float _step;
         [SerializeField] private List<TileBox> _tiles = new List<TileBox>();
         private Dictionary<int,List<TileBox>> _radiusBasedDictionary = new Dictionary<int, List<TileBox>>();
+        
         private TileBox _centerBox;
         private TileBox _tempTileBox;
 
@@ -22,6 +24,7 @@ namespace Core
         public Dictionary<int, List<TileBox>> TilesForRadius => _radiusBasedDictionary;
         public int MaximumRadius => _dimension;
         public float Step => _step;
+        public TileBox Center => _centerBox;
         
         public void Awake()
         {
@@ -80,8 +83,22 @@ namespace Core
         {
             return GetTileForenemy(_dimension);
         }
+
+        public List<TileBox> spawnerList = new List<TileBox>();
         public TileBox GetTileForenemy(int distance)
         {
+            spawnerList.Clear();
+            for (int i = 0; i < _radiusBasedDictionary[distance].Count; i++)
+            {
+                if (!_radiusBasedDictionary[distance][i].TileBusy && _radiusBasedDictionary[distance][i].Walkable)
+                {
+                    spawnerList.Add(_radiusBasedDictionary[distance][i]);
+                }
+            }
+            if (spawnerList.Count > 0)
+            {
+                return spawnerList[Random.Range(0, spawnerList.Count)];
+            }
             return null;
         }
 

@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b56e737dc8445a4bb698b8561c3d31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: 
-  _canMove: 0
-  _haveSkills: 0
+  _config: Enemy
+  _jumpHeight: 0.3
+  _jumpSpeed: 4
   _currentTileBox: {fileID: 0}
+  _canMove: 1
+  _haveSkills: 0
 --- !u!1001 &1556706279845163702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103,6 +105,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fat_funny_stickman_tpose
       objectReference: {fileID: 0}
+    - target: {fileID: 1582225873859819734, guid: 312134c6a874e07478b4605b99414533, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9fa5904fdca13104b9b551f71a9b804e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 312134c6a874e07478b4605b99414533, type: 3}
 --- !u!4 &1301594582365443421 stripped
