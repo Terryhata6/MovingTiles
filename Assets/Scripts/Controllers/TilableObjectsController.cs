@@ -9,13 +9,14 @@ namespace Core
 {
     public class TilableObjectsController : Singleton<TilableObjectsController>
     {
-        [SerializeField] private BaseTilableObject _enemyExample;
-        public List<BaseTilableObject> _objects = new List<BaseTilableObject>();
+        [SerializeField] private TilableObject _enemyExample;
+        [SerializeField] private int StartEnemiesAmount;
+        public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
 
         private void Start()
         {
-            foreach (var VARIABLE in  FindObjectsOfType<BaseTilableObject>())
+            foreach (var VARIABLE in  FindObjectsOfType<TilableObject>())
             {
                 if (!_objects.Contains(VARIABLE))
                 {
@@ -26,11 +27,12 @@ namespace Core
                     VARIABLE.SetBox(TileController.Instance.GetTileForenemy());
                 }
             }
+
             
         }
 
         #region ListMethods
-        public void AddObjectToList(BaseTilableObject obj)
+        public void AddObjectToList(TilableObject obj)
         {
             if (!_objects.Contains(obj))
             {
@@ -38,7 +40,7 @@ namespace Core
             }
         }
 
-        public void RemoveObjectFromList(BaseTilableObject obj)
+        public void RemoveObjectFromList(TilableObject obj)
         {
             _objects.Remove(obj);
         }
@@ -46,7 +48,15 @@ namespace Core
 
         public void SpawnStartEnemyes()
         {
-            
+            TileBox tilebox;
+            TilableObject enemy;
+            for (int i = 0; i < StartEnemiesAmount; i++)
+            {
+                tilebox = TileController.Instance.GetTileForenemy();
+                enemy = Instantiate(_enemyExample.gameObject, tilebox.transform.position, Quaternion.identity).GetComponent<TilableObject>();
+                _objects.Add(enemy.GetComponent<TilableObject>());
+                enemy.SetBox(tilebox);
+            }
         }
 
         public IEnumerator ExecuteEnemiesSkills() //
