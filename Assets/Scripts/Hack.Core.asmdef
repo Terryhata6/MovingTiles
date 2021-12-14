@@ -2,7 +2,9 @@
     "name": "HackCore.Core",
     "rootNamespace": "Core",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:f8c8b3c2341ca9d41a84e23d5e80af4a",
+        "GUID:dad624460036b51448e1b1849358a96a"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

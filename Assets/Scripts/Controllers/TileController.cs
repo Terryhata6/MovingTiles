@@ -14,17 +14,21 @@ namespace Core
         [SerializeField] private int _dimension;
         [SerializeField] private float _step;
         [SerializeField] private List<TileBox> _tiles = new List<TileBox>();
+        private Dictionary<int,List<TileBox>> _radiusBasedDictionary = new Dictionary<int, List<TileBox>>();
         private TileBox _centerBox;
         private TileBox _tempTileBox;
 
+        public List<TileBox> AllTiles => _tiles;
+        public Dictionary<int, List<TileBox>> TilesForRadius => _radiusBasedDictionary;
+        public int MaximumRadius => _dimension;
         public float Step => _step;
+        
         public void Awake()
         {
-            CreateTiles();
         }
 
-        public void CreateTiles()
-        {
+        public void CreateTiles() {
+            
             for (int i = -_dimension; i <= _dimension; i++)
             {
                 for (int j = -_dimension; j <= _dimension; j++)
@@ -35,10 +39,20 @@ namespace Core
                     if (Mathf.Abs(i) > Mathf.Abs(j))
                     {
                         _tempTileBox.SetDistance(Mathf.Abs(i));
+                        if (!_radiusBasedDictionary.ContainsKey(Mathf.Abs(i)))
+                        {
+                            _radiusBasedDictionary.Add(Mathf.Abs(i), new List<TileBox>());
+                        }
+                        _radiusBasedDictionary[Mathf.Abs(i)].Add(_tempTileBox);
                     }
                     else
                     {
                         _tempTileBox.SetDistance(Mathf.Abs(j));
+                        if (!_radiusBasedDictionary.ContainsKey(Mathf.Abs(j)))
+                        {
+                            _radiusBasedDictionary.Add(Mathf.Abs(j), new List<TileBox>());
+                        }
+                        _radiusBasedDictionary[Mathf.Abs(j)].Add(_tempTileBox);
                     }
 
                     _tiles.Add(_tempTileBox);
@@ -53,21 +67,29 @@ namespace Core
                 }
 
             }
-
+            RaycastHit[] hits = new RaycastHit[5];
             for (int i = 0; i < _tiles.Count; i++)
             {
                 _tiles[i].SetTileIndex(i);
-                _tiles[i].FindNeighbours();
+                _tiles[i].FindNeighbours(_step,hits);
             }
         }
 
+        
+        public TileBox GetTileForenemy()
+        {
+            return GetTileForenemy(_dimension);
+        }
+        public TileBox GetTileForenemy(int distance)
+        {
+            return null;
+        }
 
+
+        #region Pathfinding
         private List<TileBox> openSet = new List<TileBox>();
         private List<TileBox> closedSet = new List<TileBox>();
         private TileBox _tempCurrent;
-
-
-
         public List<TileBox> FindPath(TileBox Start)
         {
             return FindPath(Start, _centerBox);
@@ -85,7 +107,7 @@ namespace Core
                 _tempCurrent = openSet[0];
                 for (int i = 0; i < openSet.Count; i++)
                 {
-                    if (openSet[i].Fcost < _tempCurrent.Fcost || openSet[i].Fcost == _tempCurrent.Fcost &&
+                    if (openSet[i].FCost < _tempCurrent.FCost || openSet[i].FCost == _tempCurrent.FCost &&
                         openSet[i].HCost < _tempCurrent.HCost)
                     {
                         _tempCurrent = openSet[i];
@@ -118,10 +140,8 @@ namespace Core
                     }
                 }
             }
-
             return null;
         }
-
         private List<TileBox> tempList = new List<TileBox>();
         public List<TileBox> RetracePath(TileBox Start, TileBox Target)
         {
@@ -137,5 +157,6 @@ namespace Core
             Debug.Log("PathFinded");
             return tempList;
         }
+        #endregion
     }
 }

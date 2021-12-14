@@ -19,6 +19,10 @@ namespace Core
 
         private void Start()
         {
+            TileController.Instance.CreateTiles();
+            TilableObjectsController.Instance.SpawnStartEnemyes();
+            
+            
             _currentTurnState = _firsTurn;
 
             InputController.Instance.OnGetSwipe += GetSwipe;
@@ -29,7 +33,6 @@ namespace Core
         {
             while (!_gameEnd)
             {
-                
                 yield return new WaitUntil(() => _endTurn);
                 yield return new WaitForSeconds(0.5f);
                 Debug.Log($"Сейчас ход {_currentTurnState}");
@@ -54,37 +57,14 @@ namespace Core
             }
         }
 
+        
+        
         private void GetSwipe(SwipeDirections direction)
         {
             if (_currentTurnState.Equals(TurnState.Player))
             {
-                StartCoroutine(TilableObjectsController.Instance.ExecuteSwipeMoving(direction));
-                /*//EndOfTurn();
-                switch (direction)
-                {
-                    case SwipeDirections.Left:
-                    {
-                        TilableObjectsController.Instance.MoveEnemiesToDirection(Vector2.left);
-                        break;
-                    }
-                    case SwipeDirections.Right:
-                    {
-                        TilableObjectsController.Instance.MoveEnemiesToDirection(Vector2.right);
-                        break;
-                    }
-                    case SwipeDirections.Up:
-                    {
-                        TilableObjectsController.Instance.MoveEnemiesToDirection(Vector2.up);
-                        break;
-                    }
-                    case SwipeDirections.Down:
-                    {
-                        TilableObjectsController.Instance.MoveEnemiesToDirection(Vector2.down);
-                        break;
-                    }
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-                }*/
+                StartCoroutine(TilableObjectsController.Instance.ExecuteEnemiesSwipeMoving(direction));
+                
             }
             else
             {
