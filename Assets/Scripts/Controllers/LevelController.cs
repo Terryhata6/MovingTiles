@@ -31,10 +31,10 @@ namespace Core
             CreateNewTask(0, TilableObjectsController.Instance.SpawnStartEnemyes);
             
             
-            _currentTurnState = _firstTurn;
+            _currentTurnState = (_firstTurn == TurnState.Player)?TurnState.Enemy:TurnState.Player;
 
-            
-            
+
+            _endTurn=(_currentTurnState != TurnState.Enemy);
         }
 
         private IEnumerator Turns()
