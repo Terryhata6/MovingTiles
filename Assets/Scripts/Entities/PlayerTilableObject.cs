@@ -9,6 +9,16 @@ namespace Core.Entities
     {
 
         [SerializeField] private bool _canCounterAttack = false;
+        [SerializeField] private int _baseDamage;
+
+        public int CurrentDamage
+        {
+            get
+            {
+                return _baseDamage;
+            }
+        }
+
 
         private IEnumerator Start()
         {
@@ -66,7 +76,7 @@ namespace Core.Entities
 
         public IEnumerator Attack(BaseTilableObject obj)
         {
-            if (LevelController.Instance.TurnState == TurnState.Player || (_canCounterAttack))
+            if (LevelController.Instance.TurnState == TurnState.Player || _canCounterAttack)
             {
                 for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
                 {
@@ -77,7 +87,7 @@ namespace Core.Entities
 
                     yield return null;
                 }
-
+                obj.PlayerCallBack(PlayerCallbackType.Attack, this);
                 for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
