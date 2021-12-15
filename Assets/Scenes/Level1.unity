@@ -417,9 +417,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _config: Player
   _jumpHeight: 0.3
-  _jumpSpeed: 2
+  _jumpSpeed: 8
   _currentTileBox: {fileID: 0}
   _canCounterAttack: 0
+  _health: 4
   _baseDamage: 1
 --- !u!1 &1082271959335939024
 GameObject:

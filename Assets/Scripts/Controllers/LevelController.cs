@@ -36,7 +36,9 @@ namespace Core
         {
             TileController.Instance.CreateTiles();
             CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
-            CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
+            CreateNewTask(1, EncauntersHolder.Instance.StartSpawnEnemy);
+            CreateNewTask(2, EncauntersHolder.Instance.StartSpawnEnemy);
+            CreateNewTask(3, EncauntersHolder.Instance.StartSpawnEnemy);
             //TilableObjectsController.Instance.SpawnStartEnemyes
             
             _currentTurnState = (_firstTurn == TurnState.Player)?TurnState.Enemy:TurnState.Player;
