@@ -13,7 +13,7 @@ namespace Core.UtilitsSpace
             {
                 if (_instance == null)
                 {
-                    var objs = FindObjectsOfType(typeof(T)) as T[];
+                    var objs = FindObjectsOfType(typeof(T), true) as T[];
                     if (objs.Length > 0)
                     {
                         _instance = objs[0];
@@ -24,7 +24,8 @@ namespace Core.UtilitsSpace
                     }
                     if (_instance == null)
                     {
-                        GameObject obj = new GameObject();
+                        var obj = new GameObject();
+                        obj.name = (typeof(T)).ToString();
                         obj.hideFlags = HideFlags.HideAndDontSave;
                         _instance = obj.AddComponent<T>();
                     }

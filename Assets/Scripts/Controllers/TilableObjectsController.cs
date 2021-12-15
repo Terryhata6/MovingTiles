@@ -7,12 +7,18 @@ using UnityEngine;
 
 namespace Core
 {
-    public class TilableObjectsController : Singleton<TilableObjectsController>
+    public class TilableObjectsController :MonoBehaviour
     {
         [SerializeField] private TilableObject _enemyExample;
         [SerializeField] private int StartEnemiesAmount;
         public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
+        public static TilableObjectsController Instance;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {
@@ -27,8 +33,6 @@ namespace Core
                     VARIABLE.SetBox(TileController.Instance.GetTileForenemy());
                 }
             }
-
-            
         }
 
         #region ListMethods
@@ -46,16 +50,21 @@ namespace Core
         }
         #endregion
 
-        public void SpawnStartEnemyes()
+        public void SpawnStartEnemyes(Action forEachCall, Action onEndSpawningCallback)
         {
             TileBox tilebox;
             TilableObject enemy;
             for (int i = 0; i < StartEnemiesAmount; i++)
             {
+                forEachCall?.Invoke();
                 tilebox = TileController.Instance.GetTileForenemy();
-                enemy = Instantiate(_enemyExample.gameObject, tilebox.transform.position, Quaternion.identity).GetComponent<TilableObject>();
-                _objects.Add(enemy.GetComponent<TilableObject>());
+                enemy = Instantiate(_enemyExample.gameObject, tilebox.transform.position + Vector3.up * 5f, Quaternion.identity).GetComponent<TilableObject>();
                 enemy.SetBox(tilebox);
+                StartCoroutine(enemy.SpawnAnimation((value) =>
+                {
+                    AddObjectToList(value as TilableObject);
+                    onEndSpawningCallback?.Invoke();
+                }));
             }
         }
 
@@ -90,6 +99,17 @@ namespace Core
         public IEnumerator ExecuteEnemiesSwipeMoving(SwipeDirections direction)
         {
             waitingMoves = 0;
+            for (int i = 0; i < _objects.Count; i++)
+            {
+                if (_objects[i] == null)
+                {
+                    continue;
+                }
+                if (_objects[i].CanMove)
+                {
+                    _objects[i].CheckFreeBoxState(direction);
+                }
+            }
             for (int i = 0; i < _objects.Count; i++)
             {
                 if (_objects[i] == null)

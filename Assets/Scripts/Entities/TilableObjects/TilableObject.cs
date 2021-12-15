@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Interfaces;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Core.Entities
@@ -65,6 +64,55 @@ namespace Core.Entities
             }
         }
 
+
+        public void CheckFreeBoxState(SwipeDirections direction)
+        {
+            switch (direction)
+            {
+                case SwipeDirections.Left:
+                {
+                    if (_currentTileBox.LeftNeighbourExists)
+                    {
+                        if (_currentTileBox.LeftNeighbour.WillFree || !_currentTileBox.LeftNeighbour.TileBusy)
+                        {
+                            _currentTileBox.WillFree = true;
+                        }
+                    }
+                    break;
+                }
+                case SwipeDirections.Right:
+                {
+                    if (_currentTileBox.RightNeighbourExists)
+                    {
+                        if (_currentTileBox.RightNeighbour.WillFree || !_currentTileBox.RightNeighbour.TileBusy)
+                            _currentTileBox.WillFree = true;
+                    }
+                    break;
+                }
+                case SwipeDirections.Up:
+                {
+                    if (_currentTileBox.ForwardNeighbourExists)
+                    {
+                        if (_currentTileBox.ForwardNeighbour.WillFree || !_currentTileBox.ForwardNeighbour.TileBusy)
+                            _currentTileBox.WillFree = true;
+                    }
+                    break;
+                }
+                case SwipeDirections.Down:
+                {
+                    if (_currentTileBox.BackNeighbourExists)
+                    {
+                        
+                        if (_currentTileBox.BackNeighbour.WillFree || !_currentTileBox.BackNeighbour.TileBusy)
+                            _currentTileBox.WillFree = true;
+                    }
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+            }
+        }
+
         public void MoveFromSwipe(SwipeDirections direction, Action endAnimationCallback)
         {
             if (_currentTileBox.Equals(null))
@@ -74,66 +122,6 @@ namespace Core.Entities
             }
             else
             {
-                switch (direction)
-                {
-                    case SwipeDirections.Left:
-                    {
-                        if (_currentTileBox.LeftNeighbourExists)
-                        {
-                            if (_currentTileBox.LeftNeighbour.WillFree && !_currentTileBox.LeftNeighbour.TileBusy)
-                                _currentTileBox.WillFree = true;
-                        }
-                        else
-                        {
-                        }
-
-                        break;
-                    }
-                    case SwipeDirections.Right:
-                    {
-                        if (_currentTileBox.RightNeighbourExists)
-                        {
-                            if (_currentTileBox.RightNeighbour.WillFree && !_currentTileBox.RightNeighbour.TileBusy)
-                                _currentTileBox.WillFree = true;
-                        }
-                        else
-                        {
-                            
-                        }
-
-                        break;
-                    }
-                    case SwipeDirections.Up:
-                    {
-                        if (_currentTileBox.ForwardNeighbourExists)
-                        {
-                            if (_currentTileBox.ForwardNeighbour.WillFree && !_currentTileBox.ForwardNeighbour.TileBusy)
-                                _currentTileBox.WillFree = true;
-                        }
-                        else
-                        {
-                            
-                        }
-
-                        break;
-                    }
-                    case SwipeDirections.Down:
-                    {
-                        if (_currentTileBox.BackNeighbourExists)
-                        {
-                            if (_currentTileBox.BackNeighbour.WillFree && !_currentTileBox.BackNeighbour.TileBusy)
-                                _currentTileBox.WillFree = true;
-                        }
-                        else
-                        {
-                            
-                        }
-
-                        break;
-                    }
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
-                }
                 switch (direction)
                 {
                     case SwipeDirections.Left:
@@ -198,12 +186,10 @@ namespace Core.Entities
             }
         }
 
-        
-
         public IEnumerator TryMoveToBox(TileBox box, Action endAnimationCallBack, TurnState state)
         {
             var pos = transform.position;
-            if (!box.TileBusy||box.WillFree)
+            if (!box.TileBusy || box.WillFree)
             {
                 SetBox(box);
                 for (float i = 0; i < 1; i += 0.01f * _jumpSpeed)
@@ -211,7 +197,6 @@ namespace Core.Entities
                     TempVector3 = Vector3.Lerp(pos, box.transform.position, i);
                     TempVector3.y = Mathf.Sin(i * Mathf.PI) * _jumpHeight;
                     transform.position = TempVector3;
-
                     yield return null;
                 }
             }
@@ -221,32 +206,7 @@ namespace Core.Entities
                 {
                     case "Player":
                     {
-                        if (state == TurnState.Enemy)
-                        {
-                            for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
-                            {
-                                TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position,
-                                    i);
-                                TempVector3.y = Mathf.Sin(i * Mathf.PI) * _jumpHeight;
-                                transform.position = TempVector3;
-
-                                yield return null;
-                            }
-
-                            for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
-                            {
-                                TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position,
-                                    (0.5f - i));
-                                TempVector3.y = Mathf.Sin((0.5f - i) * Mathf.PI) * _jumpHeight;
-                                transform.position = TempVector3;
-
-                                yield return null;
-                            }
-                        }
-                        else
-                        {
-                            //TODO Animation blockAttack
-                        }
+                        yield return StartCoroutine(PlayerInteraction(box, state));
                         break;
                     }
                     case "Enemy":
@@ -262,37 +222,10 @@ namespace Core.Entities
             endAnimationCallBack.Invoke();
         }
 
-        public void CheckBattle(string config, TurnState state)
+        protected override IEnumerator PlayerInteraction(TileBox box, TurnState state)
         {
-            switch (config)
-            {
-                case "Player":
-                {
-                    break;
-                }
-                default:
-                    break;
-            }
-        }
-
-        public void SetBox(TileBox box)
-        {
-            if (box == null)
-            {
-                Debug.Log($"Enemy was destroyed becouse don't have tile");
-                Destroy(this.gameObject);
-                return;
-            }
-
-
-            if (_currentTileBox != null)
-            {
-                _currentTileBox.ChangeTiledObject();
-            }
-
-            _currentTileBox = box;
-            box.ChangeTiledObject(this);
-            
+            //base.PlayerInteraction(box, state);
+            yield break;
         }
 
         private bool SkillWasExecuted = false;
