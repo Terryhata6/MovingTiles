@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Interfaces;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Core.Entities
@@ -103,6 +102,7 @@ namespace Core.Entities
                 {
                     if (_currentTileBox.BackNeighbourExists)
                     {
+                        
                         if (_currentTileBox.BackNeighbour.WillFree || !_currentTileBox.BackNeighbour.TileBusy)
                             _currentTileBox.WillFree = true;
                     }
@@ -189,7 +189,7 @@ namespace Core.Entities
         public IEnumerator TryMoveToBox(TileBox box, Action endAnimationCallBack, TurnState state)
         {
             var pos = transform.position;
-            if (!box.TileBusy||box.WillFree)
+            if (!box.TileBusy || box.WillFree)
             {
                 SetBox(box);
                 for (float i = 0; i < 1; i += 0.01f * _jumpSpeed)

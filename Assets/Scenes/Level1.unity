@@ -851,6 +851,10 @@ PrefabInstance:
       propertyPath: _dimension
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5018710890228051552, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
+      propertyPath: _tileBoxExample
+      value: 
+      objectReference: {fileID: 6566720877355210773, guid: 4acd65b8fc9432340a0ebb47585e91c8, type: 3}
     - target: {fileID: 5018710890228051554, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
       propertyPath: m_Name
       value: TileController

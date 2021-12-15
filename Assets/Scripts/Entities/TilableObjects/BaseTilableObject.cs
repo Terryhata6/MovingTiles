@@ -26,7 +26,7 @@ namespace Core.Entities
             yield break;
         }
 
-        public void SetBox(TileBox box)
+        public virtual void SetBox(TileBox box)
         {
             if (box == null)
             {
@@ -38,12 +38,15 @@ namespace Core.Entities
 
             if (_currentTileBox != null)
             {
-                _currentTileBox.ChangeTiledObject();
+                if (_currentTileBox.TiledObject == this)
+                {
+                    _currentTileBox.ChangeTiledObject();
+                }
             }
 
             _currentTileBox = box;
             box.ChangeTiledObject(this);
-            
+
         }
         
         public virtual void PlayerCallBack(PlayerCallbackType callbackType, PlayerTilableObject player)

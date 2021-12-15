@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5018710890228051555}
-  - component: {fileID: 7617718322829663566}
   - component: {fileID: 5018710890228051552}
   - component: {fileID: 1390962555}
+  - component: {fileID: 7617718322829663566}
   m_Layer: 0
   m_Name: LevelController
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7617718322829663566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5018710890228051554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c48648cf7c4563923c157dce254893, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _firsTurn: 0
 --- !u!114 &5018710890228051552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,10 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941ccdb5b2ee45ca93e504f3a732274a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileBoxExample: {fileID: 8709739348892094670, guid: 4acd65b8fc9432340a0ebb47585e91c8, type: 3}
+  _tileBoxExample: {fileID: 0}
   _dimension: 3
   _step: 1.1
   _tiles: []
+  spawnerList: []
 --- !u!114 &1390962555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,8 +63,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyExample: {fileID: 0}
+  StartEnemiesAmount: 0
   _objects:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &7617718322829663566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5018710890228051554}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c48648cf7c4563923c157dce254893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firstTurn: 0

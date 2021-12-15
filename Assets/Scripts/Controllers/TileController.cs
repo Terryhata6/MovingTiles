@@ -4,14 +4,15 @@ using System.IO;
 using Core.Entities;
 using Core.UtilitsSpace;
 using UnityEngine;
-using UnityEngine.WSA;
 using Random = UnityEngine.Random;
 
 namespace Core
 {
-    public class TileController : Singleton<TileController>
+    [DefaultExecutionOrder(-1)]
+    public class TileController : MonoBehaviour
     {
-        [SerializeField] private TileBox tileBoxExample;
+        public static TileController Instance;
+        [SerializeField] private GameObject _tileBoxExample;
         [SerializeField] private int _dimension;
         [SerializeField] private float _step;
         [SerializeField] private List<TileBox> _tiles = new List<TileBox>();
@@ -25,9 +26,16 @@ namespace Core
         public int MaximumRadius => _dimension;
         public float Step => _step;
         public TileBox Center => _centerBox;
+
+        
         
         public void Awake()
         {
+            Instance = this;
+            if (_tileBoxExample == null)
+            {
+                Debug.Log("WHAT THE HELL",_tileBoxExample);
+            }
         }
 
         public void CreateTiles() {
@@ -36,8 +44,9 @@ namespace Core
             {
                 for (int j = -_dimension; j <= _dimension; j++)
                 {
-                    _tempTileBox = Instantiate(tileBoxExample.gameObject,
-                        transform.position + Vector3.right * (i * _step) + Vector3.forward * (j * _step),
+                    
+                    _tempTileBox = Instantiate(_tileBoxExample,
+                        (transform.position + Vector3.right * (i * _step) + Vector3.forward * (j * _step)),
                         Quaternion.identity, transform).GetComponent<TileBox>();
                     if (Mathf.Abs(i) > Mathf.Abs(j))
                     {
@@ -141,7 +150,7 @@ namespace Core
 
                 foreach (var neighbour in _tempCurrent.Neighbours)
                 {
-                    if (!neighbour.Walkable || closedSet.Contains(neighbour)) continue;
+                    if (!neighbour.Walkable || closedSet.Contains(neighbour) || (neighbour.TileBusy && neighbour != Target)) continue;
 
                     var newMovementCostToNeighbour = _tempCurrent.GCost + neighbour.MovingWeight; //Here questions
                     if (newMovementCostToNeighbour < neighbour.GCost || !openSet.Contains(neighbour))

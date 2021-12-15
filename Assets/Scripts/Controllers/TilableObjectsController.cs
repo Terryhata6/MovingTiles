@@ -7,12 +7,18 @@ using UnityEngine;
 
 namespace Core
 {
-    public class TilableObjectsController : Singleton<TilableObjectsController>
+    public class TilableObjectsController :MonoBehaviour
     {
         [SerializeField] private TilableObject _enemyExample;
         [SerializeField] private int StartEnemiesAmount;
         public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
+        public static TilableObjectsController Instance;
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void Start()
         {
