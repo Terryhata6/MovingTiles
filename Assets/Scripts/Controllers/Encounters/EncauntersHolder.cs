@@ -17,5 +17,15 @@ namespace Core
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
+        
+        public void SpawnEnemy(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteStartSpawnEnemy(OnStartCallBack, OnEndCallBack));
+        private IEnumerator ExecuteSpawnEnemy(Action OnStartCallBack, Action OnEndCallBack)
+        {
+            OnStartCallBack?.Invoke();
+            int iterator = 0;
+            TilableObjectsController.Instance.SpawnEnemy(() => iterator++, () => iterator--); ///
+            yield return new WaitUntil(() => iterator == 0);
+            OnEndCallBack?.Invoke();
+        }
     }
 }

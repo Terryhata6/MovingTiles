@@ -12,6 +12,7 @@ namespace Core.Entities
         [SerializeField][Range(1,2)] private int _moveDistance;
         [SerializeField] private bool _haveSkills = false;
         [SerializeField] private List<Skill> _skills = new List<Skill>();
+        [SerializeField] private bool _needDebugLog = false;
         
         
         public bool HaveSkills => _haveSkills;
@@ -39,7 +40,12 @@ namespace Core.Entities
                 _path = TileController.Instance.FindPath(_currentTileBox);
                 if (_path == null)
                 {
-                    Debug.Log($"{gameObject} doesn't have path", this);
+#if UNITY_EDITOR
+                    if(_needDebugLog)
+                    {
+                        Debug.Log($"{gameObject} doesn't have path", this);
+                    }                   
+#endif
                     //TODO SKIP TURN FEEDBACK
                     CallBackMethod.Invoke();
                 }
@@ -192,7 +198,7 @@ namespace Core.Entities
             if (!box.TileBusy || box.WillFree)
             {
                 SetBox(box);
-                for (float i = 0; i < 1; i += 0.01f * _jumpSpeed)
+                for (float i = 0; i < 1; i += Time.deltaTime * _jumpSpeed)
                 {
                     TempVector3 = Vector3.Lerp(pos, box.transform.position, i);
                     TempVector3.y = Mathf.Sin(i * Mathf.PI) * _jumpHeight;
