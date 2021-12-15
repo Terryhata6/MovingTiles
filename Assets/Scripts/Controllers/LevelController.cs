@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.UtilitsSpace;
-using JetBrains.Annotations;
-using log4net.Core;
 using UnityEngine;
 
 namespace Core
@@ -18,7 +16,7 @@ namespace Core
         private Coroutine _turnsCoroutine;
         private TurnState _currentTurnState;
         private int _turnNumber = 0;
-        private Dictionary<int, Action> turnTasks = new Dictionary<int, Action>();
+        private Dictionary<int, Action<Action,Action>> turnTasks = new Dictionary<int, Action<Action,Action>>();
         
         
         
@@ -28,8 +26,8 @@ namespace Core
         private void Start()
         {
             TileController.Instance.CreateTiles();
-            CreateNewTask(0, TilableObjectsController.Instance.SpawnStartEnemyes);
-            
+            CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
+            //TilableObjectsController.Instance.SpawnStartEnemyes
             
             _currentTurnState = (_firstTurn == TurnState.Player)?TurnState.Enemy:TurnState.Player;
 
@@ -50,20 +48,23 @@ namespace Core
                 {
                     case TurnState.Player:
                     {
-                        _currentTurnState = TurnState.Enemy;
+                        _currentTurnState = TurnState.Enemy;   //start enemy turn
                         Debug.Log($"Сейчас ход {_currentTurnState}");
                         StartCoroutine(TilableObjectsController.Instance.ExecuteEnemiesSkills()); //Движения врагов
                         
                         if (turnTasks.ContainsKey(TurnNumber))
                         {
-                            turnTasks[TurnNumber]?.Invoke();
+                            var _currentTasksNum = 0;
+                            turnTasks[TurnNumber]?.Invoke(() => _currentTasksNum++, () => _currentTasksNum--);
+                            yield return new WaitUntil(() =>  _currentTasksNum == 0);
                             turnTasks.Remove(TurnNumber);
                         }
                         break;
                     }
-                    case TurnState.Enemy:
+                    case TurnState.Enemy: 
                     {
-                        _currentTurnState = TurnState.Player;
+                        _currentTurnState = TurnState.Player; //start player turn
+                        InputController.Instance.OnGetSwipe += GetSwipe;
                         Debug.Log($"Сейчас ход {_currentTurnState}");
                         _turnNumber++;
                         
@@ -71,9 +72,10 @@ namespace Core
                     }
                 }
             }
+            //todo endGame animations
         }
 
-        private void CreateNewTask(int turnNumber, Action method)
+        private void CreateNewTask(int turnNumber, Action<Action,Action> method)
         {
             if (!turnTasks.ContainsKey(turnNumber))
             {
@@ -87,7 +89,7 @@ namespace Core
             if (_currentTurnState.Equals(TurnState.Player))
             {
                 StartCoroutine(TilableObjectsController.Instance.ExecuteEnemiesSwipeMoving(direction));
-                
+                InputController.Instance.OnGetSwipe -= GetSwipe;
             }
             else
             {
@@ -107,7 +109,7 @@ namespace Core
         {
             Debug.Log("Start level");
             GameEvents.Instance.LevelStart();
-            InputController.Instance.OnGetSwipe += GetSwipe;
+            
             _turnsCoroutine = StartCoroutine(Turns()); //After All Initializations
         }
 

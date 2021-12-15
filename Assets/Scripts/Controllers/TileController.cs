@@ -171,7 +171,6 @@ namespace Core
             }
             
             tempList.Reverse();
-            Debug.Log("PathFinded");
             return tempList;
         }
         #endregion
