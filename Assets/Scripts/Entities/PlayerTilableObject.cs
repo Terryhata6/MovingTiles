@@ -55,6 +55,11 @@ namespace Core.Entities
             }
         }
 
+        
+        public void GetHeal(float heal)
+        {
+            _health += heal;
+        }
         public void NearDeath()
         {
             //HealthSaves
@@ -72,6 +77,11 @@ namespace Core.Entities
             {
                 case "":
                 {
+                    break;
+                }
+                case "Collectable"://Enter-alt
+                {
+                    StartCoroutine(Pickup(obj)); 
                     break;
                 }
                 case "Enemy":
@@ -102,6 +112,31 @@ namespace Core.Entities
                     yield return null;
                 }
                 obj.PlayerCallBack(PlayerCallbackType.Attack, this);
+                for (float i = 0; i < 0.6f; i += Time.deltaTime * _jumpSpeed)
+                {
+                    TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
+                        (0.5f - i));
+                    TempVector3.y = Mathf.Sin(Mathf.Clamp(0.5f - i,0f,0.5f) * Mathf.PI) * _jumpHeight;
+                    transform.position = TempVector3;
+
+                    yield return null;
+                }
+            }
+        }
+        public IEnumerator Pickup(BaseTilableObject obj) //Enter-alt
+        {
+            if (LevelController.Instance.TurnState == TurnState.Player)
+            {
+                for (float i = 0; i < 0.6f; i += Time.deltaTime * _jumpSpeed)
+                {
+                    TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
+                        i);
+                    TempVector3.y = Mathf.Sin(Mathf.Clamp(i,0,0.5f) * Mathf.PI) * _jumpHeight;
+                    transform.position = TempVector3;
+
+                    yield return null;
+                }
+                obj.PlayerCallBack(PlayerCallbackType.Pickup, this);
                 for (float i = 0; i < 0.6f; i += Time.deltaTime * _jumpSpeed)
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
