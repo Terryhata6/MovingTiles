@@ -12,7 +12,7 @@ namespace Core.Entities
         [Header("EnemyProps")]
         [SerializeField] private int _health;
         [SerializeField] private MMFeedbacks _mmFeedbacks;
-
+        [SerializeField] private float BaseDamage = 1f;
         public int Health => _health;
         
         protected override IEnumerator PlayerInteraction(TileBox box, TurnState state)
@@ -24,17 +24,17 @@ namespace Core.Entities
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position,
                         i);
-                    TempVector3.y = Mathf.Sin(i * Mathf.PI) * _jumpHeight;
+                    TempVector3.y = Mathf.Sin(Mathf.Clamp(i,0f,0.5f) * Mathf.PI) * _jumpHeight;
                     transform.position = TempVector3;
 
                     yield return null;
                 }
-
+                (box.TiledObject as PlayerTilableObject).GetDamage(BaseDamage);
                 for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position,
                         (0.5f - i));
-                    TempVector3.y = Mathf.Sin((0.5f - i) * Mathf.PI) * _jumpHeight;
+                    TempVector3.y = Mathf.Sin(Mathf.Clamp(0.5f - i, 0f, 0.5f) * Mathf.PI) * _jumpHeight;
                     transform.position = TempVector3;
 
                     yield return null;

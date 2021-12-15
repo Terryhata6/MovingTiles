@@ -9,8 +9,10 @@ namespace Core.Entities
     {
 
         [SerializeField] private bool _canCounterAttack = false;
+        [SerializeField] private float _health;
         [SerializeField] private int _baseDamage;
 
+        public float HP => _health;
         public int CurrentDamage
         {
             get
@@ -43,8 +45,20 @@ namespace Core.Entities
         {
         }
 
-        public void GetDamage()
+        public void GetDamage(float damage)
         {
+            _health -= damage;
+            if (_health <= 0)
+            {
+                _health = 0;
+                NearDeath();
+            }
+        }
+
+        public void NearDeath()
+        {
+            //HealthSaves
+            LevelController.Instance.LevelFailed();
         }
 
         public void Attack()
@@ -78,21 +92,21 @@ namespace Core.Entities
         {
             if (LevelController.Instance.TurnState == TurnState.Player || _canCounterAttack)
             {
-                for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
+                for (float i = 0; i < 0.6f; i += Time.deltaTime * _jumpSpeed)
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
                         i);
-                    TempVector3.y = Mathf.Sin(i * Mathf.PI) * _jumpHeight;
+                    TempVector3.y = Mathf.Sin(Mathf.Clamp(i,0,0.5f) * Mathf.PI) * _jumpHeight;
                     transform.position = TempVector3;
 
                     yield return null;
                 }
                 obj.PlayerCallBack(PlayerCallbackType.Attack, this);
-                for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
+                for (float i = 0; i < 0.6f; i += Time.deltaTime * _jumpSpeed)
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
                         (0.5f - i));
-                    TempVector3.y = Mathf.Sin((0.5f - i) * Mathf.PI) * _jumpHeight;
+                    TempVector3.y = Mathf.Sin(Mathf.Clamp(0.5f - i,0f,0.5f) * Mathf.PI) * _jumpHeight;
                     transform.position = TempVector3;
 
                     yield return null;
