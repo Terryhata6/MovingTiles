@@ -26,7 +26,7 @@ namespace Core.Entities
             SetBox(TileController.Instance.Center);
         }
 
-        public void SetBox(TileBox box)
+        public override void SetBox(TileBox box)
         {
             if (_currentTileBox != null)
             {

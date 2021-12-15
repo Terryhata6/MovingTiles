@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Core.UtilitsSpace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Core
 {
-    public class SceneController : MonoBehaviour
+    public class SceneController : Singleton<SceneController>
     {
         [SerializeField] private List<string> _scenes;
         [SerializeField] private bool LevelDebug = false;
@@ -52,25 +53,26 @@ namespace Core
             LoadLevelScene(_scenes[currentLevelNumber]);
         }
 
+        
         public void LoadLevelScene(string sceneName)
         {
             SceneManager.LoadScene(sceneName,LoadSceneMode.Additive);
-            FindLevelController();
+            SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => FindLevelController();
+            
         }
 
-        public bool FindLevelController()
+        public void FindLevelController()
         {
-            //_currentLevelController =  FindObjectOfType<LevelController>();
             _currentLevelController = LevelController.Instance;
+            //_currentLevelController =  FindObjectOfType<LevelController>();
             if (_currentLevelController != null)
             {
                 UIEvents.Instance.OnButtonStartGame += _currentLevelController.LevelStart;
-                return true;
+                _currentLevelController.Initialize();
             }
             else
             {
                 Debug.Log("LevelController not found");
-                return false;
             }
         }
     }

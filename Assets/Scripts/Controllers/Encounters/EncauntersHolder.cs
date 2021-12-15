@@ -13,7 +13,7 @@ namespace Core
         {
             OnStartCallBack?.Invoke();
             int iterator = 0;
-            TilableObjectsController.Instance.SpawnStartEnemyes(() => iterator++, () => iterator--);
+            TilableObjectsController.Instance.SpawnStartEnemyes(() => iterator++, () => iterator--); ///
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }

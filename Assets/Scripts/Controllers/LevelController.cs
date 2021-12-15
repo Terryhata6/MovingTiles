@@ -6,8 +6,9 @@ using UnityEngine;
 
 namespace Core
 {
-    public class LevelController : Singleton<LevelController>
+    public class LevelController : MonoBehaviour
     {
+        public static LevelController Instance;
         [Header("Properties")] [SerializeField]
         private TurnState _firstTurn;
 
@@ -17,15 +18,24 @@ namespace Core
         private TurnState _currentTurnState;
         private int _turnNumber = 0;
         private Dictionary<int, Action<Action,Action>> turnTasks = new Dictionary<int, Action<Action,Action>>();
-        
-        
-        
+
         public TurnState TurnState => _currentTurnState;
         public int TurnNumber => _turnNumber;
-        
+
+        private void Awake()
+        {
+            Instance = this;
+        }
+
         private void Start()
+        { 
+            
+        }
+
+        public void Initialize()
         {
             TileController.Instance.CreateTiles();
+            CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
             CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
             //TilableObjectsController.Instance.SpawnStartEnemyes
             
@@ -133,6 +143,11 @@ namespace Core
         }
 
         #endregion
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
     }
 
 
