@@ -419,7 +419,7 @@ MonoBehaviour:
   _jumpHeight: 0.3
   _jumpSpeed: 8
   _currentTileBox: {fileID: 0}
-  _canCounterAttack: 0
+  _canCounterAttack: 1
   _health: 4
   _baseDamage: 1
 --- !u!1 &1082271959335939024
