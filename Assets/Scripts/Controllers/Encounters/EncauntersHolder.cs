@@ -18,7 +18,7 @@ namespace Core
             OnEndCallBack?.Invoke();
         }
         
-        public void SpawnEnemy(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteStartSpawnEnemy(OnStartCallBack, OnEndCallBack));
+        public void SpawnEnemy(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteSpawnEnemy(OnStartCallBack, OnEndCallBack));
         private IEnumerator ExecuteSpawnEnemy(Action OnStartCallBack, Action OnEndCallBack)
         {
             OnStartCallBack?.Invoke();
