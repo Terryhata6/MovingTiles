@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 42a073b853f44e349808808b70d3916d, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -868,7 +868,7 @@ PrefabInstance:
       objectReference: {fileID: 6566720877355210773, guid: 4acd65b8fc9432340a0ebb47585e91c8, type: 3}
     - target: {fileID: 5018710890228051554, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
       propertyPath: m_Name
-      value: TileController
+      value: LevelController
       objectReference: {fileID: 0}
     - target: {fileID: 5018710890228051555, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
       propertyPath: m_RootOrder

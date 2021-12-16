@@ -47,5 +47,12 @@ namespace Core
         {
             OnPlayerHpChange?.Invoke(currentValue, minValue, maximumValue);
         }
+
+        public event Action<LevelController> OnLoadNewLevelController;
+        public void LoadNewLevelController(LevelController controller)
+        {
+            OnLoadNewLevelController?.Invoke(controller);
+        }
+        
     }
 }
