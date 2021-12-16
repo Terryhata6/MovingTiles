@@ -8,8 +8,7 @@ namespace Core.Entities
 {
     public class ExitDoorTilableObject : TilableObject
     {
-        [Header("ExitDoorProps")] [SerializeField]
-        private float _baseHeal = 1;
+        
 
         [SerializeField] private MMFeedbacks _mmFeedbacks;
 

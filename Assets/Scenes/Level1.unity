@@ -842,6 +842,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -2753275871187950407, guid: 78c7b17d25a505240b25b88860eec802, type: 3}
     - target: {fileID: 1390962555, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
+      propertyPath: _exitDoorExample
+      value: 
+      objectReference: {fileID: 347175675493459151, guid: 9e67817d0e1ac0f43bc0e0017123e0ae, type: 3}
+    - target: {fileID: 1390962555, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
       propertyPath: StartEnemiesAmount
       value: 2
       objectReference: {fileID: 0}
