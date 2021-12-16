@@ -12,6 +12,7 @@ namespace Core
         [SerializeField] private TilableObject _enemyExample;
         [SerializeField] private HealPackTilableObject _healExample;
         [SerializeField] private ExitDoorTilableObject _exitDoorExample;
+        [SerializeField] private BuildingTilableObject _tempBuilding;
         [SerializeField] private int StartEnemiesAmount;
         public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
@@ -119,8 +120,8 @@ namespace Core
         {
             forEachCall?.Invoke();
             _tempPos = InputController.Instance.TouchPosition();
-            _enemy = Instantiate(_enemyExample.gameObject, _tempPos,
-                Quaternion.identity, transform).GetComponent<TilableObject>();
+            _enemy = Instantiate(_tempBuilding.gameObject, _tempPos,
+                Quaternion.identity,transform).GetComponent<TilableObject>();
             StartCoroutine(_pointer.PointSkill(_enemy, onEndSpawningCallback));
         }
         
