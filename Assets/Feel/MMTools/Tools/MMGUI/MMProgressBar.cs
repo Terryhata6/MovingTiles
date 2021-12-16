@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using MoreMountains.Tools;
+using TMPro;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
@@ -156,7 +157,7 @@ namespace MoreMountains.Tools
         public UnityEvent OnBarMovementIncreasingStop;
 
         [MMInspectorGroup("Text", true, 20)] 
-        public Text PercentageText;
+        public TextMeshProUGUI PercentageText;
 
         public string TextPrefix;
         public string TextSuffix;
@@ -458,7 +459,17 @@ namespace MoreMountains.Tools
 
         #endregion TESTS
 
-        
+        #region Hypnos
+        /// <summary>
+        /// Change bar value with delta value;
+        /// </summary>
+        /// <param name="value">changed value in percent from maximum</param>
+        public virtual void UpdateHpValue(float value)
+        {
+	        UpdateBar01(Mathf.Clamp(value, 0f, 1f));
+        }
+
+        #endregion
         
         protected virtual void UpdateText()
         {

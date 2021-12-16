@@ -1,3 +1,6 @@
+using Core;
+using Core.Entities;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +12,7 @@ public class InGameUIView : BaseMenuView
     [Header("Elements")]
     [SerializeField] private Button _buttonPause;
 
+    [SerializeField] private MMProgressBar _healthBar;
     private UIController _uiController;
 
 
@@ -16,8 +20,8 @@ public class InGameUIView : BaseMenuView
     {
         _buttonPause.onClick.AddListener(UIEvents.Instance.ButtonPauseGame);
         FindMyController();
+        _healthBar.Initialization();
     }
-
 
     private void FindMyController()
     {
@@ -29,14 +33,24 @@ public class InGameUIView : BaseMenuView
     {
         if (!IsShow) return;
         _panel.gameObject.SetActive(false);
+        GameEvents.Instance.OnPlayerHpChange -= SetHp;
         IsShow = false;
     }
 
     public override void Show()
     {
         if (IsShow) return;
+
+        #region debug
+        GameEvents.Instance.OnPlayerHpChange += SetHp;
+        #endregion
         _panel.gameObject.SetActive(true);
         IsShow = true;
+    }
+
+    public void SetHp(float currentValue, float minValue, float maxValue)
+    {
+        _healthBar.UpdateBar(currentValue, minValue, maxValue);
     }
 
     private void OnDestroy()

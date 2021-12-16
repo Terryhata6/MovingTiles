@@ -8,7 +8,6 @@ namespace Core.Entities
 {
     public class ExitDoorTilableObject : TilableObject
     {
-
         [SerializeField] private MMFeedbacks _mmFeedbacks;
 
         protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
