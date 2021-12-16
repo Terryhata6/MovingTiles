@@ -8,8 +8,6 @@ namespace Core.Entities
 {
     public class ExitDoorTilableObject : TilableObject
     {
-        [Header("ExitDoorProps")] [SerializeField]
-        private float _baseHeal = 1;
 
         [SerializeField] private MMFeedbacks _mmFeedbacks;
 
@@ -18,6 +16,15 @@ namespace Core.Entities
             //base.InteractionWithPlayer(box, state);
             if (state == TurnState.Player)
             {
+                for (float i = 0; i < 1f; i += 0.01f * _jumpSpeed)
+                {
+                    TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position,
+                        i);
+                    TempVector3.y = Mathf.Sin(Mathf.Clamp(i, 0f, 0.5f) * Mathf.PI) * _jumpHeight;
+                    transform.position = TempVector3;
+
+                    yield return null;
+                }
                 DoorUsed();
                 (box.TiledObject as PlayerTilableObject).GoToExitDoor();
                 yield return null;
