@@ -57,6 +57,8 @@ namespace Core.Entities
                     break;
                 case PlayerCallbackType.Attack:
                     break;
+                case PlayerCallbackType.Exit: //Enter-alt
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(callbackType), callbackType, null);
             }
@@ -78,6 +80,7 @@ namespace Core.Entities
     public enum PlayerCallbackType
     {
         Pickup,
-        Attack
+        Attack,
+        Exit //Enter-alt
     }
 }
