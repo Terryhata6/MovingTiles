@@ -55,7 +55,12 @@ namespace Core.Entities
                 
             }
         }
-
+        
+        public void GetHeal(float heal)
+        {
+            _health += heal;
+        }
+        
         public void GetDamage(float damage)
         {
             _hips.DOShakePosition(0.4f, snapping: false, strength: new Vector3(0.3f, 0, 0.3f)).OnComplete(() => _hips.localPosition = Vector3.up * 0.5f);
@@ -68,10 +73,8 @@ namespace Core.Entities
         }
 
         
-        public void GetHeal(float heal)
-        {
-            _health += heal;
-        }
+        
+        
         public void NearDeath()
         {
             //HealthSaves
@@ -124,7 +127,7 @@ namespace Core.Entities
 
                     yield return null;
                 }
-                obj.PlayerCallBack(PlayerCallbackType.Attack, this);
+                obj.CallbackForPlayerMoves(PlayerCallbackType.Attack, this);
                 for (float i = 0; i < 0.5f; i = Mathf.Clamp(i + Time.deltaTime * _jumpSpeed, 0 ,0.5f))
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
@@ -140,26 +143,9 @@ namespace Core.Entities
         {
             if (LevelController.Instance.TurnState == TurnState.Player)
             {
-                for (float i = 0; i < 0.6f; i += Time.deltaTime * _jumpSpeed)
-                {
-                    TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
-                        i);
-                    TempVector3.y = Mathf.Sin(Mathf.Clamp(i,0,0.5f) * Mathf.PI) * _jumpHeight;
-                    transform.position = TempVector3;
-
-                    yield return null;
-                }
-                obj.PlayerCallBack(PlayerCallbackType.Pickup, this);
-                for (float i = 0; i < 0.6f; i += Time.deltaTime * _jumpSpeed)
-                {
-                    TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
-                        (0.5f - i));
-                    TempVector3.y = Mathf.Sin(Mathf.Clamp(0.5f - i,0f,0.5f) * Mathf.PI) * _jumpHeight;
-                    transform.position = TempVector3;
-
-                    yield return null;
-                }
+                obj.CallbackForPlayerMoves(PlayerCallbackType.Pickup, this);
             }
+            yield break;
         }
 
         public void LoadStatsFormPrefs()

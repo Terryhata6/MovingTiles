@@ -37,7 +37,7 @@ namespace Core
         {
             TileController.Instance.CreateTiles();
             CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
-            CreateNewTask(2, EncauntersHolder.Instance.SpawnEnemy);
+            CreateNewTask(2, EncauntersHolder.Instance.SpawnHeal);
             CreateNewTask(4, EncauntersHolder.Instance.SpawnEnemy);
             CreateNewTask(6, EncauntersHolder.Instance.SpawnEnemy);
             //TilableObjectsController.Instance.SpawnStartEnemyes

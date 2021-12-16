@@ -64,11 +64,6 @@ namespace Core
 
         private void TouchStarted(InputAction.CallbackContext ctx)
         {
-            if (_inputSystemModule.IsPointerOverGameObject(0))
-            {
-                Debug.Log("OverGameObject");
-            }
-
             if (_eventSystem.currentSelectedGameObject)
             {
                 Debug.Log($"Selecting {_eventSystem.currentSelectedGameObject}");
@@ -80,6 +75,10 @@ namespace Core
         
         private void TouchEnded(InputAction.CallbackContext ctx)
         {
+            if (_inputSystemModule.IsPointerOverGameObject(0))
+            {
+                Debug.Log("OverGameObject");
+            }
             OnEndTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.time);
         }
 

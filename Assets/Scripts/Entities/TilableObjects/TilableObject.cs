@@ -14,6 +14,7 @@ namespace Core.Entities
         [SerializeField] private bool _haveSkills = false;
         [SerializeField] private List<Skill> _skills = new List<Skill>();
         [SerializeField] private bool _needDebugLog = false;
+        [SerializeField] private bool _wantToMoveToHero = false;
         
         
         public bool HaveSkills => _haveSkills;
@@ -36,7 +37,7 @@ namespace Core.Entities
             {
                 return;
             }
-            else
+            else if(_wantToMoveToHero)
             {
                 _path = TileController.Instance.FindPath(_currentTileBox);
                 if (_path == null)
@@ -70,6 +71,10 @@ namespace Core.Entities
                         CallBackMethod.Invoke();
                     }
                 }
+            }
+            else
+            {
+                CallBackMethod.Invoke();
             }
         }
 
@@ -203,8 +208,9 @@ namespace Core.Entities
                 yield break;
             }
 
-            transform.DORotateQuaternion(Quaternion.LookRotation(box.transform.position - transform.position, Vector3.up) , 0.05f);
+            transform.DOLookAt(box.transform.position, 0.05f);
             var pos = transform.position;
+            
             if (!box.TileBusy || box.WillFree)
             {
                 SetBox(box);
@@ -222,7 +228,7 @@ namespace Core.Entities
                 {
                     case "Player":
                     {
-                        yield return StartCoroutine(PlayerInteraction(box, state));
+                        yield return StartCoroutine(InteractionWithPlayer(box, state));
                         break;
                     }
                     case "Enemy":
@@ -233,14 +239,12 @@ namespace Core.Entities
                         break;
                 }
             }
-
-
             endAnimationCallBack.Invoke();
         }
 
-        protected override IEnumerator PlayerInteraction(TileBox box, TurnState state)
+        protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
         {
-            //base.PlayerInteraction(box, state);
+            //base.InteractionWithPlayer(box, state);
             yield break;
         }
 

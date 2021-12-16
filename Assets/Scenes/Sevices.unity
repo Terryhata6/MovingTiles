@@ -1191,10 +1191,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1851525641}
-  - component: {fileID: 1851525643}
   - component: {fileID: 1851525642}
   - component: {fileID: 1851525640}
   - component: {fileID: 1851525639}
+  - component: {fileID: 1851525643}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1285,7 +1285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aeddb837244aee448c3f2e767214b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EventSystem: {fileID: 0}
+  _inputSystemModule: {fileID: 0}
+  _eventSystem: {fileID: 0}
 --- !u!1 &1898212452
 GameObject:
   m_ObjectHideFlags: 0

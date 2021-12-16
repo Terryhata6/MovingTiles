@@ -56,6 +56,7 @@ MonoBehaviour:
   _moveDistance: 0
   _haveSkills: 0
   _needDebugLog: 1
+  _wantToMoveToHero: 1
   _health: 2
   _mmFeedbacks: {fileID: -7371152851451301954}
   BaseDamage: 1
