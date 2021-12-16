@@ -11,10 +11,12 @@ namespace Core.Entities
 
         [SerializeField] private bool _canCounterAttack = false;
         [SerializeField] private float _health;
+        [SerializeField] private float _healthMax;
         [SerializeField] private int _baseDamage;
         [SerializeField] private Transform _hips;
 
         public float HP => _health;
+        public float MaxHP => _healthMax;
         public int CurrentDamage
         {
             get
@@ -27,6 +29,7 @@ namespace Core.Entities
         private IEnumerator Start()
         {
             yield return null;
+            GameEvents.Instance.PlayerHpChange(_health,0,_healthMax);
             SetBox(TileController.Instance.Center);
         }
 
@@ -59,12 +62,14 @@ namespace Core.Entities
         public void GetHeal(float heal)
         {
             _health += heal;
+            UpdateHealthUi();
         }
         
         public void GetDamage(float damage)
         {
             _hips.DOShakePosition(0.4f, snapping: false, strength: new Vector3(0.3f, 0, 0.3f)).OnComplete(() => _hips.localPosition = Vector3.up * 0.5f);
             _health -= damage;
+            UpdateHealthUi();
             if (_health <= 0)
             {
                 _health = 0;
@@ -72,9 +77,12 @@ namespace Core.Entities
             }
         }
 
-        
-        
-        
+        public void UpdateHealthUi()
+        {
+            GameEvents.Instance.PlayerHpChange(_health,0,_healthMax);
+        }
+
+
         public void NearDeath()
         {
             //HealthSaves
