@@ -55,7 +55,8 @@ public class UIController : MonoBehaviour
 
     private void RestartGame()
     {
-        //TODO SameThatNextLevel
+        GameEvents.Instance.RestartLevel();
+        SwitchUI(UIState.MainMenu);
     }
 
     public void AddView(BaseMenuView view)

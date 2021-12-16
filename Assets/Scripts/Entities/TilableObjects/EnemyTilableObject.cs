@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -15,9 +16,9 @@ namespace Core.Entities
         [SerializeField] private float BaseDamage = 1f;
         public int Health => _health;
         
-        protected override IEnumerator PlayerInteraction(TileBox box, TurnState state)
+        protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
         {
-            //base.PlayerInteraction(box, state);
+            //base.InteractionWithPlayer(box, state);
             if (state == TurnState.Enemy)
             {
                 for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
@@ -46,9 +47,9 @@ namespace Core.Entities
             }
         }
         
-        public override void PlayerCallBack(PlayerCallbackType callbackType, PlayerTilableObject player)
+        public override void CallbackForPlayerMoves(PlayerCallbackType callbackType, PlayerTilableObject player)
         {
-            //base.PlayerCallBack(callbackType, player);
+            //base.CallbackForPlayerMoves(callbackType, player);
             switch (callbackType)
             {
                 case PlayerCallbackType.Pickup:
@@ -82,24 +83,25 @@ namespace Core.Entities
             //TODO Destroy Death Animation
             Destroy(this.gameObject);
             yield break;
-            
         }
 
         public UnityAction End;
         public override IEnumerator SpawnAnimation(Action<BaseTilableObject> OnEndSpawn)
-        {
+        {/*
             _mmFeedbacks.Initialization();
             var deltaPosition = _mmFeedbacks.GetComponent<MMFeedbackPosition>();
             //deltaPosition.InitialPosition = _currentTileBox.transform.position + Vector3.up * 3f;
             /*deltaPosition.DestinationPositionTransform = _currentTileBox.transform;
-            deltaPosition.DestinationPosition = deltaPosition.DestinationPositionTransform.position;*/
+            deltaPosition.DestinationPosition = deltaPosition.DestinationPositionTransform.position;
             End = () =>
             {
                 _mmFeedbacks.GetComponent<MMFeedbackEvents>().PlayEvents.RemoveListener(End);
                 OnEndSpawn?.Invoke(this);
             };
             _mmFeedbacks.GetComponent<MMFeedbackEvents>().PlayEvents.AddListener(End);
-            _mmFeedbacks.PlayFeedbacks();
+            _mmFeedbacks.PlayFeedbacks();*/
+            
+            transform.DOMoveY(_currentTileBox.transform.position.y+0.5f, 0.2f).OnComplete(() => OnEndSpawn.Invoke(this));
             yield break;
         }
     }

@@ -10,6 +10,7 @@ namespace Core
     public class TilableObjectsController : MonoBehaviour
     {
         [SerializeField] private TilableObject _enemyExample;
+        [SerializeField] private HealPackTilableObject _healExample;
         [SerializeField] private int StartEnemiesAmount;
         public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
@@ -68,7 +69,7 @@ namespace Core
             forEachCall?.Invoke();
             _tilebox = TileController.Instance.GetTileForenemy();
             _enemy = Instantiate(_enemyExample.gameObject, _tilebox.transform.position + Vector3.up * 5f,
-                Quaternion.identity).GetComponent<TilableObject>();
+                Quaternion.identity, transform).GetComponent<TilableObject>();
             _enemy.SetBox(_tilebox);
             StartCoroutine(_enemy.SpawnAnimation((value) =>
             {
@@ -76,6 +77,21 @@ namespace Core
                 onEndSpawningCallback?.Invoke();
             }));
         }
+        
+        public void SpawnHeal(Action forEachCall, Action onEndSpawningCallback)
+        {
+            forEachCall?.Invoke();
+            _tilebox = TileController.Instance.GetTileForenemy();
+            _enemy = Instantiate(_healExample.gameObject, _tilebox.transform.position + Vector3.up * 5f,
+                Quaternion.identity, transform).GetComponent<HealPackTilableObject>();
+            _enemy.SetBox(_tilebox);
+            StartCoroutine(_enemy.SpawnAnimation((value) =>
+            {
+                AddObjectToList(value as TilableObject);
+                onEndSpawningCallback?.Invoke();
+            }));
+        }
+        
         #endregion
         public IEnumerator ExecuteEnemiesSkills() //
         {
@@ -101,7 +117,7 @@ namespace Core
 
                 yield return new WaitForSeconds(0.1f);
             }
-
+            
             yield return new WaitUntil(() => waitingMoves == 0);
             LevelController.Instance.EndOfTurn();
         }
