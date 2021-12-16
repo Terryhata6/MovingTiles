@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Core.Interfaces;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Core.Entities
@@ -11,6 +12,7 @@ namespace Core.Entities
         [SerializeField] private bool _canCounterAttack = false;
         [SerializeField] private float _health;
         [SerializeField] private int _baseDamage;
+        [SerializeField] private Transform _hips;
 
         public float HP => _health;
         public int CurrentDamage
@@ -45,8 +47,18 @@ namespace Core.Entities
         {
         }
 
+        public void GetDamage(float Damage, BaseTilableObject enemy)
+        {
+            GetDamage(Damage);
+            if (_canCounterAttack)
+            {
+                
+            }
+        }
+
         public void GetDamage(float damage)
         {
+            _hips.DOShakePosition(0.4f, snapping: false, strength: new Vector3(0.3f, 0, 0.3f)).OnComplete(() => _hips.localPosition = Vector3.up * 0.5f);
             _health -= damage;
             if (_health <= 0)
             {
@@ -58,7 +70,7 @@ namespace Core.Entities
         public void NearDeath()
         {
             //HealthSaves
-            LevelController.Instance.LevelFailed();
+            StartCoroutine(LevelController.Instance.LevelFailed());
         }
 
         public void Attack()
@@ -90,9 +102,10 @@ namespace Core.Entities
 
         public IEnumerator Attack(BaseTilableObject obj)
         {
-            if (LevelController.Instance.TurnState == TurnState.Player || _canCounterAttack)
+            if (LevelController.Instance.TurnState == TurnState.Player/* || _canCounterAttack*/)
             {
-                for (float i = 0; i < 0.6f; i += Time.deltaTime * _jumpSpeed)
+                transform.DORotateQuaternion(Quaternion.LookRotation(obj.transform.position - transform.position, Vector3.up) , 0.05f);
+                for (float i = 0; i < 0.5f;  i = Mathf.Clamp(i + Time.deltaTime * _jumpSpeed, 0 ,0.5f))
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
                         i);
@@ -102,7 +115,7 @@ namespace Core.Entities
                     yield return null;
                 }
                 obj.PlayerCallBack(PlayerCallbackType.Attack, this);
-                for (float i = 0; i < 0.6f; i += Time.deltaTime * _jumpSpeed)
+                for (float i = 0; i < 0.5f; i = Mathf.Clamp(i + Time.deltaTime * _jumpSpeed, 0 ,0.5f))
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
                         (0.5f - i));

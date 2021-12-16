@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Interfaces;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Core.Entities
@@ -40,14 +41,16 @@ namespace Core.Entities
                 _path = TileController.Instance.FindPath(_currentTileBox);
                 if (_path == null)
                 {
-#if UNITY_EDITOR
+
                     if(_needDebugLog)
                     {
                         Debug.Log($"{gameObject} doesn't have path", this);
-                    }                   
-#endif
-                    //TODO SKIP TURN FEEDBACK
+                    }        
                     CallBackMethod.Invoke();
+                    if(_needDebugLog)
+                    {
+                        Debug.Log($"{gameObject} still invoked", this);
+                    } 
                 }
                 else
                 {
@@ -194,6 +197,13 @@ namespace Core.Entities
 
         public IEnumerator TryMoveToBox(TileBox box, Action endAnimationCallBack, TurnState state)
         {
+            if (this.gameObject == null)
+            {
+                endAnimationCallBack.Invoke();
+                yield break;
+            }
+
+            transform.DORotateQuaternion(Quaternion.LookRotation(box.transform.position - transform.position, Vector3.up) , 0.05f);
             var pos = transform.position;
             if (!box.TileBusy || box.WillFree)
             {
