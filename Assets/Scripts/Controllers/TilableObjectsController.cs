@@ -15,11 +15,13 @@ namespace Core
         [SerializeField] private int StartEnemiesAmount;
         public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
+        private PlayerSkillPointer _pointer; //Enter-alt
         public static TilableObjectsController Instance;
 
         private void Awake()
         {
             Instance = this;
+            _pointer = new PlayerSkillPointer(); //Enter-alt
         }
 
         private void Start()
@@ -35,6 +37,8 @@ namespace Core
                     VARIABLE.SetBox(TileController.Instance.GetTileForenemy());
                 }
             }
+
+            GameEvents.Instance.OnEndTouch += StopPointer; //Enter-alt
         }
         private void OnEnable()
         {
@@ -65,9 +69,12 @@ namespace Core
         }
 
         #endregion
-        #region task
+
         TileBox _tilebox;
-        TilableObject _enemy;
+        private Vector3 _tempPos;
+        TilableObject _enemy; //ПЕРЕИМЕНУЙ (RENAME)
+        #region task
+        
         public void SpawnStartEnemyes(Action forEachCall, Action onEndSpawningCallback)
         {
             for (int i = 0; i < StartEnemiesAmount; i++)
@@ -118,6 +125,18 @@ namespace Core
         }
         
         #endregion
+        #region playerPerk 
+
+        public void SpawnBuilding(Action forEachCall, Action onEndSpawningCallback) //eNTER-ALT
+        {
+            forEachCall?.Invoke();
+            _tempPos = InputController.Instance.TouchPosition();
+            _enemy = Instantiate(_enemyExample.gameObject, _tempPos,
+                Quaternion.identity, transform).GetComponent<TilableObject>();
+            StartCoroutine(_pointer.PointSkill(_enemy, onEndSpawningCallback));
+        }
+        
+        #endregion //enter-alt
         public IEnumerator ExecuteEnemiesSkills() //
         {
             waitingMoves = 0;
@@ -182,5 +201,16 @@ namespace Core
             yield return new WaitUntil(() => waitingMoves == 0);
             LevelController.Instance.EndOfTurn();
         }
+
+        private void StopPointer() // Enter-alt
+        {
+            _pointer.DropSkill();
+        }
+
+        private void OnDestroy() // Enter-alt
+        {
+            GameEvents.Instance.OnEndTouch -= StopPointer; 
+        }
+        
     }
 }
