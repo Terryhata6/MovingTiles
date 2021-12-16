@@ -81,6 +81,11 @@ namespace Core.Entities
             StartCoroutine(LevelController.Instance.LevelFailed());
         }
 
+        public void GoToExitDoor()
+        {
+            LevelController.Instance.LevelVictory();
+        }
+        
         public void Attack()
         {
         }
@@ -92,6 +97,11 @@ namespace Core.Entities
             {
                 case "":
                 {
+                    break;
+                }
+                case "Exit"://Enter-alt
+                {
+                    StartCoroutine(Exit(obj)); 
                     break;
                 }
                 case "Collectable"://Enter-alt
@@ -147,8 +157,28 @@ namespace Core.Entities
             }
             yield break;
         }
+        public IEnumerator Exit(BaseTilableObject obj) //Enter-alt
+        {
+            if (LevelController.Instance.TurnState == TurnState.Player)
+            {
+                transform.DORotateQuaternion(Quaternion.LookRotation(obj.transform.position - transform.position, Vector3.up) , 0.05f);
+                for (float i = 0; i < 1f;  i = Mathf.Clamp(i + Time.deltaTime * _jumpSpeed, 0 ,0.5f))
+                {
+                    TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
+                        i);
+                    TempVector3.y = Mathf.Sin(Mathf.Clamp(i,0,0.5f) * Mathf.PI) * _jumpHeight;
+                    transform.position = TempVector3;
 
-        public void LoadStatsFormPrefs()
+                    yield return null;
+                }
+
+                obj.CallbackForPlayerMoves(PlayerCallbackType.Exit, this);
+            }
+            yield break;
+        }
+        
+
+    public void LoadStatsFormPrefs()
         {
         }
 

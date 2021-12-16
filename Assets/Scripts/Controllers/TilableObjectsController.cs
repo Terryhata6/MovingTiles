@@ -11,6 +11,7 @@ namespace Core
     {
         [SerializeField] private TilableObject _enemyExample;
         [SerializeField] private HealPackTilableObject _healExample;
+        [SerializeField] private ExitDoorTilableObject _exitDoorExample;
         [SerializeField] private int StartEnemiesAmount;
         public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
@@ -84,6 +85,19 @@ namespace Core
             _tilebox = TileController.Instance.GetTileForenemy();
             _enemy = Instantiate(_healExample.gameObject, _tilebox.transform.position + Vector3.up * 5f,
                 Quaternion.identity, transform).GetComponent<HealPackTilableObject>();
+            _enemy.SetBox(_tilebox);
+            StartCoroutine(_enemy.SpawnAnimation((value) =>
+            {
+                AddObjectToList(value as TilableObject);
+                onEndSpawningCallback?.Invoke();
+            }));
+        }
+        public void SpawnExitDoor(Action forEachCall, Action onEndSpawningCallback) //Enter-alt
+        {
+            forEachCall?.Invoke();
+            _tilebox = TileController.Instance.GetTileForenemy();
+            _enemy = Instantiate(_exitDoorExample.gameObject, _tilebox.transform.position + Vector3.up * 5f,
+                Quaternion.identity, transform).GetComponent<ExitDoorTilableObject>();
             _enemy.SetBox(_tilebox);
             StartCoroutine(_enemy.SpawnAnimation((value) =>
             {

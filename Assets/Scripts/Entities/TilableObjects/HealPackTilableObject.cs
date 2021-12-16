@@ -3,7 +3,6 @@ using System.Collections;
 using DG.Tweening;
 using MoreMountains.Feedbacks;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Core.Entities
 {
