@@ -49,6 +49,7 @@ namespace Core.UtilitsSpace
                 }
                 else
                 {
+                    _skillCanSnap = false;
                     _tempPos.y = 1f;
                     _playerSkill.transform.position = _tempPos;
                 }
@@ -64,7 +65,7 @@ namespace Core.UtilitsSpace
             }
             else
             {
-                GameObject.Destroy(_playerSkill);
+                GameObject.Destroy(_playerSkill.gameObject);
             }
             onEndSpawningCallback?.Invoke();
         }
@@ -75,13 +76,13 @@ namespace Core.UtilitsSpace
             {
                 if (tile!.TileBusy)
                 {
-                    _skillCanSnap = true;
-                    Debug.Log("свободно");
+                    _skillCanSnap = false;
+                    Debug.Log("несвободно");
                 }
                 else
                 {
-                    _skillCanSnap = false;
-                    Debug.Log("несвободно");
+                    _skillCanSnap = true;
+                    Debug.Log("свободно");
                 }
             }
         }

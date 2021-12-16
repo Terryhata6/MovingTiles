@@ -25,6 +25,10 @@ namespace Core.Entities
         {
             yield break;
         }
+        protected virtual IEnumerator InteractionWithTilableObject(TileBox box, TurnState state)
+        {
+            yield break;
+        }
 
         public virtual void SetBox(TileBox box)
         {

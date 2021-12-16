@@ -79,6 +79,7 @@ namespace Core
             {
                 Debug.Log("OverGameObject");
             }
+            GameEvents.Instance.EndTouch(); //Enter-alt - потом убери, это для теста
             OnEndTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.time);
         }
 
