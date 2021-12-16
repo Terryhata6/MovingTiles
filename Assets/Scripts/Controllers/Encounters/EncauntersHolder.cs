@@ -46,5 +46,15 @@ namespace Core
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
+        
+        public void SpawnExitDoor(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteExitDoor(OnStartCallBack, OnEndCallBack));
+        private IEnumerator ExecuteExitDoor(Action OnStartCallBack, Action OnEndCallBack) //Enter-alt
+        {
+            OnStartCallBack?.Invoke();
+            int iterator = 0;
+            TilableObjectsController.Instance.SpawnExitDoor(() => iterator++, () => iterator--); ///
+            yield return new WaitUntil(() => iterator == 0);
+            OnEndCallBack?.Invoke();
+        }
     }
 }
