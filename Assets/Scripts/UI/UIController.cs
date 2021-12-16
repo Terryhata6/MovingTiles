@@ -12,17 +12,22 @@ public class UIController : MonoBehaviour
         UIEvents.Instance.OnButtonStartGame += StartGame;
         UIEvents.Instance.OnButtonPauseGame += PauseGame;
         UIEvents.Instance.OnButtonResumeGame += StartGame;
-        UIEvents.Instance.OnButtonNextLevel += NextLevel;
+        //UIEvents.Instance.OnButtonNextLevel += NextLevel;
         UIEvents.Instance.OnButtonRestartGame += RestartGame;
         GameEvents.Instance.OnLevelVictory += WinGame;
         GameEvents.Instance.OnLevelFailed += LoseGame;
+        GameEvents.Instance.OnLoadNewLevelController += OpenGameMenu;
     }
 
     private void Start()
     {
-        SwitchUI(UIState.MainMenu);
+        
     }
 
+    private void OpenGameMenu(LevelController controller)
+    {
+        SwitchUI(UIState.MainMenu);
+    }
 
     private void StartGame()
     {
@@ -50,7 +55,7 @@ public class UIController : MonoBehaviour
 
     private void NextLevel()
     {
-        //TODO InGameMenu
+        SwitchUI(UIState.MainMenu);
     }
 
     private void RestartGame()

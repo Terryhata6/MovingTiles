@@ -28,8 +28,8 @@ namespace Core.Entities
 
         private IEnumerator Start()
         {
+            UpdateHealthUi();
             yield return null;
-            GameEvents.Instance.PlayerHpChange(_health,0,_healthMax);
             SetBox(TileController.Instance.Center);
         }
 

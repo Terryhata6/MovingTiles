@@ -41,6 +41,18 @@ namespace Core
 
             GameEvents.Instance.OnEndTouch += StopPointer; //Enter-alt
         }
+        private void OnEnable()
+        {
+            GameEvents.Instance.OnLevelEnd += StopAllCoroutinesFroEvent;
+        }
+        public void OnDisable()
+        {
+            GameEvents.Instance.OnLevelEnd -= StopAllCoroutinesFroEvent;
+        }
+        public void StopAllCoroutinesFroEvent()
+        {
+            StopAllCoroutines();
+        }
 
         #region ListMethods
 
