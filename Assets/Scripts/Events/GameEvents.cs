@@ -35,6 +35,13 @@ namespace Core
             OnRestartLevel?.Invoke();
         }
 
+        public event Action OnEndTouch; //eNTER-ALT
+
+        public void EndTouch() //eNTER-ALT
+        {
+            OnEndTouch?.Invoke();
+        }
+
         public event Action<float,float,float> OnPlayerHpChange;
         public void PlayerHpChange(float currentValue,float minValue, float maximumValue)
         {
