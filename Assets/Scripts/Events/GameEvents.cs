@@ -28,5 +28,11 @@ namespace Core
         {
             OnLevelEnd?.Invoke();
         }
+
+        public event Action OnRestartLevel;
+        public void RestartLevel()
+        {
+            OnRestartLevel?.Invoke();
+        }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.Interfaces;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Core.Entities
@@ -13,6 +14,7 @@ namespace Core.Entities
         [SerializeField] private bool _haveSkills = false;
         [SerializeField] private List<Skill> _skills = new List<Skill>();
         [SerializeField] private bool _needDebugLog = false;
+        [SerializeField] private bool _wantToMoveToHero = false;
         
         
         public bool HaveSkills => _haveSkills;
@@ -35,19 +37,21 @@ namespace Core.Entities
             {
                 return;
             }
-            else
+            else if(_wantToMoveToHero)
             {
                 _path = TileController.Instance.FindPath(_currentTileBox);
                 if (_path == null)
                 {
-#if UNITY_EDITOR
+
                     if(_needDebugLog)
                     {
                         Debug.Log($"{gameObject} doesn't have path", this);
-                    }                   
-#endif
-                    //TODO SKIP TURN FEEDBACK
+                    }        
                     CallBackMethod.Invoke();
+                    if(_needDebugLog)
+                    {
+                        Debug.Log($"{gameObject} still invoked", this);
+                    } 
                 }
                 else
                 {
@@ -67,6 +71,10 @@ namespace Core.Entities
                         CallBackMethod.Invoke();
                     }
                 }
+            }
+            else
+            {
+                CallBackMethod.Invoke();
             }
         }
 
@@ -194,7 +202,15 @@ namespace Core.Entities
 
         public IEnumerator TryMoveToBox(TileBox box, Action endAnimationCallBack, TurnState state)
         {
+            if (this.gameObject == null)
+            {
+                endAnimationCallBack.Invoke();
+                yield break;
+            }
+
+            transform.DOLookAt(box.transform.position, 0.05f);
             var pos = transform.position;
+            
             if (!box.TileBusy || box.WillFree)
             {
                 SetBox(box);
@@ -212,7 +228,7 @@ namespace Core.Entities
                 {
                     case "Player":
                     {
-                        yield return StartCoroutine(PlayerInteraction(box, state));
+                        yield return StartCoroutine(InteractionWithPlayer(box, state));
                         break;
                     }
                     case "Enemy":
@@ -223,14 +239,12 @@ namespace Core.Entities
                         break;
                 }
             }
-
-
             endAnimationCallBack.Invoke();
         }
 
-        protected override IEnumerator PlayerInteraction(TileBox box, TurnState state)
+        protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
         {
-            //base.PlayerInteraction(box, state);
+            //base.InteractionWithPlayer(box, state);
             yield break;
         }
 

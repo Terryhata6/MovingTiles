@@ -26,8 +26,9 @@ namespace Core.UtilitsSpace
                     {
                         var obj = new GameObject();
                         obj.name = (typeof(T)).ToString();
-                        obj.hideFlags = HideFlags.HideAndDontSave;
+                        //obj.hideFlags = HideFlags.HideAndDontSave;
                         _instance = obj.AddComponent<T>();
+                        DontDestroyOnLoad(_instance);
                     }
                 }
                 return _instance;

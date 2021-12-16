@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core.UtilitsSpace;
@@ -11,11 +12,16 @@ namespace Core
         [SerializeField] private List<string> _scenes;
         [SerializeField] private bool LevelDebug = false;
         [SerializeField] private LevelController _currentLevelController;
-        
-        
+
+        private void Awake()
+        {
+            DontDestroyOnLoad(this);
+        }
+
         private void Start()
         {
             UIEvents.Instance.OnButtonNextLevel += LoadNextScene;
+            GameEvents.Instance.OnRestartLevel += ReloadScene;
 
             if (!LevelDebug)
             {
@@ -36,7 +42,7 @@ namespace Core
             }
 
             var currentLevelNumber = PlayerPrefs.GetInt("PlayerLevel");
-            SceneManager.UnloadSceneAsync(currentLevelNumber);
+            SceneManager.UnloadSceneAsync(_scenes[currentLevelNumber]);
             PlayerPrefs.SetInt("PlayerLevel", currentLevelNumber + 1);
 
             LoadLevelScene(_scenes[PlayerPrefs.GetInt("PlayerLevel")]);
@@ -49,7 +55,7 @@ namespace Core
                 UIEvents.Instance.OnButtonStartGame -= _currentLevelController.LevelStart;
             }
             var currentLevelNumber = PlayerPrefs.GetInt("PlayerLevel");
-            SceneManager.UnloadSceneAsync(currentLevelNumber);
+            SceneManager.UnloadSceneAsync(_scenes[currentLevelNumber]);
             LoadLevelScene(_scenes[currentLevelNumber]);
         }
 

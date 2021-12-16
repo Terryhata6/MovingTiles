@@ -12,11 +12,12 @@ namespace Core
         [Header("Properties")] [SerializeField]
         private TurnState _firstTurn;
 
-        private bool _gameEnd = false;
-        private bool _endTurn = false;
+        [SerializeField]private bool _gameEnd = false;
+        [SerializeField]private bool _endTurn = false;
         private Coroutine _turnsCoroutine;
-        private TurnState _currentTurnState;
-        private int _turnNumber = 0;
+        [SerializeField]private TurnState _currentTurnState;
+        [SerializeField]private int _turnNumber = 0;
+        [SerializeField] private int _currentTasksNum = 0;
         private Dictionary<int, Action<Action,Action>> turnTasks = new Dictionary<int, Action<Action,Action>>();
 
         public TurnState TurnState => _currentTurnState;
@@ -36,9 +37,9 @@ namespace Core
         {
             TileController.Instance.CreateTiles();
             CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
-            CreateNewTask(1, EncauntersHolder.Instance.SpawnEnemy);
-            CreateNewTask(2, EncauntersHolder.Instance.SpawnEnemy);
-            CreateNewTask(3, EncauntersHolder.Instance.SpawnEnemy);
+            CreateNewTask(2, EncauntersHolder.Instance.SpawnHeal);
+            CreateNewTask(4, EncauntersHolder.Instance.SpawnEnemy);
+            CreateNewTask(6, EncauntersHolder.Instance.SpawnEnemy);
             //TilableObjectsController.Instance.SpawnStartEnemyes
             
             _currentTurnState = (_firstTurn == TurnState.Player)?TurnState.Enemy:TurnState.Player;
@@ -50,8 +51,14 @@ namespace Core
         private IEnumerator Turns()
         {
             _turnNumber = 0;
+            if (_gameEnd)
+            {
+                yield break;
+            }
+
             while (!_gameEnd)
             {
+                Debug.Log($"Начало Цикла, end of turn {_endTurn}");
                 yield return new WaitUntil(() => _endTurn);
                 yield return new WaitForSeconds(0.5f);
                 _endTurn = false;
@@ -66,9 +73,11 @@ namespace Core
                         
                         if (turnTasks.ContainsKey(TurnNumber))
                         {
-                            var _currentTasksNum = 0;
+                            _currentTasksNum = 0;
+                            Debug.Log($"Release tasks from turn {TurnNumber}");
                             turnTasks[TurnNumber]?.Invoke(() => _currentTasksNum++, () => _currentTasksNum--);
                             yield return new WaitUntil(() =>  _currentTasksNum == 0);
+                            Debug.Log($"tasks from turn {TurnNumber} done");
                             turnTasks.Remove(TurnNumber);
                         }
                         break;
@@ -83,6 +92,7 @@ namespace Core
                         break;
                     }
                 }
+                Debug.Log($"Конец Цикла");
             }
             //todo endGame animations
         }
@@ -91,7 +101,7 @@ namespace Core
         {
             if (!turnTasks.ContainsKey(turnNumber))
             {
-                turnTasks.Add(turnNumber, delegate { Debug.Log($"Release tasks from turn {turnNumber}"); });
+                turnTasks.Add(turnNumber, delegate {  });
             }
             turnTasks[turnNumber] += method;
         }
@@ -113,6 +123,7 @@ namespace Core
 
         public void EndOfTurn()
         {
+            Debug.Log($"Call End of turn");
             _endTurn = true;
         }
 
@@ -131,10 +142,12 @@ namespace Core
             GameEvents.Instance.LevelVictory();
         }
 
-        public void LevelFailed()
+        public IEnumerator LevelFailed()
         {
             LevelEnd();
+            yield return new WaitForSeconds(1f);
             GameEvents.Instance.LevelFailed();
+            
         }
 
         private void LevelEnd()

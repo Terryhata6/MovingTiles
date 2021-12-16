@@ -21,7 +21,7 @@ namespace Core.Entities
             return _config;
         }
         
-        protected virtual IEnumerator PlayerInteraction(TileBox box, TurnState state)
+        protected virtual IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
         {
             yield break;
         }
@@ -49,7 +49,7 @@ namespace Core.Entities
 
         }
         
-        public virtual void PlayerCallBack(PlayerCallbackType callbackType, PlayerTilableObject player)
+        public virtual void CallbackForPlayerMoves(PlayerCallbackType callbackType, PlayerTilableObject player)
         {
             switch (callbackType)
             {

@@ -422,6 +422,7 @@ MonoBehaviour:
   _canCounterAttack: 1
   _health: 4
   _baseDamage: 1
+  _hips: {fileID: 5465940245818798757}
 --- !u!1 &1082271959335939024
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +505,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -902175518690564966, guid: 312134c6a874e07478b4605b99414533, type: 3}
+  - {fileID: 2100000, guid: 78d32daadb7a6034c91fa714ef2323eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -833,12 +834,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1390962555, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
+      propertyPath: _healExample
+      value: 
+      objectReference: {fileID: 3235498240630013834, guid: ffd077b1b7ba0e94c8d25443c7eafe25, type: 3}
+    - target: {fileID: 1390962555, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
       propertyPath: _enemyExample
       value: 
       objectReference: {fileID: -2753275871187950407, guid: 78c7b17d25a505240b25b88860eec802, type: 3}
     - target: {fileID: 1390962555, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
       propertyPath: StartEnemiesAmount
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1390962555, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
       propertyPath: _objects.Array.size

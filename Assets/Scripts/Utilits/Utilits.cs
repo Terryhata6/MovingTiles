@@ -4,6 +4,7 @@ namespace Core.UtilitsSpace
 {
     public class Utilits
     {
+
         public static Vector3 GetPointFromCamera(Camera camera, Vector3 position)
         {
             /*position.z = camera.nearClipPlane;*/

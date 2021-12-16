@@ -3,8 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+
 using Core.UtilitsSpace;
 using UnityEngine.Diagnostics;
+using UnityEngine.InputSystem.UI;
 
 namespace Core
 {
@@ -24,7 +27,8 @@ namespace Core
         #endregion
 
 
-
+        [SerializeField] private InputSystemUIInputModule _inputSystemModule;
+        [SerializeField] private EventSystem _eventSystem;
         private Camera _mainCamera;
         private BaseAction _baseActions;
 
@@ -32,6 +36,14 @@ namespace Core
         {
             _baseActions = new BaseAction();
             _mainCamera = Camera.main;
+            if (_inputSystemModule == null)
+            {
+                _inputSystemModule = GetComponent<InputSystemUIInputModule>();
+            }
+            if (_eventSystem == null)
+            {
+                _eventSystem = GetComponent<EventSystem>();
+            }
         }
 
         private void OnEnable()
@@ -52,11 +64,21 @@ namespace Core
 
         private void TouchStarted(InputAction.CallbackContext ctx)
         {
+            if (_eventSystem.currentSelectedGameObject)
+            {
+                Debug.Log($"Selecting {_eventSystem.currentSelectedGameObject}");
+            }
+
+            //_baseActions.UI.Point.ReadValue<Vector2>();
             OnStartTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.startTime);
         }
         
         private void TouchEnded(InputAction.CallbackContext ctx)
         {
+            if (_inputSystemModule.IsPointerOverGameObject(0))
+            {
+                Debug.Log("OverGameObject");
+            }
             OnEndTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.time);
         }
 

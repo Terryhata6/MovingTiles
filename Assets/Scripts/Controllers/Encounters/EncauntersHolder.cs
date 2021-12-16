@@ -7,7 +7,16 @@ namespace Core
 {
     public class EncauntersHolder : Singleton<EncauntersHolder>
     {
-        
+        private IEnumerator ExecuteEncaunter(Action<Action, Action> method, Action OnStartCallBack, Action OnEndCallBack)
+        {
+            OnStartCallBack?.Invoke();
+            int iterator = 0;
+            method(() => iterator++, () => iterator--); ///
+            yield return new WaitUntil(() => iterator == 0);
+            OnEndCallBack?.Invoke();
+        }
+
+
         public void StartSpawnEnemy(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteStartSpawnEnemy(OnStartCallBack, OnEndCallBack));
         private IEnumerator ExecuteStartSpawnEnemy(Action OnStartCallBack, Action OnEndCallBack)
         {
@@ -17,13 +26,23 @@ namespace Core
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
-        
+
         public void SpawnEnemy(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteSpawnEnemy(OnStartCallBack, OnEndCallBack));
         private IEnumerator ExecuteSpawnEnemy(Action OnStartCallBack, Action OnEndCallBack)
         {
             OnStartCallBack?.Invoke();
             int iterator = 0;
             TilableObjectsController.Instance.SpawnEnemy(() => iterator++, () => iterator--); ///
+            yield return new WaitUntil(() => iterator == 0);
+            OnEndCallBack?.Invoke();
+        }
+        
+        public void SpawnHeal(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteSpawnHeal(OnStartCallBack, OnEndCallBack));
+        private IEnumerator ExecuteSpawnHeal(Action OnStartCallBack, Action OnEndCallBack)
+        {
+            OnStartCallBack?.Invoke();
+            int iterator = 0;
+            TilableObjectsController.Instance.SpawnHeal(() => iterator++, () => iterator--); ///
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
