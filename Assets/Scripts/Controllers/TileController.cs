@@ -38,6 +38,20 @@ namespace Core
             }
         }
 
+        private void OnEnable()
+        {
+            GameEvents.Instance.OnLevelEnd += StopAllCoroutinesFroEvent;
+        }
+        public void OnDisable()
+        {
+            GameEvents.Instance.OnLevelEnd -= StopAllCoroutinesFroEvent;
+        }
+
+        public void StopAllCoroutinesFroEvent()
+        {
+            StopAllCoroutines();
+        }
+
         public void CreateTiles() {
             
             for (int i = -_dimension; i <= _dimension; i++)
@@ -183,5 +197,7 @@ namespace Core
             return tempList;
         }
         #endregion
+
+        
     }
 }

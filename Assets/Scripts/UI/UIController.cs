@@ -50,7 +50,7 @@ public class UIController : MonoBehaviour
 
     private void NextLevel()
     {
-        //TODO InGameMenu
+        SwitchUI(UIState.MainMenu);
     }
 
     private void RestartGame()

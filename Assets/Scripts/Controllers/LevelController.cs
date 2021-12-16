@@ -35,6 +35,7 @@ namespace Core
 
         public void Initialize()
         {
+            Debug.Log("CallInitialize");
             TileController.Instance.CreateTiles();
             CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
             CreateNewTask(2, EncauntersHolder.Instance.SpawnExitDoor); //Enter-alt
@@ -153,6 +154,7 @@ namespace Core
         private void LevelEnd()
         {
             _gameEnd = true;
+            StopCoroutine(_turnsCoroutine);
             StopAllCoroutines();
             InputController.Instance.OnGetSwipe -= GetSwipe;
             GameEvents.Instance.LevelEnd();

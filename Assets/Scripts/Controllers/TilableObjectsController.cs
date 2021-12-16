@@ -36,6 +36,18 @@ namespace Core
                 }
             }
         }
+        private void OnEnable()
+        {
+            GameEvents.Instance.OnLevelEnd += StopAllCoroutinesFroEvent;
+        }
+        public void OnDisable()
+        {
+            GameEvents.Instance.OnLevelEnd -= StopAllCoroutinesFroEvent;
+        }
+        public void StopAllCoroutinesFroEvent()
+        {
+            StopAllCoroutines();
+        }
 
         #region ListMethods
 
@@ -53,7 +65,6 @@ namespace Core
         }
 
         #endregion
-
         #region task
         TileBox _tilebox;
         TilableObject _enemy;

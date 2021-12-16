@@ -310,6 +310,7 @@ namespace MoreMountains.Tools
 			yield return ProcessDelayBeforeEntryFade();
 			yield return EntryFade();
 			yield return ProcessDelayAfterEntryFade();
+			//Debug.Log("This disabled UnloadOriginSceneSequence");
 			yield return UnloadOriginScenes();
 			yield return LoadDestinationScene();
 			yield return ProcessDelayBeforeExitFade();
