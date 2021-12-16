@@ -26,6 +26,7 @@ namespace Core
         private void Awake()
         {
             Instance = this;
+            GameEvents.Instance.LoadNewLevelController(this);
         }
 
         private void Start()

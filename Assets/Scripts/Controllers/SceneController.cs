@@ -18,6 +18,7 @@ namespace Core
         [SerializeField] private MMFeedbacks _MMFeedBacks;
         [SerializeField] private MMFeedbackLoadScene _loader;
         [SerializeField] private MMFeedbackUnloadScene _unloader;
+        [SerializeField] private MMSceneLoadingManager _sceneLoadingManager;
 
         private void Awake()
         {
@@ -32,9 +33,10 @@ namespace Core
             _MMFeedBacks = GetComponent<MMFeedbacks>();
             _loader = _MMFeedBacks.GetComponent<MMFeedbackLoadScene>();
             _unloader = _MMFeedBacks.GetComponent<MMFeedbackUnloadScene>();
+            _sceneLoadingManager = GetComponent<MMSceneLoadingManager>();
             _MMFeedBacks.Initialization();
             
-            /*
+            
             if (!LevelDebug)
             {
                 LoadLevelScene(_scenes[GetLevelNumber()]);
@@ -42,8 +44,8 @@ namespace Core
             else
             {
                 FindLevelController();
-            }*/
-            _loader.Play(Vector3.zero);
+            }
+            
         }
 
         public int GetLevelNumber()
@@ -85,7 +87,7 @@ namespace Core
             }
 
             var currentLevelNumber = GetLevelNumber();
-            SceneManager.UnloadSceneAsync(_scenes[currentLevelNumber]);
+            /*SceneManager.UnloadSceneAsync(_scenes[currentLevelNumber]);*/
             currentLevelNumber += 1;
             SetLevelNumber(currentLevelNumber);
             LoadLevelScene(_scenes[GetLevelNumber()]);
@@ -94,18 +96,23 @@ namespace Core
         public delegate void method(Scene scene, LoadSceneMode mode); 
         public void LoadLevelScene(string sceneName)
         {
-            SceneManager.LoadScene(sceneName,LoadSceneMode.Additive);
+            //SceneManager.LoadScene(sceneName,LoadSceneMode.Additive);
             //SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => FindLevelController();
-            FindLevelController();
+            _loader.DestinationSceneName = sceneName;
+            //_loader.Play(Vector3.zero);
+            _MMFeedBacks.PlayFeedbacks();
+            //FindObjectOfType<MMAdditiveSceneLoadingManager>().OnLoadTransitionComplete.AddListener(FindLevelController);
+            GameEvents.Instance.OnLoadNewLevelController += FindLevelController;
 
         }
 
-        public void FindLevelController()
+        public void FindLevelController(LevelController controller)
         {
-            _currentLevelController = LevelController.Instance;
+            _currentLevelController = controller;
             //_currentLevelController =  FindObjectOfType<LevelController>();
             if (_currentLevelController != null)
             {
+                GameEvents.Instance.OnLoadNewLevelController -= FindLevelController;
                 UIEvents.Instance.OnButtonStartGame += _currentLevelController.LevelStart;
                 _currentLevelController.Initialize();
             }
@@ -114,5 +121,12 @@ namespace Core
                 Debug.Log("LevelController not found");
             }
         }
+        
+        public void FindLevelController()
+        {
+            FindLevelController(LevelController.Instance);
+        }
+
+        
     }
 }

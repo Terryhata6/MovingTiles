@@ -449,6 +449,7 @@ GameObject:
   - component: {fileID: 733355314}
   - component: {fileID: 733355317}
   - component: {fileID: 733355316}
+  - component: {fileID: 733355315}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -473,10 +474,12 @@ MonoBehaviour:
   - Level1
   - Level1
   - Level1
-  LevelDebug: 1
+  LevelDebug: 0
   _currentLevelController: {fileID: 0}
+  _MMFeedBacks: {fileID: 0}
   _loader: {fileID: 0}
   _unloader: {fileID: 0}
+  _sceneLoadingManager: {fileID: 0}
 --- !u!4 &733355313
 Transform:
   m_ObjectHideFlags: 0
@@ -510,6 +513,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLevel: 0
+--- !u!114 &733355315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733355311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fc9302e06a3ad240a410b9264fd8e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LoadingText: {fileID: 0}
+  LoadingProgressBar: {fileID: 0}
+  LoadingAnimation: {fileID: 0}
+  LoadingCompleteAnimation: {fileID: 0}
+  StartFadeDuration: 0.2
+  ProgressBarSpeed: 2
+  ExitFadeDuration: 0.2
+  LoadCompleteDelay: 0.5
 --- !u!114 &733355316
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -548,9 +571,9 @@ MonoBehaviour:
   LoadingSceneName: MMAdditiveLoadingScreen
   DestinationSceneName: Level1
   LoadingMode: 2
-  Priority: 1
+  Priority: 4
   InterpolateProgress: 1
-  SecureLoad: 0
+  SecureLoad: 1
   BeforeEntryFadeDelay: 0
   EntryFadeDuration: 0.2
   AfterEntryFadeDelay: 0
@@ -626,7 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Feedbacks:
   - {fileID: 733355316}
-  InitializationMode: 2
+  InitializationMode: 1
   SafeMode: 3
   Direction: 0
   AutoChangeDirectionOnEnd: 0
