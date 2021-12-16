@@ -73,6 +73,11 @@ namespace Core.Entities
             OnEndSpawn?.Invoke(this);
             yield break;
         }
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
     }
 
     public enum PlayerCallbackType

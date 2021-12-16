@@ -153,8 +153,10 @@ namespace Core
         private void LevelEnd()
         {
             _gameEnd = true;
+            StopAllCoroutines();
             InputController.Instance.OnGetSwipe -= GetSwipe;
             GameEvents.Instance.LevelEnd();
+            
         }
 
         #endregion
