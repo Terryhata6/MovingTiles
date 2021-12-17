@@ -64,23 +64,27 @@ namespace Core
 
         private void TouchStarted(InputAction.CallbackContext ctx)
         {
-            if (_eventSystem.currentSelectedGameObject)
+            if (_eventSystem.IsPointerOverGameObject())
             {
-                Debug.Log($"Selecting {_eventSystem.currentSelectedGameObject}");
+                Debug.Log($"PointerOverGameObject");
             }
-
-            //_baseActions.UI.Point.ReadValue<Vector2>();
-            OnStartTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.startTime);
+            else
+            {
+                OnStartTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera,_baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.startTime);
+            }
         }
         
         private void TouchEnded(InputAction.CallbackContext ctx)
         {
-            if (_inputSystemModule.IsPointerOverGameObject(0))
+            if (_eventSystem.IsPointerOverGameObject())
             {
-                Debug.Log("OverGameObject");
+                Debug.Log($"Selecting");
             }
-            GameEvents.Instance.EndTouch(); //Enter-alt - потом убери, это для теста
-            OnEndTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.time);
+            else
+            {
+                GameEvents.Instance.EndTouch(); //Enter-alt - потом убери, это для теста
+                OnEndTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.time);
+            }
         }
 
         public void GetSwipe(SwipeDirections direction)

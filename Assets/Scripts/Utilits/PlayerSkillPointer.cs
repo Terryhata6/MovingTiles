@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Core.Entities;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Core.UtilitsSpace
@@ -15,10 +16,11 @@ namespace Core.UtilitsSpace
         private TileBox _tile;
 
 
-
-        public IEnumerator PointSkill(TilableObject _playerSkill, Action onEndSpawningCallback) //eNTER-ALT
+       
+        public IEnumerator PointSkill(TilableObject _playerSkill, [CanBeNull]Action onEndSpawningCallback) //eNTER-ALT
         {
             _pointSkill = true;
+            _playerSkill.gameObject.SetActive(true);
             while (_pointSkill)
             {
                 _tempPos = InputController.Instance.TouchPosition(out _hit, ~(1<<7));
@@ -32,12 +34,11 @@ namespace Core.UtilitsSpace
                         else
                         {
                             _tile = _hit.collider.gameObject.GetComponent<TileBox>();
-                            CheckTile(_tile);
+                            CheckTile(_tile, out _skillCanSnap);
                             _tempPos = _hit.collider.transform.position;
                             _lastGameObj = _hit.collider;
                             _playerSkill.transform.position = _tempPos;
                         }
-                    
                     }
                     else
                     {
@@ -46,7 +47,6 @@ namespace Core.UtilitsSpace
                         _tempPos.y = 1f;
                         _playerSkill.transform.position = _tempPos;
                     }
-
                 }
                 else
                 {
@@ -72,20 +72,24 @@ namespace Core.UtilitsSpace
             onEndSpawningCallback?.Invoke();
         }
 
-        public void CheckTile(TileBox tile)
+        public void CheckTile(TileBox tile, out bool skillCanSnap)
         {
             if (tile)
             {
                 if (tile!.TileBusy)
                 {
-                    _skillCanSnap = false;
+                    skillCanSnap = false;
                     Debug.Log("несвободно");
                 }
                 else
                 {
-                    _skillCanSnap = true;
+                    skillCanSnap = true;
                     Debug.Log("свободно");
                 }
+            }
+            else
+            {
+                skillCanSnap = false;
             }
         }
         

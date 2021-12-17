@@ -1,0 +1,852 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8248551196194097
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5838947212775976936}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (14)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5838947212775976936
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8248551196194097}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: -1.03, y: 0.33500004, z: -0.86}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &195934690038564783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7058937351736724769}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (21)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7058937351736724769
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195934690038564783}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &321653263044178057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3341836899050712296}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (13)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3341836899050712296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 321653263044178057}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.96000004, y: 0.33500004, z: -2.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &1672554945400257864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2188830843128215866}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (8)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2188830843128215866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672554945400257864}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 1.27, y: 0.33500004, z: 0.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &1735432488370648091
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4757229593300377061}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (12)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4757229593300377061
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735432488370648091}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &2721244297999153329
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6957587975158712624}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (15)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6957587975158712624
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2721244297999153329}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &2787444466431198059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1093789947842027756}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (17)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1093789947842027756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787444466431198059}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: -2.14, y: 0.33500004, z: -1.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &2812741415544231555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2812741415544231552}
+  - component: {fileID: 2812741415544231553}
+  m_Layer: 0
+  m_Name: MeshBaker (0)-mesh-mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2812741415544231552
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812741415544231555}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.35, y: 0, z: 0.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &2812741415544231553
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812741415544231555}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 7c5f3bdbc5f285240b48e46686cff4b4, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 4300000, guid: b38ef9f5fe18a34458af17a932f08c9d, type: 2}
+  m_Bones:
+  - {fileID: 5773441293777444678}
+  - {fileID: 3774652926113000499}
+  - {fileID: 3607072041967812015}
+  - {fileID: 1532633013269090328}
+  - {fileID: 8377123949011659609}
+  - {fileID: 8955426048067516281}
+  - {fileID: 2554841002668033715}
+  - {fileID: 6464805803176631099}
+  - {fileID: 2188830843128215866}
+  - {fileID: 8339428012700525683}
+  - {fileID: 5787924823472895987}
+  - {fileID: 3712955135288050538}
+  - {fileID: 4757229593300377061}
+  - {fileID: 3341836899050712296}
+  - {fileID: 5838947212775976936}
+  - {fileID: 6957587975158712624}
+  - {fileID: 1114794398858532751}
+  - {fileID: 1093789947842027756}
+  - {fileID: 8444784268529757126}
+  - {fileID: 2322639856654461118}
+  - {fileID: 7133613104756667371}
+  - {fileID: 7058937351736724769}
+  - {fileID: 1606125435776955774}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 5.915547, y: 0.3174858, z: -1.5016658}
+    m_Extent: {x: 2.2237668, y: 0.82581115, z: 2.8880599}
+  m_DirtyAABB: 0
+--- !u!1 &2846438503173693130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532633013269090328}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (3)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1532633013269090328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846438503173693130}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &2864804144278156534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2322639856654461118}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (19)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2322639856654461118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2864804144278156534}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &2980375662945603137
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8339428012700525683}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (9)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8339428012700525683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2980375662945603137}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &3158746041929195606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3607072041967812015}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (2)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3607072041967812015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3158746041929195606}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &3223567852666265521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5787924823472895987}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (10)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5787924823472895987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223567852666265521}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.61, y: 0.33500004, z: 1.99}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &3575602114656206664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1597472662600720401}
+  m_Layer: 0
+  m_Name: Bushes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1597472662600720401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3575602114656206664}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2812741415544231552}
+  - {fileID: 5773441293777444678}
+  - {fileID: 3774652926113000499}
+  - {fileID: 3607072041967812015}
+  - {fileID: 1532633013269090328}
+  - {fileID: 8377123949011659609}
+  - {fileID: 8955426048067516281}
+  - {fileID: 2554841002668033715}
+  - {fileID: 6464805803176631099}
+  - {fileID: 2188830843128215866}
+  - {fileID: 8339428012700525683}
+  - {fileID: 5787924823472895987}
+  - {fileID: 3712955135288050538}
+  - {fileID: 4757229593300377061}
+  - {fileID: 3341836899050712296}
+  - {fileID: 5838947212775976936}
+  - {fileID: 6957587975158712624}
+  - {fileID: 1114794398858532751}
+  - {fileID: 1093789947842027756}
+  - {fileID: 8444784268529757126}
+  - {fileID: 2322639856654461118}
+  - {fileID: 7133613104756667371}
+  - {fileID: 7058937351736724769}
+  - {fileID: 1606125435776955774}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3733225203840314419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1114794398858532751}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (16)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1114794398858532751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3733225203840314419}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &4778536881923401080
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5773441293777444678}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5773441293777444678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4778536881923401080}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &4870217862335438392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3774652926113000499}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (1)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3774652926113000499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4870217862335438392}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &4977610774925876402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8444784268529757126}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (18)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8444784268529757126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977610774925876402}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &6194313221201269940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8377123949011659609}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (4)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8377123949011659609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194313221201269940}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &6644809529743539865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1606125435776955774}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (22)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1606125435776955774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6644809529743539865}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &6807445150200269858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3712955135288050538}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (11)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3712955135288050538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6807445150200269858}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 2.208, y: 0.33500004, z: -0.887}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &6991499444935344491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6464805803176631099}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (7)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6464805803176631099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991499444935344491}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.78999996, y: 0.33500004, z: -0.675}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &7075960031577112945
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2554841002668033715}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (6)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2554841002668033715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7075960031577112945}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: -0.52, y: 0.33500004, z: -2.56}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &7261075265229188753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7133613104756667371}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (20)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7133613104756667371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261075265229188753}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: -0.9, y: 0.33500004, z: 0.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
+--- !u!1 &7290776050254946965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8955426048067516281}
+  m_Layer: 0
+  m_Name: SampleSceneBush-Sphere-Take1_3 (5)(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8955426048067516281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290776050254946965}
+  m_LocalRotation: {x: -0, y: 0.24752405, z: -0, w: 0.9688818}
+  m_LocalPosition: {x: 0.11, y: 0.33500004, z: 0.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1597472662600720401}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 28.662, z: 0}
