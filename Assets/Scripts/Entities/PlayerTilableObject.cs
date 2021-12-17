@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Core.Entities
 {
+    [DefaultExecutionOrder(1)]
     public class PlayerTilableObject : BaseTilableObject, ITilable
     {
 
@@ -31,6 +32,7 @@ namespace Core.Entities
             UpdateHealthUi();
             yield return null;
             SetBox(TileController.Instance.Center);
+            UpdateHealthUi();
         }
 
         public override void SetBox(TileBox box)

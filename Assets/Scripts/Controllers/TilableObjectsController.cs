@@ -9,6 +9,7 @@ namespace Core
 {
     public class TilableObjectsController : MonoBehaviour
     {
+        public static TilableObjectsController Instance;
         [SerializeField] private TilableObject _enemyExample;
         [SerializeField] private HealPackTilableObject _healExample;
         [SerializeField] private ExitDoorTilableObject _exitDoorExample;
@@ -17,8 +18,10 @@ namespace Core
         public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
         private PlayerSkillPointer _pointer; //Enter-alt
-        public static TilableObjectsController Instance;
+        
 
+        public PlayerSkillPointer Pointer => _pointer;
+        
         private void Awake()
         {
             Instance = this;
