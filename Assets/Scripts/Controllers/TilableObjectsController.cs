@@ -13,7 +13,7 @@ namespace Core
         [SerializeField] private TilableObject _enemyExample;
         [SerializeField] private HealPackTilableObject _healExample;
         [SerializeField] private ExitDoorTilableObject _exitDoorExample;
-        [SerializeField] private BuildingTilableObject _tempBuilding;
+        [SerializeField] private TilableObject _tempBuilding;
         [SerializeField] private int StartEnemiesAmount;
         public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
