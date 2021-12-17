@@ -41,7 +41,10 @@ namespace Core.Entities
             {
                 _currentTileBox.ChangeTiledObject();
             }
-
+            if (box == null)
+            {
+                return;
+            }
             _currentTileBox = box;
             _currentTileBox.ChangeTiledObject(this);
             transform.position = box.transform.position;

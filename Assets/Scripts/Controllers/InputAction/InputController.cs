@@ -82,9 +82,10 @@ namespace Core
             }
             else
             {
-                GameEvents.Instance.EndTouch(); //Enter-alt - потом убери, это для теста
+                 //Enter-alt - потом убери, это для теста
                 OnEndTouch?.Invoke(Utilits.GetPointFromCamera(_mainCamera, _baseActions.Touch.FirstTouchPosition.ReadValue<Vector2>()),(float)ctx.time);
             }
+            GameEvents.Instance.EndTouch();
         }
 
         public void GetSwipe(SwipeDirections direction)
