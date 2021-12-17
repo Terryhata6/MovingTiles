@@ -42,6 +42,7 @@ namespace Core.UtilitsSpace
                     else
                     {
                         _skillCanSnap = false;
+                        _lastGameObj = null;
                         _tempPos.y = 1f;
                         _playerSkill.transform.position = _tempPos;
                     }
@@ -50,6 +51,7 @@ namespace Core.UtilitsSpace
                 else
                 {
                     _skillCanSnap = false;
+                    _lastGameObj = null;
                     _tempPos.y = 1f;
                     _playerSkill.transform.position = _tempPos;
                 }
