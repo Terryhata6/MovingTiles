@@ -10,6 +10,8 @@ public class UICharacterSelectMenuController : MonoBehaviour
     [SerializeField] private Button _buttonBodyRight;
     [SerializeField] private Button _buttonBodyLeft;
 
+    private PlayerSkinController _skinController;
+
 
     private void Start()
     {
@@ -24,28 +26,33 @@ public class UICharacterSelectMenuController : MonoBehaviour
         UIEvents.Instance.OnButtonHeadLeft += HeadLeft;
         UIEvents.Instance.OnButtonBodyRight += BodyRight;
         UIEvents.Instance.OnButtonBodyLeft += BodyLeft;
+
+
+        _skinController = FindObjectOfType<PlayerSkinController>();
     }
 
     private void SaveAndContinue()
     {
         //TODO
+        //Change scene
+        _skinController.SaveSkinPreset();
     }
 
     private void HeadRight()
     {
-        //TODO
+        _skinController.NextHeadSkin();
     }
     private void HeadLeft()
     {
-        //TODO
+        _skinController.PreviousHeadSkin();
     }
     private void BodyRight()
     {
-        //TODO
+        _skinController.NextBodySet();
     }
     private void BodyLeft()
     {
-        //TODO
+        _skinController.PreviousBodySet();
     }
 
     private void OnDestroy()
