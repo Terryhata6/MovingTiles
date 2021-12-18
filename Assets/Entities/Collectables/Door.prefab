@@ -154,6 +154,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8231142686430893006, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4204633028826151111, guid: d495db79ca9ee56429f04c244f4412dd, type: 3}
+    - target: {fileID: -1950733119399844177, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99992067
+      objectReference: {fileID: 0}
+    - target: {fileID: -1950733119399844177, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1950733119399844177, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.012596328
+      objectReference: {fileID: 0}
+    - target: {fileID: -1950733119399844177, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -1.443
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
       propertyPath: m_Name
       value: DOOR

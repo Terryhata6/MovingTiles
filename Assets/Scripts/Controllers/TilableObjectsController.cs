@@ -203,7 +203,6 @@ namespace Core
             }
 
             yield return new WaitUntil(() => waitingMoves == 0);
-            LevelController.Instance.EndOfTurn();
         }
 
         private void StopPointer() // Enter-alt

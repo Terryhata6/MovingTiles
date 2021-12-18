@@ -94,29 +94,20 @@ namespace Core.Entities
 
         public void FindNeighbours(float distance, RaycastHit[] hits)
         {
-            hits = new RaycastHit[20];
+            hits = new RaycastHit[5];
             neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.left, hits, distance, 1 << 6);
-            Debug.DrawRay(transform.position, Vector3.up, Color.black, 1000f);
             for (int i = 0; i < neighbourHitsCount; i++)
             {
                 if (hits[i].collider.TryGetComponent<TileBox>(out tempTileBox))
                 {
                     if (tempTileBox._tileIndex != _tileIndex)
                     {
-                        Debug.DrawRay(transform.position, Vector3.left * distance, Color.red, 1000f);
-                        Debug.DrawRay(transform.position, Vector3.up, Color.magenta, 1000f);
                         AddNeighbour(tempTileBox);
                         LeftNeighbour = tempTileBox;
                         LeftNeighbourExists = true;
                     }
                 }
-                else
-                {
-                    Debug.DrawRay(transform.position, Vector3.left * distance, Color.black, 1000f);
-                }
             }
-
-            hits = new RaycastHit[20];
             neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.right, hits, distance, 1 << 6);
             for (int i = 0; i < neighbourHitsCount; i++)
             {
@@ -124,21 +115,12 @@ namespace Core.Entities
                 {
                     if (tempTileBox._tileIndex != _tileIndex)
                     {
-                        Debug.DrawRay(transform.position, Vector3.right * distance, Color.blue, 1000f);
-                        Debug.DrawRay(transform.position, Vector3.up, Color.magenta, 1000f);
-                        Debug.LogWarning("BLUERAYCAST");
                         AddNeighbour(tempTileBox);
                         RightNeighbour = tempTileBox;
                         RightNeighbourExists = true;
                     }
                 }
-                else
-                {
-                    Debug.DrawRay(transform.position, Vector3.right * distance, Color.black, 1000f);
-                }
             }
-
-            hits = new RaycastHit[20];
             neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.forward, hits, distance, 1 << 6);
             for (int i = 0; i < neighbourHitsCount; i++)
             {
@@ -146,21 +128,12 @@ namespace Core.Entities
                 {
                     if (tempTileBox._tileIndex != _tileIndex)
                     {
-                        Debug.DrawRay(transform.position, Vector3.forward * distance, Color.green, 1000f);
-                        Debug.DrawRay(transform.position, Vector3.up, Color.magenta, 1000f);
                         AddNeighbour(tempTileBox);
                         ForwardNeighbour = tempTileBox;
                         ForwardNeighbourExists = true;
                     }
                 }
-                else
-                {
-                    Debug.DrawRay(transform.position, Vector3.forward * distance, Color.black, 1000f);
-                }
             }
-
-
-            hits = new RaycastHit[20];
             neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.back, hits, distance, 1 << 6);
             for (int i = 0;
                 i < neighbourHitsCount;
@@ -170,16 +143,10 @@ namespace Core.Entities
                 {
                     if (tempTileBox._tileIndex != _tileIndex)
                     {
-                        Debug.DrawRay(transform.position, Vector3.back * distance, Color.yellow, 1000f);
-                        Debug.DrawRay(transform.position, Vector3.up, Color.magenta, 1000f);
                         AddNeighbour(tempTileBox);
                         BackNeighbour = tempTileBox;
                         BackNeighbourExists = true;
                     }
-                }
-                else
-                {
-                    Debug.DrawRay(transform.position, Vector3.back * distance, Color.black, 1000f);
                 }
             }
         }
