@@ -53,6 +53,13 @@ namespace Core
         {
             OnLoadNewLevelController?.Invoke(controller);
         }
-        
+
+        public event Action OnGetDraggableDrop;
+
+        public void GetDraggableDrop()
+        {
+            OnGetDraggableDrop?.Invoke();
+        }
+
     }
 }

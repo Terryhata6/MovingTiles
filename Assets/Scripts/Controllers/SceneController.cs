@@ -68,9 +68,9 @@ namespace Core
 
         private void Start()
         {
-            
             UIEvents.Instance.OnButtonNextLevel += LoadNextScene;
             GameEvents.Instance.OnRestartLevel += ReloadScene;
+            GameEvents.Instance.OnGetDraggableDrop += GetNewDraggableObject;
 
             _MMFeedBacks = GetComponent<MMFeedbacks>();
             _loader = _MMFeedBacks.GetComponent<MMFeedbackLoadScene>();
