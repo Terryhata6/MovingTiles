@@ -14,7 +14,7 @@ namespace Core.Entities
         protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
         {
             transform.DOLookAt(new Vector3(0, 0, -1), 0.1f);
-            transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.1f);
+            transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.1f);
             bool doorOpened = false;
             bool doorScaled = false;
             var player = (box.TiledObject as PlayerTilableObject);
