@@ -20,6 +20,22 @@ namespace Core
         [SerializeField] private MMFeedbackUnloadScene _unloader;
         [SerializeField] private MMSceneLoadingManager _sceneLoadingManager;
 
+        [SerializeField] private Material _spaceMaterial;
+        [SerializeField] private Material _spaceBassMaterial;
+        private Vector2 deltaVector = Vector2.one;
+
+        private void FixedUpdate()
+        {
+            if (_spaceMaterial == null)
+            {
+                
+            }
+            else
+            {
+                _spaceMaterial.mainTextureOffset += deltaVector * Time.fixedDeltaTime;
+            }
+        }
+
 
         private void Awake()
         {
