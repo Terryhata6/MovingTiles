@@ -5878,8 +5878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2de6a7513ae9246a32170a3006a6c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilableObjectInstance: {fileID: 789893520676969836}
-  _tilableObjectExmple: {fileID: 8561278448641487205, guid: 19ca54ca5da88394097a9ba0f0ac4de5, type: 3}
+  _tilableObjectInstance: {fileID: 0}
+  _tilableObjectExmple: {fileID: 5932280853409980387, guid: 19ca54ca5da88394097a9ba0f0ac4de5, type: 3}
   _charges: 229
   dampingSpeed: 0.05
   _image: {fileID: 8951333735519310703}
@@ -5985,14 +5985,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4129014107026791515, guid: 19ca54ca5da88394097a9ba0f0ac4de5, type: 3}
   m_PrefabInstance: {fileID: 8951333736334421001}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &789893520676969836 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8561278448641487205, guid: 19ca54ca5da88394097a9ba0f0ac4de5, type: 3}
-  m_PrefabInstance: {fileID: 8951333736334421001}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e4c71ffbcc54170ab3f72b943c8641b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
