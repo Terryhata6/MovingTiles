@@ -36,7 +36,6 @@ namespace Core
 
         public void Initialize()
         {
-            Debug.Log("CallInitialize");
             TileController.Instance.CreateTiles();
             CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
             CreateNewTask(4, EncauntersHolder.Instance.SpawnEnemy);
