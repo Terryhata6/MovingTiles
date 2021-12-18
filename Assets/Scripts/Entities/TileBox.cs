@@ -8,13 +8,13 @@ namespace Core.Entities
 {
     public class TileBox : MonoBehaviour
     {
-        [SerializeField] private int _hCost; //heuric distance from ending
+        [SerializeField] private int _hCostdistance; //heuric distance from ending
         [SerializeField] private int _tileIndex;
         [SerializeField] private BaseTilableObject _currentTilableObject;
         [SerializeField] private List<TileBox> _neighbours;
         [SerializeField] private bool _walkable = true;
         [SerializeField] private int _movingWeight = 1;
-        [SerializeField] public MMFeedbacks _mmFeedbacks; 
+        [SerializeField] public MMFeedbacks _mmFeedbacks;
         public List<TileBox> Neighbours => _neighbours;
         public bool WillFree;
         public TileBox LeftNeighbour;
@@ -28,34 +28,43 @@ namespace Core.Entities
         public bool Walkable => _walkable;
         public bool TileBusy => _currentTilableObject != null;
         public BaseTilableObject TiledObject => _currentTilableObject;
+
         public int MovingWeight
         {
             get
             {
                 if (TileBusy)
                 {
-                    return 1000*_movingWeight;
+                    return 1000 * _movingWeight;
                 }
+
                 return _movingWeight;
             }
         }
+
         #region Pathfinding fields
 
-        [HideInInspector]public int GCost = 0; //From startNode to current
-        [HideInInspector]public int HCost => _hCost * 10; //heuric distance from ending
-        [HideInInspector]public int FCost => GCost + _hCost;
-        [HideInInspector]public TileBox pathfindingParent;
+        [HideInInspector] public int GCost = 0; //From startNode to current
+        [HideInInspector] public int HCost => _hCostdistance * 10; //heuric distance from ending
+        [HideInInspector] public int FCost => GCost + _hCostdistance;
+        [HideInInspector] public TileBox pathfindingParent;
+
         #endregion
 
 
         public void Awake()
         {
-            ExecuteSpawnAnimation();
+            //ExecuteSpawnAnimation();
+        }
+
+        public void Start()
+        {
+            //ExecuteSpawnAnimation();
         }
 
         public void SetDistance(int distance)
         {
-            _hCost = distance;
+            _hCostdistance = distance;
         }
 
         public void SetTileIndex(int index)
@@ -70,58 +79,109 @@ namespace Core.Entities
 
         public void ExecuteSpawnAnimation()
         {
+            _mmFeedbacks = GetComponent<MMFeedbacks>();
+            _mmFeedbacks.Initialization();
+            var component = _mmFeedbacks.GetComponent<MMFeedbackPosition>();
+            component.Space = MMFeedbackPosition.Spaces.Local;
+            component.InitialPosition = Vector3.zero;
+            component.InitialPositionTransform = transform;
+            _mmFeedbacks.PlayFeedbacks();
             //_mmFeedbacks.AutoPlayOnEnable = true;
         }
 
         TileBox tempTileBox;
         private int neighbourHitsCount;
-        public void FindNeighbours(float distance, RaycastHit[] hits){
 
+        public void FindNeighbours(float distance, RaycastHit[] hits)
+        {
+            hits = new RaycastHit[20];
             neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.left, hits, distance, 1 << 6);
+            Debug.DrawRay(transform.position, Vector3.up, Color.black, 1000f);
             for (int i = 0; i < neighbourHitsCount; i++)
             {
-                tempTileBox = hits[i].collider.GetComponent<TileBox>();
-                if (!tempTileBox.Equals(this))
+                if (hits[i].collider.TryGetComponent<TileBox>(out tempTileBox))
                 {
-                    AddNeighbour(tempTileBox);
-                    LeftNeighbour = tempTileBox;
-                    LeftNeighbourExists = true;
+                    if (tempTileBox._tileIndex != _tileIndex)
+                    {
+                        Debug.DrawRay(transform.position, Vector3.left * distance, Color.red, 1000f);
+                        Debug.DrawRay(transform.position, Vector3.up, Color.magenta, 1000f);
+                        AddNeighbour(tempTileBox);
+                        LeftNeighbour = tempTileBox;
+                        LeftNeighbourExists = true;
+                    }
+                }
+                else
+                {
+                    Debug.DrawRay(transform.position, Vector3.left * distance, Color.black, 1000f);
                 }
             }
+
+            hits = new RaycastHit[20];
             neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.right, hits, distance, 1 << 6);
             for (int i = 0; i < neighbourHitsCount; i++)
             {
-                tempTileBox = hits[i].collider.GetComponent<TileBox>();
-                if (!tempTileBox.Equals(this))
+                if (hits[i].collider.TryGetComponent<TileBox>(out tempTileBox))
                 {
-                    AddNeighbour(tempTileBox);
-                    RightNeighbour = tempTileBox;
-                    RightNeighbourExists = true;
+                    if (tempTileBox._tileIndex != _tileIndex)
+                    {
+                        Debug.DrawRay(transform.position, Vector3.right * distance, Color.blue, 1000f);
+                        Debug.DrawRay(transform.position, Vector3.up, Color.magenta, 1000f);
+                        Debug.LogWarning("BLUERAYCAST");
+                        AddNeighbour(tempTileBox);
+                        RightNeighbour = tempTileBox;
+                        RightNeighbourExists = true;
+                    }
                 }
-            }
-            neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.forward, hits, distance, 1 << 6);
-            for (int i = 0; i < neighbourHitsCount; i++)
-            {
-                tempTileBox = hits[i].collider.GetComponent<TileBox>();
-                if (!tempTileBox.Equals(this))
+                else
                 {
-                    AddNeighbour(tempTileBox);
-                    ForwardNeighbour = tempTileBox;
-                    ForwardNeighbourExists = true;
-                }
-            }
-            neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.back, hits, distance, 1 << 6);
-            for (int i = 0; i < neighbourHitsCount; i++)
-            {
-                tempTileBox = hits[i].collider.GetComponent<TileBox>();
-                if (!tempTileBox.Equals(this))
-                {
-                    AddNeighbour(tempTileBox);
-                    BackNeighbour = tempTileBox;
-                    BackNeighbourExists = true;
+                    Debug.DrawRay(transform.position, Vector3.right * distance, Color.black, 1000f);
                 }
             }
 
+            hits = new RaycastHit[20];
+            neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.forward, hits, distance, 1 << 6);
+            for (int i = 0; i < neighbourHitsCount; i++)
+            {
+                if (hits[i].collider.TryGetComponent<TileBox>(out tempTileBox))
+                {
+                    if (tempTileBox._tileIndex != _tileIndex)
+                    {
+                        Debug.DrawRay(transform.position, Vector3.forward * distance, Color.green, 1000f);
+                        Debug.DrawRay(transform.position, Vector3.up, Color.magenta, 1000f);
+                        AddNeighbour(tempTileBox);
+                        ForwardNeighbour = tempTileBox;
+                        ForwardNeighbourExists = true;
+                    }
+                }
+                else
+                {
+                    Debug.DrawRay(transform.position, Vector3.forward * distance, Color.black, 1000f);
+                }
+            }
+
+
+            hits = new RaycastHit[20];
+            neighbourHitsCount = Physics.RaycastNonAlloc(transform.position, Vector3.back, hits, distance, 1 << 6);
+            for (int i = 0;
+                i < neighbourHitsCount;
+                i++)
+            {
+                if (hits[i].collider.TryGetComponent<TileBox>(out tempTileBox))
+                {
+                    if (tempTileBox._tileIndex != _tileIndex)
+                    {
+                        Debug.DrawRay(transform.position, Vector3.back * distance, Color.yellow, 1000f);
+                        Debug.DrawRay(transform.position, Vector3.up, Color.magenta, 1000f);
+                        AddNeighbour(tempTileBox);
+                        BackNeighbour = tempTileBox;
+                        BackNeighbourExists = true;
+                    }
+                }
+                else
+                {
+                    Debug.DrawRay(transform.position, Vector3.back * distance, Color.black, 1000f);
+                }
+            }
         }
 
 

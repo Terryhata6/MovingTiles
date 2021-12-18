@@ -9,9 +9,13 @@ namespace Core.Entities
     public class ExitDoorTilableObject : TilableObject
     {
         [SerializeField] private MMFeedbacks _mmFeedbacks;
+        [SerializeField] private Transform _openDoorTranform;
 
         protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
         {
+            bool doorOpened = false;
+            _openDoorTranform.transform.DORotate(new Vector3(0, 90, 0), 0.5f).OnComplete(() => { doorOpened = true;});
+            yield return new WaitUntil(() => doorOpened);
             //base.InteractionWithPlayer(box, state);
             if (state == TurnState.Player)
             {
