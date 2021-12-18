@@ -20,6 +20,7 @@ namespace Core
         [SerializeField] private MMFeedbackUnloadScene _unloader;
         [SerializeField] private MMSceneLoadingManager _sceneLoadingManager;
 
+
         private void Awake()
         {
             DontDestroyOnLoad(this);
@@ -27,6 +28,7 @@ namespace Core
 
         private void Start()
         {
+            
             UIEvents.Instance.OnButtonNextLevel += LoadNextScene;
             GameEvents.Instance.OnRestartLevel += ReloadScene;
 

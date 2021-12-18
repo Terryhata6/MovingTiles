@@ -61,8 +61,8 @@ namespace Core
             while (!_gameEnd)
             {
                 Debug.Log($"Начало Цикла, end of turn {_endTurn}");
-                yield return new WaitUntil(() => _endTurn);
                 yield return new WaitForSeconds(0.5f);
+                yield return new WaitUntil(() => _endTurn);
                 _endTurn = false;
 
                 switch (_currentTurnState)
@@ -110,14 +110,16 @@ namespace Core
 
         private void GetSwipe(SwipeDirections direction)
         {
+            StartCoroutine(GetSwipeCoroutine(direction));
+        }
+
+        private IEnumerator GetSwipeCoroutine(SwipeDirections direction)
+        {
             if (_currentTurnState.Equals(TurnState.Player))
             {
-                StartCoroutine(TilableObjectsController.Instance.ExecuteEnemiesSwipeMoving(direction));
                 InputController.Instance.OnGetSwipe -= GetSwipe;
-            }
-            else
-            {
-                
+                yield return TilableObjectsController.Instance.ExecuteEnemiesSwipeMoving(direction);
+                EndOfTurn();
             }
         }
 
