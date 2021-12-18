@@ -237,7 +237,14 @@ namespace Core.Entities
                     }
                     case "Building":
                     {
-                        yield return StartCoroutine(InteractionWithTilableObject(box, state));
+                        break;
+                    }
+                    case "Weapon":
+                    {
+                        break;
+                    }
+                    case "Collectable":
+                    {
                         break;
                     }
                     default:
@@ -248,12 +255,6 @@ namespace Core.Entities
         }
 
         protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
-        {
-            //base.InteractionWithPlayer(box, state);
-            yield break;
-        }
-        
-        protected override IEnumerator InteractionWithTilableObject(TileBox box, TurnState state)
         {
             //base.InteractionWithPlayer(box, state);
             yield break;

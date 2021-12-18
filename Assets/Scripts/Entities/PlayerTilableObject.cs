@@ -126,6 +126,11 @@ namespace Core.Entities
             LevelController.Instance.LevelVictory();
         }
 
+        public void SetWeapon(WeaponType type, int damage, int charges)
+        {
+            Debug.Log($"WeaponSet {type}");
+        }
+
         public override string CompareConfig(BaseTilableObject obj)
         {
             base.CompareConfig(obj);
