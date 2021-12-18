@@ -93,7 +93,7 @@ Material:
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
-    - _CameraDistanceImpact: 0.5
+    - _CameraDistanceImpact: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -123,9 +123,9 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _OutlineDepthOffset: 0.046
+    - _OutlineDepthOffset: 0.015
     - _OutlineEnabled: 1
-    - _OutlineWidth: 1
+    - _OutlineWidth: 0.26
     - _OverrideBakedGi: 0
     - _OverrideLightAttenuation: 0
     - _OverrideLightmapDir: 0
@@ -157,7 +157,7 @@ Material:
     - _FlatSpecularColor: {r: 1.8443027, g: 1.8443027, b: 1.8443027, a: 0.92941177}
     - _LightAttenuation: {r: 0, g: 1, b: 0, a: 0}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _OutlineColor: {r: 0.2326855, g: 0.3018868, b: 0.22897829, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

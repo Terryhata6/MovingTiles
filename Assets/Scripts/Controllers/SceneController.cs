@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Entities;
 using Core.UtilitsSpace;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Core
 {
@@ -24,6 +27,11 @@ namespace Core
         [SerializeField] private Material _spaceBassMaterial;
         private Vector2 deltaVector = Vector2.one;
 
+        [Header("DraggableUI")][SerializeField] private DragUITilableObject[] draggableUi;
+        [SerializeField] private TilableObject[] obj;
+        [SerializeField] private Image[] objImage;
+        
+        
         private void FixedUpdate()
         {
             if (_spaceMaterial == null)
@@ -36,6 +44,22 @@ namespace Core
             }
         }
 
+        public void GetNewDraggableObject()
+        {
+            for (int i = 0; i < draggableUi.Length; i++)
+            {
+                if (draggableUi[i].ItsFree)
+                {
+                    var j = Random.Range(0, obj.Length);
+                    if (obj[j] != null && objImage[j] != null)
+                    {
+                        draggableUi[i].SetNewObject(objImage[j], obj[j]);
+                    }
+
+                    return;
+                }
+            }
+        }
 
         private void Awake()
         {

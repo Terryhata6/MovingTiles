@@ -21,13 +21,31 @@ namespace Core
         [SerializeField] private float dampingSpeed;
         private Vector3 globalMousePosition;
         [SerializeField] private Image _image;
-
+        public bool ItsFree => _charges <= 0;
+        
         public void Awake()
         {
             _draggingObjectRectTransform = transform as RectTransform;
         }
-        
-        
+
+
+        public void SetNewObject(Image image,TilableObject tilableObjectExmple)
+        {
+            
+            if (_tilableObjectInstance != null)
+            {
+                Destroy(_tilableObjectInstance.gameObject);
+            }
+
+            if (tilableObjectExmple != null)
+            {
+                _tilableObjectExmple = tilableObjectExmple;
+                _tilableObjectInstance =
+                    Instantiate(tilableObjectExmple, transform.position, Quaternion.identity, transform);
+                _tilableObjectInstance.gameObject.SetActive(false);
+            }
+        }
+
 
         public void OnDrag(PointerEventData eventData)
         {
