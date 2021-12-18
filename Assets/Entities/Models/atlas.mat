@@ -157,7 +157,7 @@ Material:
     - _FlatSpecularColor: {r: 1.8443027, g: 1.8443027, b: 1.8443027, a: 0.92941177}
     - _LightAttenuation: {r: 0, g: 1, b: 0, a: 0}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _OutlineColor: {r: 0.2326855, g: 0.3018868, b: 0.22897829, a: 1}
+    - _OutlineColor: {r: 0.9716981, g: 0.9716981, b: 0.9716981, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
