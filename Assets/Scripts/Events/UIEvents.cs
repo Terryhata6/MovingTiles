@@ -33,4 +33,36 @@ public class UIEvents : Singleton<UIEvents>
     {
         OnButtonNextLevel?.Invoke();
     }
+
+    #region Character select menu
+    public event Action OnButtonSaveAndContinue;
+    public void ButtonSaveAndContinue()
+    {
+        OnButtonSaveAndContinue?.Invoke();
+    }
+
+    public event Action OnButtonHeadRight;
+    public void ButtonHeadRight()
+    {
+        OnButtonHeadRight?.Invoke();
+    }
+
+    public event Action OnButtonHeadLeft;
+    public void ButtonHeadLeft()
+    {
+        OnButtonHeadLeft?.Invoke();
+    }
+
+    public event Action OnButtonBodyRight;
+    public void ButtonBodyRight()
+    {
+        OnButtonBodyRight?.Invoke();
+    }
+
+    public event Action OnButtonBodyLeft;
+    public void ButtonBodyLeft()
+    {
+        OnButtonBodyLeft?.Invoke();
+    }
+    #endregion
 }
