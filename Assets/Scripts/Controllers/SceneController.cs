@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core.Entities;
 using Core.UtilitsSpace;
 using MoreMountains.Feedbacks;
 using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Core
 {
@@ -20,6 +23,43 @@ namespace Core
         [SerializeField] private MMFeedbackUnloadScene _unloader;
         [SerializeField] private MMSceneLoadingManager _sceneLoadingManager;
 
+        [SerializeField] private Material _spaceMaterial;
+        [SerializeField] private Material _spaceBassMaterial;
+        private Vector2 deltaVector = Vector2.one;
+
+        [Header("DraggableUI")][SerializeField] private DragUITilableObject[] draggableUi;
+        [SerializeField] private TilableObject[] obj;
+        [SerializeField] private Image[] objImage;
+        
+        
+        private void FixedUpdate()
+        {
+            if (_spaceMaterial == null)
+            {
+                
+            }
+            else
+            {
+                _spaceMaterial.mainTextureOffset += deltaVector * Time.fixedDeltaTime;
+            }
+        }
+
+        public void GetNewDraggableObject()
+        {
+            for (int i = 0; i < draggableUi.Length; i++)
+            {
+                if (draggableUi[i].ItsFree)
+                {
+                    var j = Random.Range(0, obj.Length);
+                    if (obj[j] != null && objImage[j] != null)
+                    {
+                        draggableUi[i].SetNewObject(objImage[j], obj[j]);
+                    }
+
+                    return;
+                }
+            }
+        }
 
         private void Awake()
         {
@@ -28,9 +68,9 @@ namespace Core
 
         private void Start()
         {
-            
             UIEvents.Instance.OnButtonNextLevel += LoadNextScene;
             GameEvents.Instance.OnRestartLevel += ReloadScene;
+            GameEvents.Instance.OnGetDraggableDrop += GetNewDraggableObject;
 
             _MMFeedBacks = GetComponent<MMFeedbacks>();
             _loader = _MMFeedBacks.GetComponent<MMFeedbackLoadScene>();

@@ -13,25 +13,33 @@ namespace Core.Entities
 
         protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
         {
+            transform.DOLookAt(new Vector3(0, 0, -1), 0.1f);
+            transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 0.1f);
             bool doorOpened = false;
-            _openDoorTranform.transform.DORotate(new Vector3(0, 90, 0), 0.5f).OnComplete(() => { doorOpened = true;});
+            bool doorScaled = false;
+            var player = (box.TiledObject as PlayerTilableObject);
+            _openDoorTranform.transform.DORotate(new Vector3(0, 90, 0), 0.5f).OnComplete(() => { doorOpened = true; });
             yield return new WaitUntil(() => doorOpened);
             //base.InteractionWithPlayer(box, state);
-            if (state == TurnState.Player)
+            for (float i = 0; i < 1f; i += 0.01f * _jumpSpeed)
             {
-                for (float i = 0; i < 1f; i += 0.01f * _jumpSpeed)
-                {
-                    TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position,
-                        i);
-                    TempVector3.y = Mathf.Sin(Mathf.Clamp(i, 0f, 0.5f) * Mathf.PI) * _jumpHeight;
-                    transform.position = TempVector3;
+                TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, box.transform.position,
+                    i);
+                TempVector3.y = Mathf.Sin(Mathf.Clamp(i, 0f, 0.5f) * Mathf.PI) * _jumpHeight;
+                transform.position = TempVector3;
 
-                    yield return null;
-                }
-                DoorUsed();
-                (box.TiledObject as PlayerTilableObject).GoToExitDoor();
                 yield return null;
             }
+
+            transform.position = box.transform.position;
+            //DoorUsed();
+            transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1f);
+            player.transform.DOScale(new Vector3(0.1f, 0.1f, 0.1f), 1f).OnComplete(() => { doorScaled = true;});
+            transform.DORotate(Vector3.zero, 1f, RotateMode.FastBeyond360);
+            doorScaled = false;
+            yield return new WaitUntil(() => doorScaled);
+            player.GoToExitDoor();
+            yield return null;
         }
 
 
