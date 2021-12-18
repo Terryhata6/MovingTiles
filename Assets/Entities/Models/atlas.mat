@@ -154,7 +154,7 @@ Material:
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0.990566, g: 0, b: 0, a: 0.85056}
-    - _FlatSpecularColor: {r: 1.8443027, g: 1.8443027, b: 1.8443027, a: 0.92941177}
+    - _FlatSpecularColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 0.92941177}
     - _LightAttenuation: {r: 0, g: 1, b: 0, a: 0}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
