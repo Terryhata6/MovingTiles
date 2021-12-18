@@ -16,5 +16,5 @@ EditorBuildSettings:
     guid: dedb2bed56a01c241be42c5c5b5748ca
   - enabled: 1
     path: Assets/Scenes/SceneLoaders/MMAdditiveLoadingScreen.unity
-    guid: b3e2617aabbdf54449b522ae973c342d
+    guid: 28c7a438e6c244f48b8a72b6f36ee6d1
   m_configObjects: {}
