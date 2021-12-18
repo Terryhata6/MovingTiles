@@ -4,26 +4,53 @@ using UnityEngine;
 
 public class RealTimeSkinnedMeshBaker : MonoBehaviour
 {
-    [SerializeField]private MB3_MeshBaker _meshBaker;
-    [SerializeField] private GameObject[] _meshRenderers;
-    [SerializeField] private SkinnedMeshRenderer _targetMeshRenderer;
-    IEnumerator Start()
+    [SerializeField] private MB3_MeshBaker _meshBaker;
+    
+    [Header("MeshRandomiser")][SerializeField] private List<GameObject> _coreGO;
+    [SerializeField] private List<GameObject> _randomiseGO;
+
+    public IEnumerator StartBaking()
     {
         if (!_meshBaker)
         {
             _meshBaker = GetComponentInChildren<MB3_MeshBaker>();
         }
 
-        yield return BakeSkinnedMesh(_meshRenderers);
-        Debug.LogWarning("go little rockstar");
-        
+        yield return BakeSkinnedMesh(FillRenderers());
+        Debug.Log("go little rockstar");
     }
 
-    public IEnumerator BakeSkinnedMesh(GameObject[] gos)
+    public IEnumerator StartBaking(GameObject[] objs)
     {
-        _meshBaker.AddDeleteGameObjects(gos, gos ,disableRendererInSource: true);
+        if (!_meshBaker)
+        {
+            _meshBaker = GetComponentInChildren<MB3_MeshBaker>();
+        }
+
+        yield return BakeSkinnedMesh(objs);
+        Debug.Log("go little rockstar");
+    }
+
+
+    private IEnumerator BakeSkinnedMesh(GameObject[] gos)
+    {
+        _meshBaker.AddDeleteGameObjects(gos, gos, disableRendererInSource: true);
         _meshBaker.Apply();
         yield break;
     }
 
+    private GameObject[] FillRenderers()
+    {
+        List<GameObject> _meshRenderers = new List<GameObject>();
+        _meshRenderers.AddRange(_coreGO);
+        for (int i = 0; i < _randomiseGO.Count; i++)
+        {
+            if (Random.Range(0f, 1f) > 0.5f)
+            {
+                _meshRenderers.Add(_randomiseGO[i]);
+            }
+        }
+
+        return _meshRenderers.ToArray();
+    }
 }

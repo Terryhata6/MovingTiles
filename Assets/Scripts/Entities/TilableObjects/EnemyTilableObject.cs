@@ -16,6 +16,8 @@ namespace Core.Entities
         [SerializeField] private float BaseDamage = 1f;
         [SerializeField] private Animator _animator;
         [SerializeField] private GameObject[] _weapons;
+        [SerializeField] private bool _needBakeMesh = false;
+        [SerializeField] private RealTimeSkinnedMeshBaker _baker;
         public int Health => _health;
         private bool _endAttack = false;
 
@@ -122,6 +124,11 @@ namespace Core.Entities
 
         public override IEnumerator SpawnAnimation(Action<BaseTilableObject> OnEndSpawn)
         {
+            if (_needBakeMesh)
+            {
+                _baker = GetComponentInChildren<RealTimeSkinnedMeshBaker>();
+                yield return _baker.StartBaking();
+            }
             transform.DOMoveY(_currentTileBox.transform.position.y + 0.5f, 0.2f)
                 .OnComplete(() => OnEndSpawn.Invoke(this));
             yield break;
