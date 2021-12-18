@@ -39,6 +39,7 @@ namespace Core
             TileController.Instance.CreateTiles();
             CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
             CreateNewTask(4, EncauntersHolder.Instance.SpawnEnemy);
+            CreateNewTask(2, EncauntersHolder.Instance.SpawnPickaxe);
             CreateNewTask(4, EncauntersHolder.Instance.SpawnHeal);
             CreateNewTask(4, EncauntersHolder.Instance.SpawnExitDoor);
             CreateNewTask(6, EncauntersHolder.Instance.SpawnEnemy);

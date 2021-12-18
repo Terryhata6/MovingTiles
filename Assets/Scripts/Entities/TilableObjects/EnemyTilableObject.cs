@@ -75,11 +75,6 @@ namespace Core.Entities
             }
         }
 
-        protected override IEnumerator InteractionWithTilableObject(TileBox box, TurnState state)
-        {
-            yield break;
-        }
-
         public override void CallbackForPlayerMoves(PlayerCallbackType callbackType, PlayerTilableObject player)
         {
             //base.CallbackForPlayerMoves(callbackType, player);
