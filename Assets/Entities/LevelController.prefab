@@ -100,6 +100,12 @@ MonoBehaviour:
   _healExample: {fileID: 0}
   _exitDoorExample: {fileID: 0}
   _tempBuilding: {fileID: 0}
+  _weapons:
+  - {fileID: 7657727484612885032, guid: 59b7e7ebd6cc3b0459d07e1412a59c95, type: 3}
+  - {fileID: -5379332851647448467, guid: fd29d76648601df409e0b60abda4ee45, type: 3}
+  - {fileID: 633276712710708279, guid: fd927c3e45c77444fb9267d6c786d22b, type: 3}
+  - {fileID: 7041972608335647726, guid: 7843a2f511a495a4eac148f23cadfaf0, type: 3}
+  - {fileID: 3126754948226359098, guid: 981e0b3766aaf42479469474c17ea811, type: 3}
   StartEnemiesAmount: 0
   _objects:
   - {fileID: 0}

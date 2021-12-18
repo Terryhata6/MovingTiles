@@ -54,7 +54,7 @@ MonoBehaviour:
   _haveSkills: 0
   _needDebugLog: 1
   _wantToMoveToHero: 0
-  _baseHeal: 1
+  _baseHeal: 5
   _mmFeedbacks: {fileID: 1767570348191254332}
 --- !u!114 &1767570348191254332
 MonoBehaviour:

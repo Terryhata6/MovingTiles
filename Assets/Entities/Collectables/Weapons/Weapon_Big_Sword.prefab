@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 518461275271588872}
-  - component: {fileID: 6670146695430760270}
-  - component: {fileID: 5370732551026384680}
   - component: {fileID: -5379332851647448467}
   m_Layer: 0
   m_Name: Weapon_Big_Sword
@@ -28,26 +26,81 @@ Transform:
   m_GameObject: {fileID: 8105566684147368019}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.994405e-16, y: -0.007285127, z: 0.000000002060774}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children:
+  - {fileID: 6237210194523045104}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6670146695430760270
+--- !u!114 &-5379332851647448467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105566684147368019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57f7dfd909b9234492dbeb3e345d1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _config: Weapon
+  _jumpHeight: 0.3
+  _jumpSpeed: 8
+  _currentTileBox: {fileID: 0}
+  _canMove: 1
+  _moveDistance: 0
+  _haveSkills: 0
+  _needDebugLog: 0
+  _wantToMoveToHero: 0
+  _weaponType: 1
+--- !u!1 &8604551489232648768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6237210194523045104}
+  - component: {fileID: 7095145654872135004}
+  - component: {fileID: 7073287239001357058}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6237210194523045104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8604551489232648768}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
+  m_LocalPosition: {x: 0.223, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 518461275271588872}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
+--- !u!33 &7095145654872135004
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105566684147368019}
+  m_GameObject: {fileID: 8604551489232648768}
   m_Mesh: {fileID: 8210514248650035400, guid: bb3f9443998b90d49836acc20ac9b1e2, type: 3}
---- !u!23 &5370732551026384680
+--- !u!23 &7073287239001357058
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105566684147368019}
+  m_GameObject: {fileID: 8604551489232648768}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -82,25 +135,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-5379332851647448467
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8105566684147368019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a57f7dfd909b9234492dbeb3e345d1d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _config: Weapon
-  _jumpHeight: 0.3
-  _jumpSpeed: 8
-  _currentTileBox: {fileID: 0}
-  _canMove: 1
-  _moveDistance: 0
-  _haveSkills: 0
-  _needDebugLog: 0
-  _wantToMoveToHero: 0
-  _weaponType: 1
