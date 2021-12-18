@@ -14,7 +14,10 @@ namespace Core.Entities
         [SerializeField] private float _health;
         [SerializeField] private float _healthMax;
         [SerializeField] private int _baseDamage;
+        [SerializeField] private int _damage;
         [SerializeField] private Transform _hips;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private int _currentWeaponCharges = 0;
 
         public float HP => _health;
         public float MaxHP => _healthMax;
@@ -29,11 +32,30 @@ namespace Core.Entities
 
         private IEnumerator Start()
         {
-            UpdateHealthUi();
+            _animator = GetComponent<Animator>();
             yield return null;
             SetBox(TileController.Instance.Center);
             UpdateHealthUi();
+            
         }
+
+        public void ActivateOneHandedWeapon(int charges, int damage)
+        {
+            _animator.SetBool("ThoHand", false);
+            _currentWeaponCharges = charges;
+        }
+
+        public void ActivateTwoHandedWeapon(int charges, int damage)
+        {
+            _animator.SetBool("ThoHand", true);
+            _currentWeaponCharges = charges;
+        }
+
+        public void DeactivateWeapon()
+        {
+            _animator.SetBool("ThoHand", false);
+        }
+
 
         public override void SetBox(TileBox box)
         {
