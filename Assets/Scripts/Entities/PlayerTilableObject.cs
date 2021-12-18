@@ -7,14 +7,18 @@ using UnityEngine;
 namespace Core.Entities
 {
     [DefaultExecutionOrder(1)]
-    public class PlayerTilableObject : BaseTilableObject, ITilable
+    public class PlayerTilableObject : BaseTilableObject, ITilable, IAnimatorEventListner
     {
 
         [SerializeField] private bool _canCounterAttack = false;
         [SerializeField] private float _health;
         [SerializeField] private float _healthMax;
+        [SerializeField] private int _damage;
         [SerializeField] private int _baseDamage;
         [SerializeField] private Transform _hips;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private int _currentWeaponCharges = 0;
+        [SerializeField] private GameObject[] _weapons;
 
         public float HP => _health;
         public float MaxHP => _healthMax;
@@ -22,18 +26,40 @@ namespace Core.Entities
         {
             get
             {
-                return _baseDamage;
+                return _damage;
             }
         }
 
 
         private IEnumerator Start()
         {
-            UpdateHealthUi();
+            _damage = _baseDamage;
+            _animator = GetComponentInChildren<Animator>();
+            
             yield return null;
             SetBox(TileController.Instance.Center);
             UpdateHealthUi();
+            
         }
+
+        public void ActivateOneHandedWeapon(int charges, int damage)
+        {
+            _animator.SetBool("ThoHand", false);
+            _currentWeaponCharges = charges;
+        }
+
+        public void ActivateTwoHandedWeapon(int charges, int damage)
+        {
+            _animator.SetBool("ThoHand", true);
+            _currentWeaponCharges = charges;
+        }
+
+        public void DeactivateWeapon()
+        {
+            _animator.SetBool("ThoHand", false);
+            _damage = _baseDamage;
+        }
+
 
         public override void SetBox(TileBox box)
         {
@@ -72,7 +98,8 @@ namespace Core.Entities
         
         public void GetDamage(float damage)
         {
-            _hips.DOShakePosition(0.4f, snapping: false, strength: new Vector3(0.3f, 0, 0.3f)).OnComplete(() => _hips.localPosition = Vector3.up * 0.5f);
+            //_hips.DOShakePosition(0.4f, snapping: false, strength: new Vector3(0.3f, 0, 0.3f)).OnComplete(() => _hips.localPosition = Vector3.up * 0.5f);
+            _animator.SetTrigger("Hit");
             _health -= damage;
             UpdateHealthUi();
             if (_health <= 0)
@@ -98,10 +125,6 @@ namespace Core.Entities
         {
             LevelController.Instance.LevelVictory();
         }
-        
-        public void Attack()
-        {
-        }
 
         public override string CompareConfig(BaseTilableObject obj)
         {
@@ -124,7 +147,7 @@ namespace Core.Entities
                 }
                 case "Enemy":
                 {
-                    StartCoroutine(Attack(obj));
+                    //StartCoroutine(Attack(obj)); This call moved to EnemyTilableObject
                     break;
                 }
                 default:
@@ -136,12 +159,25 @@ namespace Core.Entities
             return _config;
         }
 
+        private bool _endAttack = false;
+        public void EndAttack()
+        {
+            _endAttack = true;
+            Debug.LogWarning("PlayerEndAttack");
+        }
+
         public IEnumerator Attack(BaseTilableObject obj)
         {
             if (LevelController.Instance.TurnState == TurnState.Player/* || _canCounterAttack*/)
             {
                 transform.DORotateQuaternion(Quaternion.LookRotation(obj.transform.position - transform.position, Vector3.up) , 0.05f);
-                for (float i = 0; i < 0.5f;  i = Mathf.Clamp(i + Time.deltaTime * _jumpSpeed, 0 ,0.5f))
+                _animator.SetTrigger("Attack");
+                yield return new WaitUntil(() => _endAttack);
+                _endAttack = false;
+                obj.CallbackForPlayerMoves(PlayerCallbackType.Attack, this);
+                
+                
+                /*for (float i = 0; i < 0.5f;  i = Mathf.Clamp(i + Time.deltaTime * _jumpSpeed, 0 ,0.5f))
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
                         i);
@@ -150,7 +186,7 @@ namespace Core.Entities
 
                     yield return null;
                 }
-                obj.CallbackForPlayerMoves(PlayerCallbackType.Attack, this);
+                
                 for (float i = 0; i < 0.5f; i = Mathf.Clamp(i + Time.deltaTime * _jumpSpeed, 0 ,0.5f))
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
@@ -159,7 +195,7 @@ namespace Core.Entities
                     transform.position = TempVector3;
 
                     yield return null;
-                }
+                }*/
             }
         }
         public IEnumerator Pickup(BaseTilableObject obj) //Enter-alt
