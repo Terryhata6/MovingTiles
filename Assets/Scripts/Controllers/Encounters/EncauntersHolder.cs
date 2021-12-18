@@ -66,6 +66,20 @@ namespace Core
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
-        
+
+        public void SpawnAxe(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteWeapon(OnStartCallBack, OnEndCallBack, WeaponType.Axe));
+        public void SpawnPickaxe(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteWeapon(OnStartCallBack, OnEndCallBack, WeaponType.Pickaxe));
+        public void SpawnKatana(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteWeapon(OnStartCallBack, OnEndCallBack, WeaponType.Katana));
+        public void SpawnMace(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteWeapon(OnStartCallBack, OnEndCallBack, WeaponType.Mace));
+        public void SpawnBigSword(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteWeapon(OnStartCallBack, OnEndCallBack, WeaponType.BigSword));
+        private IEnumerator ExecuteWeapon(Action OnStartCallBack, Action OnEndCallBack, WeaponType weaponType) //Enter-alt
+        {
+            OnStartCallBack?.Invoke();
+            int iterator = 0;
+            TilableObjectsController.Instance.SpawnWeapon(() => iterator++, () => iterator--, weaponType); 
+            yield return new WaitUntil(() => iterator == 0);
+            OnEndCallBack?.Invoke();
+        }
+
     }
 }
