@@ -15,6 +15,7 @@ namespace Core
         [SerializeField] private TilableObject _enemyExample;
         [SerializeField] private HealPackTilableObject _healExample;
         [SerializeField] private ExitDoorTilableObject _exitDoorExample;
+        [SerializeField] private ProjectileTilableObject _projectile;
         [SerializeField] private TilableObject _tempBuilding;
         [SerializeField] private WeaponTilableObject[] _weapons;
         [SerializeField] private int StartEnemiesAmount;
@@ -146,6 +147,19 @@ namespace Core
         public void SpawnWeapon(Action forEachCall, Action onEndSpawningCallback)
         {
             SpawnWeapon(forEachCall, onEndSpawningCallback, GetRandomWeaponType());
+        }
+        public void SpawnProjectile(Action forEachCall, Action onEndSpawningCallback)
+        {
+            forEachCall?.Invoke();
+            _tilebox = TileController.Instance.GetTileForenemy();
+            _enemy = Instantiate(_projectile.gameObject, _tilebox.transform.position + Vector3.up * 5f,
+                Quaternion.identity, transform).GetComponent<ProjectileTilableObject>();
+            _enemy.SetBox(_tilebox);
+            StartCoroutine(_enemy.SpawnAnimation((value) =>
+            {
+                AddObjectToList(value as TilableObject);
+                onEndSpawningCallback?.Invoke();
+            }));
         }
         
         #endregion
