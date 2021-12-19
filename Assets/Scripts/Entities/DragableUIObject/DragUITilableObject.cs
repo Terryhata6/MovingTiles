@@ -30,7 +30,7 @@ namespace Core
         }
 
 
-        public void SetNewObject(Image image,TilableObject tilableObjectExmple)
+        public void SetNewObject(Sprite image,TilableObject tilableObjectExmple)
         {
             
             if (_tilableObjectInstance != null)
@@ -41,12 +41,12 @@ namespace Core
             if (tilableObjectExmple != null)
             {
                 _tilableObjectExmple = tilableObjectExmple;
-                _image.sprite = image.sprite;
-                _tilableObjectInstance =
-                    TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
+                _image.sprite = image;
+                _tilableObjectInstance = Instantiate(_tilableObjectExmple.gameObject, transform.position,
+                    Quaternion.identity,transform).GetComponent<TilableObject>();
                 _tilableObjectInstance.gameObject.SetActive(false);
                 EnableImage(true);
-                ChangeChargesAmount(+1);
+                AddCharge(1);
             }
         }
 
@@ -81,7 +81,7 @@ namespace Core
 
         private void SpawnOrNotSpawnCallBack()
         {
-            ChangeChargesAmount(-1);
+            RemoveCharge(1);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -107,19 +107,35 @@ namespace Core
                 _startCheckingTilable = false;
                 EnableImage(true);
                 _draggingObjectRectTransform.position = _beginPosition;
-                _tilableObjectInstance =
-                    TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
+                _tilableObjectInstance = Instantiate(_tilableObjectExmple.gameObject, transform.position,
+                                Quaternion.identity,transform).GetComponent<TilableObject>();
                 _tilableObjectInstance.gameObject.SetActive(false);
-
+                _tilableObjectInstance.transform.SetParent(transform);
             }
         }
 
         public void ChangeChargesAmount(int charge)
         {
-            _charges += charge;
+            _charges = charge;
             if (_charges <= 0)
             {
                 EnableImage(false);
+            }
+            
+        }
+
+        public void AddCharge(int charge)
+        {
+            if (charge > 0)
+            {
+                ChangeChargesAmount(_charges+charge);
+            }
+        }
+        public void RemoveCharge(int charge)
+        {
+            if (charge > 0)
+            {
+                ChangeChargesAmount(_charges-charge);
             }
         }
 

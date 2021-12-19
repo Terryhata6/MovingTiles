@@ -164,15 +164,6 @@ namespace Core
         
         #endregion
         #region playerPerk 
-
-
-        public TilableObject SpawnSkill(TilableObject skillExample) //eNTER-ALT
-        {
-            _tempPos = InputController.Instance.TouchPosition();
-            _enemy = Instantiate(skillExample.gameObject, _tempPos,
-                Quaternion.identity,transform).GetComponent<TilableObject>();
-            return _enemy;
-        }
         
         #endregion //enter-alt
         public IEnumerator ExecuteEnemiesSkills() //

@@ -13,11 +13,7 @@ namespace Core
             SceneController.Instance.GetNewDraggableObject();
             yield break;
         }
-
-
-
-
-
+        
         private IEnumerator ExecuteEncaunter(Action<Action, Action> method, Action OnStartCallBack, Action OnEndCallBack)
         {
             OnStartCallBack?.Invoke();
@@ -95,3 +91,18 @@ namespace Core
 
     }
 }
+
+public enum EncaunterType
+{
+    StartSpawnEnemy,
+    SpawnEnemy,
+    SpawnHeal,
+    SpawnExitDoor,
+    SpawnAxe,
+    SpawnPickaxe,
+    SpawnKatana,
+    SpawnMace,
+    SpawnBigSword,
+    SpawnProjectile
+}
+

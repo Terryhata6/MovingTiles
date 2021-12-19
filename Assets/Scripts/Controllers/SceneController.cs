@@ -33,7 +33,7 @@ namespace Core
         private DragUITilableObject[] draggableUi;
 
         [SerializeField] private TilableObject[] obj;
-        [SerializeField] private Image[] objImage;
+        [SerializeField] private Sprite[] objImage;
 
 
         private void FixedUpdate()
@@ -63,7 +63,7 @@ namespace Core
                 }
                 else if (draggableUi[i].CompareObject(obj[j]))
                 {
-                    draggableUi[i].ChangeChargesAmount(+1);
+                    draggableUi[i].AddCharge(1);
                     return;
                 }
             }
