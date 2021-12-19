@@ -58,22 +58,22 @@ namespace Core
         {
             if (Vector3.Dot(direction, Vector2.up) >= _directionTreshhold)
             {
-                Debug.Log("UP");
+                //Debug.Log("UP");
                 _inputController.GetSwipe(SwipeDirections.Up);
             }
             else if (Vector3.Dot(direction, Vector2.down) >= _directionTreshhold)
             {
-                Debug.Log("Down");
+                //Debug.Log("Down");
                 _inputController.GetSwipe(SwipeDirections.Down);
             }
             else if (Vector3.Dot(direction, Vector2.left) >= _directionTreshhold)
             {
-                Debug.Log("Left");
+                //Debug.Log("Left");
                 _inputController.GetSwipe(SwipeDirections.Left);
             }
             else if (Vector3.Dot(direction, Vector2.right) >= _directionTreshhold)
             {
-                Debug.Log("Right");
+                //Debug.Log("Right");
                 _inputController.GetSwipe(SwipeDirections.Right);
             }
         }

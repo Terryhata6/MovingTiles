@@ -15,7 +15,12 @@ namespace Core.Entities
         public string Config => _config;
         public TileBox Tile => _currentTileBox;
         protected Vector3 TempVector3;
-        
+
+        public virtual void Awake()
+        {
+            
+        }
+
         public virtual string CompareConfig(BaseTilableObject obj)
         {
             return _config;

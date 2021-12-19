@@ -11,11 +11,11 @@ namespace Core
         public static LevelController Instance;
         [Header("Properties")] [SerializeField]
         private TurnState _firstTurn;
-
+        [SerializeField]private EnviSetType setTypeType;
         [SerializeField]private bool _gameEnd = false;
         [SerializeField]private bool _endTurn = false;
         private Coroutine _turnsCoroutine;
-        [SerializeField]private TurnState _currentTurnState;
+        [Header("Tasks")][SerializeField]private TurnState _currentTurnState;
         [SerializeField]private int _turnNumber = 0;
         [SerializeField] private int _currentTasksNum = 0;
         private Dictionary<int, Action<Action,Action>> turnTasks = new Dictionary<int, Action<Action,Action>>();
@@ -38,8 +38,9 @@ namespace Core
         {
             TileController.Instance.CreateTiles();
             CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
-            CreateNewTask(4, EncauntersHolder.Instance.SpawnEnemy);
             CreateNewTask(1, EncauntersHolder.Instance.SpawnProjectile);
+            CreateNewTask(1, EncauntersHolder.Instance.SpawnKatana);
+            CreateNewTask(4, EncauntersHolder.Instance.SpawnEnemy);
             CreateNewTask(4, EncauntersHolder.Instance.SpawnHeal);
             CreateNewTask(4, EncauntersHolder.Instance.SpawnExitDoor);
             CreateNewTask(6, EncauntersHolder.Instance.SpawnEnemy);
@@ -49,6 +50,7 @@ namespace Core
 
 
             _endTurn=(_currentTurnState != TurnState.Enemy);
+            EnviermentController.Instance.ActivateSet(setTypeType);
         }
 
         private IEnumerator Turns()
@@ -61,7 +63,7 @@ namespace Core
 
             while (!_gameEnd)
             {
-                Debug.Log($"Начало Цикла, end of turn {_endTurn}");
+                //Debug.Log($"Начало Цикла, end of turn {_endTurn}");
                 yield return new WaitForSeconds(0.5f);
                 yield return new WaitUntil(() => _endTurn);
                 _endTurn = false;
@@ -71,16 +73,16 @@ namespace Core
                     case TurnState.Player:
                     {
                         _currentTurnState = TurnState.Enemy;   //start enemy turn
-                        Debug.Log($"Сейчас ход {_currentTurnState}");
+                        //Debug.Log($"Сейчас ход {_currentTurnState}");
                         StartCoroutine(TilableObjectsController.Instance.ExecuteEnemiesSkills()); //Движения врагов
                         
                         if (turnTasks.ContainsKey(TurnNumber))
                         {
                             _currentTasksNum = 0;
-                            Debug.Log($"Release tasks from turn {TurnNumber}");
+                            //Debug.Log($"Release tasks from turn {TurnNumber}");
                             turnTasks[TurnNumber]?.Invoke(() => _currentTasksNum++, () => _currentTasksNum--);
                             yield return new WaitUntil(() =>  _currentTasksNum == 0);
-                            Debug.Log($"tasks from turn {TurnNumber} done");
+                            //Debug.Log($"tasks from turn {TurnNumber} done");
                             turnTasks.Remove(TurnNumber);
                         }
                         break;
@@ -89,13 +91,13 @@ namespace Core
                     {
                         _currentTurnState = TurnState.Player; //start player turn
                         InputController.Instance.OnGetSwipe += GetSwipe;
-                        Debug.Log($"Сейчас ход {_currentTurnState}");
+                        //Debug.Log($"Сейчас ход {_currentTurnState}");
                         _turnNumber++;
                         
                         break;
                     }
                 }
-                Debug.Log($"Конец Цикла");
+                //Debug.Log($"Конец Цикла");
             }
             //todo endGame animations
         }
@@ -128,7 +130,7 @@ namespace Core
 
         public void EndOfTurn()
         {
-            Debug.Log($"Call End of turn");
+            //Debug.Log($"Call End of turn");
             _endTurn = true;
         }
 

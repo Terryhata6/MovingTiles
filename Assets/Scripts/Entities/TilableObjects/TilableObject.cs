@@ -20,8 +20,9 @@ namespace Core.Entities
         public bool HaveSkills => _haveSkills;
         public bool CanMove => _canMove;
 
-        public void Awake()
+        public override void Awake()
         {
+            base.Awake();
             if (_skills.Count > 0)
             {
                 _haveSkills = true;
