@@ -11,11 +11,11 @@ namespace Core
         public static LevelController Instance;
         [Header("Properties")] [SerializeField]
         private TurnState _firstTurn;
-
+        [SerializeField]private EnviSetType setTypeType;
         [SerializeField]private bool _gameEnd = false;
         [SerializeField]private bool _endTurn = false;
         private Coroutine _turnsCoroutine;
-        [SerializeField]private TurnState _currentTurnState;
+        [Header("Tasks")][SerializeField]private TurnState _currentTurnState;
         [SerializeField]private int _turnNumber = 0;
         [SerializeField] private int _currentTasksNum = 0;
         private Dictionary<int, Action<Action,Action>> turnTasks = new Dictionary<int, Action<Action,Action>>();
@@ -38,8 +38,9 @@ namespace Core
         {
             TileController.Instance.CreateTiles();
             CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
-            CreateNewTask(4, EncauntersHolder.Instance.SpawnEnemy);
             CreateNewTask(1, EncauntersHolder.Instance.SpawnProjectile);
+            CreateNewTask(1, EncauntersHolder.Instance.SpawnKatana);
+            CreateNewTask(4, EncauntersHolder.Instance.SpawnEnemy);
             CreateNewTask(4, EncauntersHolder.Instance.SpawnHeal);
             CreateNewTask(4, EncauntersHolder.Instance.SpawnExitDoor);
             CreateNewTask(6, EncauntersHolder.Instance.SpawnEnemy);
@@ -49,6 +50,7 @@ namespace Core
 
 
             _endTurn=(_currentTurnState != TurnState.Enemy);
+            EnviermentController.Instance.ActivateSet(setTypeType);
         }
 
         private IEnumerator Turns()
@@ -128,7 +130,7 @@ namespace Core
 
         public void EndOfTurn()
         {
-            Debug.Log($"Call End of turn");
+            //Debug.Log($"Call End of turn");
             _endTurn = true;
         }
 

@@ -7,11 +7,22 @@ namespace Core
 {
     public class EncauntersHolder : Singleton<EncauntersHolder>
     {
+        
+        public IEnumerator CreateDropFromkKilledEnemy(Vector3 position)
+        {
+            
+            yield break;
+        }
+
+
+
+
+
         private IEnumerator ExecuteEncaunter(Action<Action, Action> method, Action OnStartCallBack, Action OnEndCallBack)
         {
             OnStartCallBack?.Invoke();
             int iterator = 0;
-            method(() => iterator++, () => iterator--); ///
+            method(() => iterator++, () => iterator--); //
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
@@ -22,7 +33,7 @@ namespace Core
         {
             OnStartCallBack?.Invoke();
             int iterator = 0;
-            TilableObjectsController.Instance.SpawnStartEnemyes(() => iterator++, () => iterator--); ///
+            TilableObjectsController.Instance.SpawnStartEnemyes(() => iterator++, () => iterator--); //
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
@@ -32,7 +43,7 @@ namespace Core
         {
             OnStartCallBack?.Invoke();
             int iterator = 0;
-            TilableObjectsController.Instance.SpawnEnemy(() => iterator++, () => iterator--); ///
+            TilableObjectsController.Instance.SpawnEnemy(() => iterator++, () => iterator--); //
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
@@ -42,7 +53,7 @@ namespace Core
         {
             OnStartCallBack?.Invoke();
             int iterator = 0;
-            TilableObjectsController.Instance.SpawnHeal(() => iterator++, () => iterator--); ///
+            TilableObjectsController.Instance.SpawnHeal(() => iterator++, () => iterator--); //
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
@@ -52,7 +63,7 @@ namespace Core
         {
             OnStartCallBack?.Invoke();
             int iterator = 0;
-            TilableObjectsController.Instance.SpawnExitDoor(() => iterator++, () => iterator--); ///
+            TilableObjectsController.Instance.SpawnExitDoor(() => iterator++, () => iterator--); //
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
@@ -62,7 +73,7 @@ namespace Core
         {
             OnStartCallBack?.Invoke();
             int iterator = 0;
-            TilableObjectsController.Instance.SpawnBuilding(() => iterator++, () => iterator--); ///
+            TilableObjectsController.Instance.SpawnBuilding(() => iterator++, () => iterator--); //
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
@@ -86,7 +97,7 @@ namespace Core
         {
             OnStartCallBack?.Invoke();
             int iterator = 0;
-            TilableObjectsController.Instance.SpawnProjectile(() => iterator++, () => iterator--); ///
+            TilableObjectsController.Instance.SpawnProjectile(() => iterator++, () => iterator--); //
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }

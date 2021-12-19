@@ -4,6 +4,7 @@ using DG.Tweening;
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Core.Entities
 {
@@ -21,14 +22,16 @@ namespace Core.Entities
         public int Health => _health;
         private bool _endAttack = false;
 
-        public void Awake()
+        public override void Awake()
         {
+            base.Awake();
             _animator = GetComponentInChildren<Animator>();
         }
 
-        public void SetWeapon(int charges, int damage)
+        public void SetWeapon(int damage)
         {
-            
+            int result = Random.Range(0, _weapons.Length);
+            //Ramdomise weapons??
         }
 
         public void EndAttack()
@@ -114,6 +117,7 @@ namespace Core.Entities
         {
             TilableObjectsController.Instance.RemoveObjectFromList(this);
             //TODO Destroy Death Animation
+            StartCoroutine(EncauntersHolder.Instance.CreateDropFromkKilledEnemy(transform.position));
             yield return null;
             Destroy(this.gameObject);
             yield break;
