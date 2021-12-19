@@ -21,6 +21,7 @@ public class UIController : MonoBehaviour
         GameEvents.Instance.OnLevelVictory += WinGame;
         GameEvents.Instance.OnLevelFailed += LoseGame;
         GameEvents.Instance.OnLoadNewLevelController += OpenGameMenu;
+        GameEvents.Instance.OnHideLevelUI += HideUI;
     }
 
     private void Start()
@@ -66,6 +67,14 @@ public class UIController : MonoBehaviour
     {
         GameEvents.Instance.RestartLevel();
         SwitchUI(UIState.MainMenu);
+    }
+
+    private void HideUI()
+    {
+        for (int i = 0; i < _menues.Count; i++)
+        {
+            _menues[i].Hide();
+        }
     }
 
     public void AddView(BaseMenuView view)
