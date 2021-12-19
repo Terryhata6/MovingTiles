@@ -157,7 +157,7 @@ PrefabInstance:
     - target: {fileID: -8231142686430893006, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4204633028826151111, guid: d495db79ca9ee56429f04c244f4412dd, type: 3}
+      objectReference: {fileID: 4204633028826151111, guid: 20c61776a910b0245a7854fb9fe81cb6, type: 3}
     - target: {fileID: -1950733119399844177, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.99992067
@@ -177,7 +177,7 @@ PrefabInstance:
     - target: {fileID: -326406453466834027, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: ecb38bcef53f91f4dbb5aa955b9485e0, type: 2}
+      objectReference: {fileID: 2100000, guid: fcc90b78c59d24a4db76e3307f3a7f10, type: 2}
     - target: {fileID: 919132149155446097, guid: 6599ac618b6674545b1f25f77aab2300, type: 3}
       propertyPath: m_Name
       value: DOOR

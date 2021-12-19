@@ -20,7 +20,7 @@ namespace Core
         public void OnDeath()
         {
             SavePlayerData(_defaultBaseHp, _defaultBaseHp, -1, 0, 0);
-            SceneController.Instance.SetLevelNumber(-1);
+            SceneController.Instance.SetLevelNumber(0);
         }
 
         public void SavePlayerData(float hp, float maxHp, int currentWeapon, int charges, int weaponDamage)
