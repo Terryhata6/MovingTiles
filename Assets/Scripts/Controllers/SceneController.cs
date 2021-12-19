@@ -19,7 +19,7 @@ namespace Core
         [SerializeField] private List<string> _scenes;
         [SerializeField] private bool LevelDebug = false;
         [SerializeField] private LevelController _currentLevelController;
-        
+
         [SerializeField] private MMFeedbacks _MMFeedBacks;
         [SerializeField] private MMFeedbackLoadScene _loader;
         [SerializeField] private MMFeedbackUnloadScene _unloader;
@@ -29,16 +29,17 @@ namespace Core
         [SerializeField] private Material _spaceBassMaterial;
         private Vector2 deltaVector = Vector2.one;
 
-        [Header("DraggableUI")][SerializeField] private DragUITilableObject[] draggableUi;
+        [Header("DraggableUI")] [SerializeField]
+        private DragUITilableObject[] draggableUi;
+
         [SerializeField] private TilableObject[] obj;
         [SerializeField] private Image[] objImage;
-        
-        
+
+
         private void FixedUpdate()
         {
             if (_spaceMaterial == null)
             {
-                
             }
             else
             {
@@ -57,8 +58,8 @@ namespace Core
                     {
                         draggableUi[i].SetNewObject(objImage[j], obj[j]);
                     }
+
                     return;
-                    
                 }
                 else if (draggableUi[i].CompareObject(obj[j]))
                 {
@@ -66,6 +67,7 @@ namespace Core
                     return;
                 }
             }
+
             if (obj[j] != null && objImage[j] != null)
             {
                 draggableUi[0].SetNewObject(objImage[j], obj[j]);
@@ -79,6 +81,7 @@ namespace Core
             {
                 draggableUi[i].ChangeChargesAmount(0);
             }
+
         }
 
         private void Awake()
@@ -88,7 +91,7 @@ namespace Core
             {
                 draggableUi[i].gameObject.SetActive(true);
             }
-    }
+        }
 
         private void Start()
         {
@@ -103,8 +106,8 @@ namespace Core
             _unloader = _MMFeedBacks.GetComponent<MMFeedbackUnloadScene>();
             _sceneLoadingManager = GetComponent<MMSceneLoadingManager>();
             _MMFeedBacks.Initialization();
-            
-            
+
+
             if (!LevelDebug)
             {
                 LoadLevelScene(GetLevelNumber());
@@ -113,18 +116,18 @@ namespace Core
             {
                 FindLevelController();
             }
-            
         }
 
         public int GetLevelNumber()
         {
-            var currentLevelNumber = PlayerPrefs.GetInt("CurrentZone", defaultValue:-1);
+            var currentLevelNumber = PlayerPrefs.GetInt("CurrentZone", defaultValue: 0);
 
             if (currentLevelNumber >= _scenes.Count)
             {
-                currentLevelNumber = -1; //todo change to EndScene
+                currentLevelNumber = 0; //todo change to EndScene
                 SetLevelNumber(currentLevelNumber);
             }
+
             return currentLevelNumber;
         }
 
@@ -134,6 +137,7 @@ namespace Core
             {
                 number = 0;
             }
+
             PlayerPrefs.SetInt("CurrentZone", number);
         }
 
@@ -143,9 +147,10 @@ namespace Core
             {
                 UIEvents.Instance.OnButtonStartGame -= _currentLevelController.LevelStart;
             }
+
             LoadLevelScene(GetLevelNumber());
         }
-        
+
         public void LoadNextScene()
         {
             if (_currentLevelController != null)
@@ -159,24 +164,19 @@ namespace Core
             LoadLevelScene(currentLevelNumber);
         }
 
-        public delegate void method(Scene scene, LoadSceneMode mode); 
+
         public void LoadLevelScene(int sceneNumber)
         {
             string sceneName;
-            if (sceneNumber == -1)
+
+            if (sceneNumber < _scenes.Count)
             {
-                sceneName = _characterSelectScene;
+                sceneName = _scenes[sceneNumber];
+                SetLevelNumber(0);
             }
             else
             {
-                if (sceneNumber < _scenes.Count)
-                {
-                    sceneName = _scenes[sceneNumber];
-                }
-                else
-                {
-                    sceneName = _endScene;
-                }
+                sceneName = _endScene;
             }
             _loader.DestinationSceneName = sceneName;
             _MMFeedBacks.PlayFeedbacks();
@@ -198,12 +198,10 @@ namespace Core
                 Debug.Log("LevelController not found");
             }
         }
-        
+
         public void FindLevelController()
         {
             FindLevelController(LevelController.Instance);
         }
-
-        
     }
 }

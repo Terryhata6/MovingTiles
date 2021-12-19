@@ -163,6 +163,7 @@ namespace Core.Entities
         public override IEnumerator DestroyAnimation()
         {
             TilableObjectsController.Instance.RemoveObjectFromList(this);
+            _currentTileBox.ChangeTiledObject();
             //TODO Destroy Death Animation
             StartCoroutine(EncauntersHolder.Instance.CreateDropFromkKilledEnemy(transform.position));
             if (_haveRagdall)
