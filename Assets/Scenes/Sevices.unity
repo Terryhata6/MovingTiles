@@ -339,7 +339,7 @@ MonoBehaviour:
   - setTypeType: 1
     _gos:
     - {fileID: 136686166}
-    - {fileID: 1496450768}
+    - {fileID: 550202506}
   - setTypeType: 2
     _gos:
     - {fileID: 306182308}
@@ -364,6 +364,11 @@ Transform:
   m_Father: {fileID: 733355313}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &550202506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4228124796130797640, guid: bc036d8c36b76e944866702aa86ac1f2, type: 3}
+  m_PrefabInstance: {fileID: 599311031}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &599311031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -371,17 +376,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 324000679}
     m_Modifications:
-    - target: {fileID: 4171587650169533679, guid: bc036d8c36b76e944866702aa86ac1f2, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 6099aa7d1b2abeb42bd164fdd96cef92, type: 2}
     - target: {fileID: 4228124796130797640, guid: bc036d8c36b76e944866702aa86ac1f2, type: 3}
       propertyPath: m_Name
       value: Grass
       objectReference: {fileID: 0}
     - target: {fileID: 4228124796130797640, guid: bc036d8c36b76e944866702aa86ac1f2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7233702216233887027, guid: bc036d8c36b76e944866702aa86ac1f2, type: 3}
       propertyPath: m_RootOrder
@@ -840,7 +841,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.25977257, y: 0.19233471, z: -0.05287995, w: 0.9448436}
+  m_LocalRotation: {x: 0.25977254, y: 0.19233471, z: -0.05287995, w: 0.9448436}
   m_LocalPosition: {x: -3.47, y: 5.28, z: 21.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

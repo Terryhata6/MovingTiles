@@ -33,7 +33,7 @@ public class SoundController : Singleton<SoundController>
         }
         _textSender.Value = text;
         _textSender.TargetTransform = targetTransform;
-        _textSender.Play(targetTransform.position);
-        _mmFeedbacks.PlayFeedbacks(targetTransform.position);
+        //_textSender.Play(targetTransform.position);
+        _mmFeedbacks.PlayFeedbacks(targetTransform.position + Vector3.up);
     }
 }
