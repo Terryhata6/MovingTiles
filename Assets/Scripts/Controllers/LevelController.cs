@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Core.UtilitsSpace;
 using UnityEngine;
+using Cinemachine;
+
 
 namespace Core
 {
@@ -21,6 +23,10 @@ namespace Core
         private Dictionary<int, Action<Action,Action>> turnTasks = new Dictionary<int, Action<Action,Action>>();
 
         [Header("Scenarios")] [SerializeField] private List<LevelScenario> _scenarios;
+        [Header("Camera")]
+        [SerializeField] private CinemachineVirtualCamera _mobileCamera;
+        [SerializeField] private CinemachineVirtualCamera _pcCamera;
+
 
         public TurnState TurnState => _currentTurnState;
         public int TurnNumber => _turnNumber;
@@ -47,6 +53,17 @@ namespace Core
 
             _endTurn=(_currentTurnState != TurnState.Enemy);
             EnviermentController.Instance.ActivateSet(setTypeType);
+
+            if (Screen.width > Screen.height)
+            {
+                _pcCamera.Priority = 99;
+                _mobileCamera.Priority = 10;
+            }
+            else
+            {
+                _mobileCamera.Priority = 99;
+                _pcCamera.Priority = 10;
+            }
         }
 
         private Action<Action, Action> taskMethod;
