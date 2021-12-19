@@ -1152,33 +1152,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 777527545069547072, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 829054191639765862, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 899078652314386531, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1588852352589573314, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1880106678751201292, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2730750120936738262, guid: 508711fd140adce478e5dd952c295a75, type: 3}
       propertyPath: m_Name
       value: Human
-      objectReference: {fileID: 0}
-    - target: {fileID: 2810533584577474251, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3363698989533386604, guid: 508711fd140adce478e5dd952c295a75, type: 3}
       propertyPath: m_RootOrder
@@ -1224,56 +1200,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4093343100654118491, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4450361147053872721, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4700318869133669248, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874521032459280248, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5174316792348803080, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6050233607708932423, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6050526525477061902, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6133295090599370490, guid: 508711fd140adce478e5dd952c295a75, type: 3}
+    - target: {fileID: 8529597590001472765, guid: 508711fd140adce478e5dd952c295a75, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6134960321430510297, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8817853725773064490, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9111125280669302669, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9154543827898861096, guid: 508711fd140adce478e5dd952c295a75, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7229357915090489750, guid: 508711fd140adce478e5dd952c295a75, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 508711fd140adce478e5dd952c295a75, type: 3}
 --- !u!1 &2093382268
 GameObject:

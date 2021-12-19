@@ -18,6 +18,7 @@ namespace Core.Entities
         [SerializeField] private Transform _hips;
         [SerializeField] private Animator _animator;
         [SerializeField] private int _currentWeaponCharges = 0;
+        [SerializeField] private int _currentWeapon = -1;
         [SerializeField] private GameObject[] _weapons;
 
         public float HP => _health;
@@ -35,7 +36,12 @@ namespace Core.Entities
         {
             _damage = _baseDamage;
             _animator = GetComponentInChildren<Animator>();
-            
+            SaveLoadManager.Instance.LoadPlayerData(out _health, out _healthMax, out _currentWeapon, out _currentWeaponCharges, out _damage);
+            if (_currentWeapon >= 0 && _currentWeapon < _weapons.Length)
+            {
+                SetWeapon((WeaponType) _currentWeapon, _damage, _currentWeaponCharges);
+            }
+
             yield return null;
             SetBox(TileController.Instance.Center);
             UpdateHealthUi();
@@ -65,6 +71,7 @@ namespace Core.Entities
             //TODO DeactivateWeaponFeedBack
             _animator.SetBool("ThoHand", false);
             _damage = _baseDamage;
+            _currentWeapon = -1;
         }
 
 
@@ -86,6 +93,7 @@ namespace Core.Entities
 
         public void PlayStartAnimation()
         {
+            //
         }
 
         public void GetDamage(float Damage, BaseTilableObject enemy)
@@ -93,13 +101,18 @@ namespace Core.Entities
             GetDamage(Damage);
             if (_canCounterAttack)
             {
-                
+                enemy.CallbackForPlayerMoves(PlayerCallbackType.Attack, this);
             }
         }
         
         public void GetHeal(float heal)
         {
             _health += heal;
+            if (_health > _healthMax)
+            {
+                _health = MaxHP;
+            }
+
             UpdateHealthUi();
         }
         
@@ -130,6 +143,7 @@ namespace Core.Entities
 
         public void GoToExitDoor()
         {
+            SaveLoadManager.Instance.SavePlayerData(_health, _healthMax, _currentWeapon, _currentWeaponCharges, _damage);
             LevelController.Instance.LevelVictory();
         }
 
@@ -144,30 +158,35 @@ namespace Core.Entities
                 case WeaponType.Axe:
                 {
                     ActivateTwoHandedWeapon(charges, damage);
+                    _currentWeapon = 0;
                     _weapons[0].SetActive(true);
                     break;
                 }
                 case WeaponType.BigSword:
                 {
                     ActivateOneHandedWeapon(charges,damage);
+                    _currentWeapon = 1;
                     _weapons[1].SetActive(true);
                     break;
                 }
                 case WeaponType.Katana:
                 {
                     ActivateOneHandedWeapon(charges,damage);
+                    _currentWeapon = 2;
                     _weapons[2].SetActive(true);
                     break;
                 }
                 case WeaponType.Mace:
                 {
                     ActivateTwoHandedWeapon(charges,damage);
+                    _currentWeapon = 3;
                     _weapons[3].SetActive(true);
                     break;
                 }
                 case WeaponType.Pickaxe:
                 {
                     ActivateOneHandedWeapon(charges,damage);
+                    _currentWeapon = 4;
                     _weapons[4].SetActive(true);
                     break;
                 }
@@ -217,10 +236,7 @@ namespace Core.Entities
             {
                 _endAttack = true;
                 //Debug.LogWarning("PlayerEndAttack");
-                if (_currentWeaponCharges <= 0)
-                {
-                    DeactivateWeapon();
-                }
+                
             }
         }
 
@@ -236,6 +252,10 @@ namespace Core.Entities
                 _endAttack = false;
                 _attackStarted = false;
                 obj.CallbackForPlayerMoves(PlayerCallbackType.Attack, this);
+                if (_currentWeaponCharges <= 0)
+                {
+                    DeactivateWeapon();
+                }
                 
                 
                 /*for (float i = 0; i < 0.5f;  i = Mathf.Clamp(i + Time.deltaTime * _jumpSpeed, 0 ,0.5f))

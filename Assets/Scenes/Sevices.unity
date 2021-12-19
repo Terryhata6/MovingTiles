@@ -534,7 +534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b25a25975342ecb5a990f4029d16a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentLevel: 0
+  CurrentZone: -1
+  _defaultBaseHp: 10
 --- !u!114 &733355316
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -1059,7 +1060,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.226
     m_Bias: 2.26
     m_NormalBias: 2.36
     m_NearPlane: 0.1

@@ -151,6 +151,7 @@ namespace Core
 
         public IEnumerator LevelFailed()
         {
+            SaveLoadManager.Instance.OnDeath();
             LevelEnd();
             yield return new WaitForSeconds(1f);
             GameEvents.Instance.LevelFailed();
