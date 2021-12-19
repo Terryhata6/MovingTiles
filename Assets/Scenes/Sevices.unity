@@ -489,7 +489,7 @@ MonoBehaviour:
   _unloader: {fileID: 0}
   _sceneLoadingManager: {fileID: 0}
   _spaceMaterial: {fileID: 2100000, guid: ecb38bcef53f91f4dbb5aa955b9485e0, type: 2}
-  _spaceBassMaterial: {fileID: 0}
+  _spaceBassMaterial: {fileID: 2100000, guid: e7a8c1c02a568794daebff8c6feef68c, type: 2}
   draggableUi:
   - {fileID: 1147492477}
   - {fileID: 951944382}
@@ -844,7 +844,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.25977254, y: 0.19233471, z: -0.05287995, w: 0.9448436}
+  m_LocalRotation: {x: 0.25977257, y: 0.19233471, z: -0.05287995, w: 0.9448436}
   m_LocalPosition: {x: -3.47, y: 5.28, z: 21.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

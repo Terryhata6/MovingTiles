@@ -42,8 +42,7 @@ namespace Core.Entities
                 SetWeapon((WeaponType) _currentWeapon, _damage, _currentWeaponCharges);
             }
 
-            yield return null;
-            SetBox(TileController.Instance.Center);
+            yield return SetBoxCorutine(TileController.Instance.Center);
             UpdateHealthUi();
             
         }
@@ -88,12 +87,32 @@ namespace Core.Entities
             _currentTileBox = box;
             _currentTileBox.ChangeTiledObject(this);
             transform.position = box.transform.position;
-            PlayStartAnimation();
+            PlayStartAnimation(box.transform.position.y);
+        }
+        
+        public IEnumerator SetBoxCorutine(TileBox box)
+        {
+            if (_currentTileBox != null)
+            {
+                _currentTileBox.ChangeTiledObject();
+            }
+            if (box == null)
+            {
+                yield break;
+            }
+            _currentTileBox = box;
+            _currentTileBox.ChangeTiledObject(this);
+            transform.position = box.transform.position + new Vector3(0f,5f,0f);
+            yield return PlayStartAnimation(box.transform.position.y);
         }
 
-        public void PlayStartAnimation()
+        public IEnumerator PlayStartAnimation(float yValue)
         {
-            //
+            _animator.SetBool("Flying",true);
+            int i = 1;
+            transform.DOMoveY(yValue, 0.3f).OnComplete(()=> i = 0);
+            yield return new WaitUntil(() => i == 0);
+            _animator.SetBool("Flying",false);
         }
 
         public void GetDamage(float Damage, BaseTilableObject enemy)

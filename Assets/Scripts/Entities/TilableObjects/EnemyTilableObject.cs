@@ -19,10 +19,11 @@ namespace Core.Entities
         [SerializeField] private float _baseDamage = 1f;
         [SerializeField] private float _damage = 1f;
         [SerializeField] private Animator _animator;
+        [SerializeField] private bool _needAnimator = false;
         [SerializeField] private GameObject[] _weapons;
         [SerializeField] private bool _needBakeMesh = false;
         [SerializeField] private RealTimeSkinnedMeshBaker _baker;
-        
+
         [SerializeField] private bool _haveRagdall = false;
         [SerializeField] private List<Rigidbody> _rigs;
         [SerializeField] private List<Collider> _colliders;
@@ -33,7 +34,14 @@ namespace Core.Entities
         public override void Awake()
         {
             base.Awake();
-            _animator = GetComponentInChildren<Animator>();
+            if (_needAnimator)
+            {
+                _animator = GetComponentInChildren<Animator>();
+            }
+            else
+            {
+            }
+
             if (_haveRagdall)
             {
                 _rigs = GetComponentsInChildren<Rigidbody>().ToList();
@@ -46,12 +54,20 @@ namespace Core.Entities
         {
             if (!_haveRagdall)
                 return;
-            _animator.enabled = false;
+            if (_needAnimator)
+            {
+                _animator.enabled = false;
+            }
+            else
+            {
+            }
+
             for (int i = 0; i < _rigs.Count; i++)
             {
                 _rigs[i].isKinematic = false;
                 _rigs[i].useGravity = true;
             }
+
             for (int i = 0; i < _colliders.Count; i++)
             {
                 _colliders[i].isTrigger = false;
@@ -62,12 +78,20 @@ namespace Core.Entities
         {
             if (!_haveRagdall)
                 return;
-            _animator.enabled = true;
+            if (_needAnimator)
+            {
+                _animator.enabled = true;
+            }
+            else
+            {
+            }
+
             for (int i = 0; i < _rigs.Count; i++)
             {
                 _rigs[i].isKinematic = true;
                 _rigs[i].useGravity = false;
             }
+
             for (int i = 0; i < _colliders.Count; i++)
             {
                 _colliders[i].isTrigger = true;
@@ -78,7 +102,6 @@ namespace Core.Entities
         {
             int result = Random.Range(0, _weapons.Length);
             _weapons[result].SetActive(true);
-            
         }
 
         public void EndAttack()
@@ -90,7 +113,19 @@ namespace Core.Entities
         {
             if (state == TurnState.Enemy)
             {
-                _animator.SetTrigger("Attack");
+                if (_needAnimator)
+                {
+                    _animator.SetTrigger("Attack");
+                }
+                else
+                {
+                    transform.DOMove(transform.position + (box.transform.position - transform.position) * 0.5f, 0.2f)
+                        .OnComplete(() =>
+                        {
+                            _endAttack = true;
+                            transform.DOMove(_currentTileBox.transform.position, 0.2f);
+                        });
+                }
                 yield return new WaitUntil(() => _endAttack);
                 _endAttack = false;
                 (box.TiledObject as PlayerTilableObject).GetDamage(Damage, this);
@@ -152,7 +187,15 @@ namespace Core.Entities
         public void GetDamage(int damage)
         {
             _health -= damage;
-            _animator.SetTrigger("Hit");
+            if (_needAnimator)
+            {
+                _animator.SetTrigger("Hit");
+            }
+            else
+            {
+                
+            }
+
             if (Health <= 0)
             {
                 _health = 0;
@@ -171,13 +214,15 @@ namespace Core.Entities
                 ActivateRagdoll();
                 foreach (var rig in _rigs)
                 {
-                    rig.AddForce(transform.forward * -3f + transform.up * 15f, ForceMode.Impulse);   
+                    rig.AddForce(transform.forward * -3f + transform.up * 15f, ForceMode.Impulse);
                 }
+
                 yield return new WaitForSeconds(2f);
                 Destroy(this.gameObject);
             }
             else
             {
+                
                 transform.DOMoveY(-4f, 2f).OnComplete(() => Destroy(this.gameObject));
             }
         }
@@ -191,6 +236,7 @@ namespace Core.Entities
                 _baker = GetComponentInChildren<RealTimeSkinnedMeshBaker>();
                 yield return _baker.StartBaking();
             }
+
             transform.DOMoveY(_currentTileBox.transform.position.y, 0.2f)
                 .OnComplete(() => OnEndSpawn.Invoke(this));
             yield break;

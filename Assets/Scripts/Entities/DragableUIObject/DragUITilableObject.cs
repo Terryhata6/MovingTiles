@@ -45,6 +45,9 @@ namespace Core
                 _tilableObjectInstance = Instantiate(_tilableObjectExmple.gameObject, transform.position,
                     Quaternion.identity,transform).GetComponent<TilableObject>();
                 _tilableObjectInstance.gameObject.SetActive(false);
+                _tilableObjectInstance.gameObject.transform.localScale =
+                    Vector3.one*(_tilableObjectInstance.gameObject.transform.localScale.x /
+                    UIController.Current.transform.localScale.x);
                 EnableImage(true);
                 AddCharge(1);
             }

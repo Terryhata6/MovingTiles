@@ -102,6 +102,9 @@ namespace Core
                 case EncaunterType.SpawnProjectile:
                     taskMethod = EncauntersHolder.Instance.SpawnProjectile;
                     break;
+                case EncaunterType.SpawnMimic:
+                    taskMethod = EncauntersHolder.Instance.SpawnMimic;
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }

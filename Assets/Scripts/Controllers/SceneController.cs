@@ -44,6 +44,7 @@ namespace Core
             else
             {
                 _spaceMaterial.mainTextureOffset += deltaVector * Time.fixedDeltaTime;
+                _spaceBassMaterial.mainTextureOffset += deltaVector * Time.fixedDeltaTime;
             }
         }
 

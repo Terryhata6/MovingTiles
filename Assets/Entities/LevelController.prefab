@@ -159,6 +159,7 @@ MonoBehaviour:
   - {fileID: 633276712710708279, guid: fd927c3e45c77444fb9267d6c786d22b, type: 3}
   - {fileID: 7041972608335647726, guid: 7843a2f511a495a4eac148f23cadfaf0, type: 3}
   - {fileID: 3126754948226359098, guid: 981e0b3766aaf42479469474c17ea811, type: 3}
+  _mimicExample: {fileID: 1877768852455232174, guid: 13f0f006ad3408b458f404b154ff04ee, type: 3}
   StartEnemiesAmount: 0
   _objects:
   - {fileID: 0}
@@ -188,14 +189,17 @@ MonoBehaviour:
   - tasks:
     - turn: 0
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 0
     - turn: 2
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 0
@@ -205,6 +209,7 @@ MonoBehaviour:
       taskType: 4
     - turn: 3
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 2
@@ -212,6 +217,7 @@ MonoBehaviour:
       taskType: 2
     - turn: 2
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 0
@@ -223,6 +229,7 @@ MonoBehaviour:
       taskType: 1
     - turn: 3
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 6
@@ -238,6 +245,7 @@ MonoBehaviour:
       taskType: 2
     - turn: 4
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 6
@@ -253,6 +261,7 @@ MonoBehaviour:
       taskType: 2
     - turn: 4
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 0
@@ -270,6 +279,7 @@ MonoBehaviour:
       taskType: 0
     - turn: 4
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 5
@@ -287,6 +297,7 @@ MonoBehaviour:
       taskType: 5
     - turn: 4
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 9
@@ -300,6 +311,7 @@ MonoBehaviour:
       taskType: 0
     - turn: 2
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 9
@@ -313,6 +325,7 @@ MonoBehaviour:
       taskType: 3
     - turn: 2
       taskType: 3
+    envi: 0
   - tasks:
     - turn: 0
       taskType: 9
@@ -326,6 +339,9 @@ MonoBehaviour:
       taskType: 3
     - turn: 2
       taskType: 3
+    envi: 0
+  _mobileCamera: {fileID: 0}
+  _pcCamera: {fileID: 0}
 --- !u!1001 &607210388675757995
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3213,6 +3213,7 @@ MonoBehaviour:
   _baseDamage: 1
   _damage: 1
   _animator: {fileID: 0}
+  _needAnimator: 1
   _weapons:
   - {fileID: 7154160703277029709}
   - {fileID: 2542937799102296048}

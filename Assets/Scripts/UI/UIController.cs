@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    public static UIController Current;
     [Header("Debug")]
     [SerializeField] private Button _buttonResetPrefs;
 
@@ -13,6 +14,7 @@ public class UIController : MonoBehaviour
 
     public void Awake()
     {
+        Current = this;
         UIEvents.Instance.OnButtonStartGame += StartGame;
         UIEvents.Instance.OnButtonPauseGame += PauseGame;
         UIEvents.Instance.OnButtonResumeGame += StartGame;

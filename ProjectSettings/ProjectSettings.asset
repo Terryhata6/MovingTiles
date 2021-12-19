@@ -156,6 +156,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.DefaultCompany.MovingTiles
     Standalone: com.DefaultCompany.MovingTiles
+    iPhone: com.DefaultCompany.MovingTiles
   buildNumber:
     Standalone: 0
     iPhone: 0
