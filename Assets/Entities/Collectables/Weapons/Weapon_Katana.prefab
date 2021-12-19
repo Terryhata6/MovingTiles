@@ -54,6 +54,8 @@ MonoBehaviour:
   _needDebugLog: 0
   _wantToMoveToHero: 0
   _weaponType: 2
+  _damage: 5
+  _charges: 3
 --- !u!1 &5888297065085042365
 GameObject:
   m_ObjectHideFlags: 0

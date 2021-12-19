@@ -9,8 +9,8 @@ namespace Core.Entities
     {
         [Header("WeaponProps")] [SerializeField]
         private WeaponType _weaponType = WeaponType.Axe;
-        private int _damage = 1;
-        private int _charges = 1;
+        [SerializeField]private int _damage = 1;
+        [SerializeField]private int _charges = 1;
 
         protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
         {

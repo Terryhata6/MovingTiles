@@ -46,16 +46,23 @@ namespace Core.Entities
         {
             _animator.SetBool("ThoHand", false);
             _currentWeaponCharges = charges;
+            _damage = damage;
         }
 
         public void ActivateTwoHandedWeapon(int charges, int damage)
         {
             _animator.SetBool("ThoHand", true);
             _currentWeaponCharges = charges;
+            _damage = damage;
         }
 
         public void DeactivateWeapon()
         {
+            for (int i = 0; i < _weapons.Length; i++)
+            {
+                _weapons[i].SetActive(false);
+            }
+            //TODO DeactivateWeaponFeedBack
             _animator.SetBool("ThoHand", false);
             _damage = _baseDamage;
         }
@@ -128,7 +135,45 @@ namespace Core.Entities
 
         public void SetWeapon(WeaponType type, int damage, int charges)
         {
-            Debug.Log($"WeaponSet {type}");
+            for (int i = 0; i < _weapons.Length; i++)
+            {
+                _weapons[i].SetActive(false);
+            }
+            switch (type)
+            {
+                case WeaponType.Axe:
+                {
+                    ActivateTwoHandedWeapon(charges, damage);
+                    _weapons[0].SetActive(true);
+                    break;
+                }
+                case WeaponType.BigSword:
+                {
+                    ActivateOneHandedWeapon(charges,damage);
+                    _weapons[1].SetActive(true);
+                    break;
+                }
+                case WeaponType.Katana:
+                {
+                    ActivateOneHandedWeapon(charges,damage);
+                    _weapons[2].SetActive(true);
+                    break;
+                }
+                case WeaponType.Mace:
+                {
+                    ActivateTwoHandedWeapon(charges,damage);
+                    _weapons[3].SetActive(true);
+                    break;
+                }
+                case WeaponType.Pickaxe:
+                {
+                    ActivateOneHandedWeapon(charges,damage);
+                    _weapons[4].SetActive(true);
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
 
         public override string CompareConfig(BaseTilableObject obj)
@@ -164,11 +209,19 @@ namespace Core.Entities
             return _config;
         }
 
+        private bool _attackStarted = false;
         private bool _endAttack = false;
         public void EndAttack()
         {
-            _endAttack = true;
-            Debug.LogWarning("PlayerEndAttack");
+            if (_attackStarted)
+            {
+                _endAttack = true;
+                //Debug.LogWarning("PlayerEndAttack");
+                if (_currentWeaponCharges <= 0)
+                {
+                    DeactivateWeapon();
+                }
+            }
         }
 
         public IEnumerator Attack(BaseTilableObject obj)
@@ -177,8 +230,11 @@ namespace Core.Entities
             {
                 transform.DORotateQuaternion(Quaternion.LookRotation(obj.transform.position - transform.position, Vector3.up) , 0.05f);
                 _animator.SetTrigger("Attack");
+                _attackStarted = true;
+                _currentWeaponCharges--;
                 yield return new WaitUntil(() => _endAttack);
                 _endAttack = false;
+                _attackStarted = false;
                 obj.CallbackForPlayerMoves(PlayerCallbackType.Attack, this);
                 
                 
