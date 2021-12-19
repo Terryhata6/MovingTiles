@@ -193,6 +193,16 @@ MonoBehaviour:
   - tasks:
     - turn: 0
       taskType: 3
+    - turn: 5
+      taskType: 10
+    - turn: 5
+      taskType: 10
+    - turn: 5
+      taskType: 10
+    - turn: 5
+      taskType: 10
+    - turn: 5
+      taskType: 10
     envi: 0
   - tasks:
     - turn: 0
@@ -202,22 +212,60 @@ MonoBehaviour:
     envi: 0
   - tasks:
     - turn: 0
-      taskType: 0
-    - turn: 1
-      taskType: 1
+      taskType: 9
+    - turn: 0
+      taskType: 9
     - turn: 2
+      taskType: 2
+    - turn: 2
+      taskType: 0
+    - turn: 2
+      taskType: 3
+    - turn: 4
+      taskType: 8
+    envi: 0
+  - tasks:
+    - turn: 0
+      taskType: 9
+    - turn: 1
+      taskType: 9
+    - turn: 2
+      taskType: 9
+    - turn: 3
+      taskType: 9
+    - turn: 2
+      taskType: 3
+    - turn: 2
+      taskType: 3
+    envi: 2
+  - tasks:
+    - turn: 0
+      taskType: 2
+    - turn: 1
       taskType: 4
+    - turn: 2
+      taskType: 1
+    - turn: 2
+      taskType: 0
     - turn: 3
       taskType: 3
-    envi: 0
+    - turn: 6
+      taskType: 7
+    envi: 1
   - tasks:
     - turn: 0
+      taskType: 10
+    - turn: 3
       taskType: 2
-    - turn: 0
+    - turn: 3
       taskType: 2
-    - turn: 2
+    - turn: 4
+      taskType: 0
+    - turn: 5
       taskType: 3
-    envi: 0
+    - turn: 5
+      taskType: 9
+    envi: 1
   - tasks:
     - turn: 0
       taskType: 0
@@ -229,7 +277,7 @@ MonoBehaviour:
       taskType: 1
     - turn: 3
       taskType: 3
-    envi: 0
+    envi: 1
   - tasks:
     - turn: 0
       taskType: 6
@@ -237,6 +285,22 @@ MonoBehaviour:
       taskType: 6
     - turn: 3
       taskType: 0
+    - turn: 3
+      taskType: 0
+    - turn: 3
+      taskType: 2
+    - turn: 3
+      taskType: 2
+    - turn: 4
+      taskType: 3
+    envi: 1
+  - tasks:
+    - turn: 6
+      taskType: 6
+    - turn: 6
+      taskType: 6
+    - turn: 3
+      taskType: 9
     - turn: 3
       taskType: 1
     - turn: 3
@@ -245,23 +309,7 @@ MonoBehaviour:
       taskType: 2
     - turn: 4
       taskType: 3
-    envi: 0
-  - tasks:
-    - turn: 0
-      taskType: 6
-    - turn: 1
-      taskType: 6
-    - turn: 3
-      taskType: 9
-    - turn: 3
-      taskType: 1
-    - turn: 3
-      taskType: 2
-    - turn: 3
-      taskType: 2
-    - turn: 4
-      taskType: 3
-    envi: 0
+    envi: 1
   - tasks:
     - turn: 0
       taskType: 0
@@ -279,7 +327,7 @@ MonoBehaviour:
       taskType: 0
     - turn: 4
       taskType: 3
-    envi: 0
+    envi: 2
   - tasks:
     - turn: 0
       taskType: 5
@@ -293,25 +341,11 @@ MonoBehaviour:
       taskType: 5
     - turn: 0
       taskType: 5
-    - turn: 0
+    - turn: 2
       taskType: 5
     - turn: 4
       taskType: 3
-    envi: 0
-  - tasks:
-    - turn: 0
-      taskType: 9
-    - turn: 0
-      taskType: 9
-    - turn: 0
-      taskType: 9
-    - turn: 0
-      taskType: 9
-    - turn: 2
-      taskType: 0
-    - turn: 2
-      taskType: 3
-    envi: 0
+    envi: 2
   - tasks:
     - turn: 0
       taskType: 9
@@ -325,7 +359,7 @@ MonoBehaviour:
       taskType: 3
     - turn: 2
       taskType: 3
-    envi: 0
+    envi: 2
   - tasks:
     - turn: 0
       taskType: 9
@@ -339,7 +373,7 @@ MonoBehaviour:
       taskType: 3
     - turn: 2
       taskType: 3
-    envi: 0
+    envi: 2
   _mobileCamera: {fileID: 0}
   _pcCamera: {fileID: 0}
 --- !u!1001 &607210388675757995

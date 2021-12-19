@@ -110,7 +110,7 @@ namespace Core.Entities
         {
             _animator.SetBool("Flying",true);
             int i = 1;
-            transform.DOMoveY(yValue, 0.3f).OnComplete(()=> i = 0);
+            transform.DOMoveY(yValue, 0.6f).OnComplete(()=> i = 0);
             yield return new WaitUntil(() => i == 0);
             _animator.SetBool("Flying",false);
         }
