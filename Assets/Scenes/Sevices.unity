@@ -486,8 +486,22 @@ MonoBehaviour:
   - {fileID: 1394584671}
   obj:
   - {fileID: 2712044866565607552, guid: e190235e9c834634a9b7cab1cff90d61, type: 3}
+  - {fileID: -337460968937002296, guid: 835e995dd90218f48945e95b366f0802, type: 3}
+  - {fileID: 3235498240630013834, guid: ffd077b1b7ba0e94c8d25443c7eafe25, type: 3}
+  - {fileID: 7657727484612885032, guid: 59b7e7ebd6cc3b0459d07e1412a59c95, type: 3}
+  - {fileID: -5379332851647448467, guid: fd29d76648601df409e0b60abda4ee45, type: 3}
+  - {fileID: 633276712710708279, guid: fd927c3e45c77444fb9267d6c786d22b, type: 3}
+  - {fileID: 7041972608335647726, guid: 7843a2f511a495a4eac148f23cadfaf0, type: 3}
+  - {fileID: 3126754948226359098, guid: 981e0b3766aaf42479469474c17ea811, type: 3}
   objImage:
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 5423bd72ca95e664ca1595732f76e815, type: 3}
+  - {fileID: 21300000, guid: 08633c235e292824d9ddf9ff5ff73889, type: 3}
+  - {fileID: 21300000, guid: 7a76e0d2b2b0990459fd6618f8e96a6a, type: 3}
+  - {fileID: 21300000, guid: 0100c75061bc46b44b705745de39b049, type: 3}
+  - {fileID: 21300000, guid: eab26fc9a60017141a661a2cdbf972ba, type: 3}
+  - {fileID: 21300000, guid: 46f8ed97fa5ac7f428c661f5c871fd1a, type: 3}
+  - {fileID: 21300000, guid: 382ece2349e0b3d4ca7dfc94c9e60766, type: 3}
+  - {fileID: 21300000, guid: 8f574ba07d242e54f9c067f2ca7184d8, type: 3}
 --- !u!4 &733355313
 Transform:
   m_ObjectHideFlags: 0
