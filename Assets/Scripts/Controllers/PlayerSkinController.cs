@@ -1,10 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 public class PlayerSkinController : MonoBehaviour
 {
+    [Header("CoreGO")]
+    [SerializeField] private GameObject[] _coreGO;
     [Header("Head")]
     [SerializeField] private GameObject[] _allHeadSkins;
     [SerializeField] private PlayerSkinSet[] _headSets;
@@ -18,9 +19,13 @@ public class PlayerSkinController : MonoBehaviour
     private string _headSetKey = "HeadSet";
     private string _bodySetKey = "BodySet";
 
+    private RealTimeSkinnedMeshBaker _realtimeBaker;
+    private List<GameObject> _objectsForBake = new List<GameObject>();
+
 
     private void Awake()
     {
+        _realtimeBaker = GetComponentInChildren<RealTimeSkinnedMeshBaker>();
         LoadSkinPreset();
     }
 
@@ -38,6 +43,11 @@ public class PlayerSkinController : MonoBehaviour
 
         ChangeHeadSkin(_currentHeadSet);
         ChangeBodySkin(_currentBodySet);
+
+        _objectsForBake.Clear();
+        _objectsForBake.AddRange(_headSets[_currentHeadSet].SkinSet);
+        _objectsForBake.AddRange(_bodySets[_currentBodySet].SkinSet);
+        StartCoroutine(_realtimeBaker.StartBaking(_objectsForBake.ToArray()));
     }
 
     private void ChangeHeadSkin(int id)
