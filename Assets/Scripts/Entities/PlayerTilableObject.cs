@@ -44,6 +44,7 @@ namespace Core.Entities
 
             yield return null;
             SetBox(TileController.Instance.Center);
+            _health = _healthMax;
             UpdateHealthUi();
             
         }

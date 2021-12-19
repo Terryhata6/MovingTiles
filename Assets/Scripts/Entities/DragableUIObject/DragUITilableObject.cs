@@ -117,10 +117,15 @@ namespace Core
         public void ChangeChargesAmount(int charge)
         {
             _charges += charge;
+            if (charge.Equals(0))
+            {
+                _charges = 0;
+            }
             if (_charges <= 0)
             {
                 EnableImage(false);
             }
+            
         }
 
         public void EnableImage(bool trueOrFalse)
