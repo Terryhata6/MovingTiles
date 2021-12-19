@@ -57,15 +57,15 @@ namespace Core.Entities
                 DeactivateRagdoll();
             }
 
-            if (Random.Range(0, 6) > 2)
+            if (Random.Range(0, 7) > 5)
             {
-                if (Random.Range(0, 6) > 2)
+                if (Random.Range(0, 7) > 5)
                 {
-                    SetWeapon(3);
+                    SetWeapon(2);
                 }
                 else
                 {
-                    SetWeapon(2);
+                    SetWeapon(1);
                 }
             }
 
