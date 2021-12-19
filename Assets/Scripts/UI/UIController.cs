@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
 using Core;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    [Header("Debug")]
+    [SerializeField] private Button _buttonResetPrefs;
+
     private List<BaseMenuView> _menues = new List<BaseMenuView>();
 
 
@@ -21,7 +25,7 @@ public class UIController : MonoBehaviour
 
     private void Start()
     {
-        
+        _buttonResetPrefs.onClick.AddListener(() => PlayerPrefs.DeleteAll());
     }
 
     private void OpenGameMenu(LevelController controller)
