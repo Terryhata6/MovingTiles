@@ -54,7 +54,7 @@ namespace Core.Entities
         public override IEnumerator DestroyAnimation()
         {
             TilableObjectsController.Instance.RemoveObjectFromList(this);
-            //TODO Destroy Death Animation
+            //Destroy Death Animation
             Debug.Log("Открытие двери, конец уровня");
             yield break;
         }

@@ -1000,6 +1000,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f64a2d89187b904885ccee083b3b945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _coreGO:
+  - {fileID: 899078652314386531}
+  - {fileID: 1588852352589573314}
+  - {fileID: 4450361147053872721}
+  - {fileID: 4874521032459280248}
   _allHeadSkins:
   - {fileID: 6050233607708932423}
   - {fileID: 4093343100654118491}
