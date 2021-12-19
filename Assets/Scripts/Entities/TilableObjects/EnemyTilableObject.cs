@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using MoreMountains.Feedbacks;
 using UnityEngine;
@@ -14,24 +16,69 @@ namespace Core.Entities
         private int _health;
 
         [SerializeField] private MMFeedbacks _mmFeedbacks;
-        [SerializeField] private float BaseDamage = 1f;
+        [SerializeField] private float _baseDamage = 1f;
+        [SerializeField] private float _damage = 1f;
         [SerializeField] private Animator _animator;
         [SerializeField] private GameObject[] _weapons;
         [SerializeField] private bool _needBakeMesh = false;
         [SerializeField] private RealTimeSkinnedMeshBaker _baker;
-        public int Health => _health;
+        
+        [SerializeField] private bool _haveRagdall = false;
+        [SerializeField] private List<Rigidbody> _rigs;
+        [SerializeField] private List<Collider> _colliders;
         private bool _endAttack = false;
+        public int Health => _health;
+        public float Damage => _damage;
 
         public override void Awake()
         {
             base.Awake();
             _animator = GetComponentInChildren<Animator>();
+            if (_haveRagdall)
+            {
+                _rigs = GetComponentsInChildren<Rigidbody>().ToList();
+                _colliders = GetComponentsInChildren<Collider>().ToList();
+                DeactivateRagdoll();
+            }
+        }
+
+        public void ActivateRagdoll()
+        {
+            if (!_haveRagdall)
+                return;
+            _animator.enabled = false;
+            for (int i = 0; i < _rigs.Count; i++)
+            {
+                _rigs[i].isKinematic = false;
+                _rigs[i].useGravity = true;
+            }
+            for (int i = 0; i < _colliders.Count; i++)
+            {
+                _colliders[i].isTrigger = false;
+            }
+        }
+
+        public void DeactivateRagdoll()
+        {
+            if (!_haveRagdall)
+                return;
+            _animator.enabled = true;
+            for (int i = 0; i < _rigs.Count; i++)
+            {
+                _rigs[i].isKinematic = true;
+                _rigs[i].useGravity = false;
+            }
+            for (int i = 0; i < _colliders.Count; i++)
+            {
+                _colliders[i].isTrigger = true;
+            }
         }
 
         public void SetWeapon(int damage)
         {
             int result = Random.Range(0, _weapons.Length);
-            //Ramdomise weapons??
+            _weapons[result].SetActive(true);
+            
         }
 
         public void EndAttack()
@@ -46,7 +93,7 @@ namespace Core.Entities
                 _animator.SetTrigger("Attack");
                 yield return new WaitUntil(() => _endAttack);
                 _endAttack = false;
-                (box.TiledObject as PlayerTilableObject).GetDamage(BaseDamage, this);
+                (box.TiledObject as PlayerTilableObject).GetDamage(Damage, this);
                 /*
                 for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
                 {
@@ -118,9 +165,20 @@ namespace Core.Entities
             TilableObjectsController.Instance.RemoveObjectFromList(this);
             //TODO Destroy Death Animation
             StartCoroutine(EncauntersHolder.Instance.CreateDropFromkKilledEnemy(transform.position));
-            yield return null;
-            Destroy(this.gameObject);
-            yield break;
+            if (_haveRagdall)
+            {
+                ActivateRagdoll();
+                foreach (var rig in _rigs)
+                {
+                    rig.AddForce(transform.forward * -3f + transform.up * 15f, ForceMode.Impulse);   
+                }
+                yield return new WaitForSeconds(2f);
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                transform.DOMoveY(-4f, 2f).OnComplete(() => Destroy(this.gameObject));
+            }
         }
 
         public UnityAction End;

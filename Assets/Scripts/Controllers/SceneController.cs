@@ -119,9 +119,7 @@ namespace Core
             {
                 UIEvents.Instance.OnButtonStartGame -= _currentLevelController.LevelStart;
             }
-            var currentLevelNumber = GetLevelNumber();
-            SceneManager.UnloadSceneAsync(_scenes[currentLevelNumber]);
-            LoadLevelScene(currentLevelNumber);
+            LoadLevelScene(GetLevelNumber());
         }
         
         public void LoadNextScene()
@@ -132,7 +130,6 @@ namespace Core
             }
 
             var currentLevelNumber = GetLevelNumber();
-            /*SceneManager.UnloadSceneAsync(_scenes[currentLevelNumber]);*/
             currentLevelNumber += 1;
             SetLevelNumber(currentLevelNumber);
             LoadLevelScene(currentLevelNumber);
