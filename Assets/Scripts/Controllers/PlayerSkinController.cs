@@ -26,9 +26,14 @@ public class PlayerSkinController : MonoBehaviour
     private void Awake()
     {
         _realtimeBaker = GetComponentInChildren<RealTimeSkinnedMeshBaker>();
+    }
+
+    private void Start()
+    {
         if (SceneManager.GetActiveScene().name == "CharacterSelect")
         {
             LoadSkinPreset(false);
+            EnviermentController.Instance.DeactivateAll();
         }
         else
         {

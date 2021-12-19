@@ -16,6 +16,14 @@ public class EnviermentController : Singleton<EnviermentController>
         }
     }
 
+    public void DeactivateAll()
+    {
+        foreach (var set in GOSets)
+        {
+            set.DeactivateSet();
+        }
+    }
+
     public void ActivateSet(EnviSetType setTypeType)
     {
         int index;
