@@ -193,6 +193,16 @@ MonoBehaviour:
   - tasks:
     - turn: 0
       taskType: 3
+    - turn: 5
+      taskType: 10
+    - turn: 5
+      taskType: 10
+    - turn: 5
+      taskType: 10
+    - turn: 5
+      taskType: 10
+    - turn: 5
+      taskType: 10
     envi: 0
   - tasks:
     - turn: 0
@@ -206,9 +216,13 @@ MonoBehaviour:
     - turn: 0
       taskType: 9
     - turn: 2
+      taskType: 2
+    - turn: 2
       taskType: 0
     - turn: 2
       taskType: 3
+    - turn: 4
+      taskType: 8
     envi: 0
   - tasks:
     - turn: 0
@@ -230,18 +244,22 @@ MonoBehaviour:
     - turn: 1
       taskType: 4
     - turn: 2
-      taskType: 10
-    - turn: 4
+      taskType: 1
+    - turn: 2
       taskType: 0
-    - turn: 4
+    - turn: 3
       taskType: 3
+    - turn: 6
+      taskType: 7
     envi: 1
   - tasks:
     - turn: 0
-      taskType: 2
-    - turn: 0
+      taskType: 10
+    - turn: 3
       taskType: 2
     - turn: 3
+      taskType: 2
+    - turn: 4
       taskType: 0
     - turn: 5
       taskType: 3
@@ -268,7 +286,7 @@ MonoBehaviour:
     - turn: 3
       taskType: 0
     - turn: 3
-      taskType: 1
+      taskType: 0
     - turn: 3
       taskType: 2
     - turn: 3
@@ -277,9 +295,9 @@ MonoBehaviour:
       taskType: 3
     envi: 1
   - tasks:
-    - turn: 0
+    - turn: 6
       taskType: 6
-    - turn: 1
+    - turn: 6
       taskType: 6
     - turn: 3
       taskType: 9

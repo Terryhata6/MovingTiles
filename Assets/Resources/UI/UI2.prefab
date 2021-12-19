@@ -61,7 +61,7 @@ MonoBehaviour:
   MinimumBarFillValue: 0
   MaximumBarFillValue: 1
   SetInitialFillValueOnStart: 0
-  InitialFillValue: 0.2
+  InitialFillValue: 1
   BarDirection: 0
   FillMode: 0
   TimeScale: 0

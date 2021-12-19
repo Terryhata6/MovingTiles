@@ -203,6 +203,7 @@ namespace Core.Entities
 
         public IEnumerator TryMoveToBox(TileBox box, Action endAnimationCallBack, TurnState state)
         {
+            gameObject.SendMessage("CallSpecialRareInteraction",SendMessageOptions.DontRequireReceiver);
             if (this.gameObject == null)
             {
                 endAnimationCallBack.Invoke();

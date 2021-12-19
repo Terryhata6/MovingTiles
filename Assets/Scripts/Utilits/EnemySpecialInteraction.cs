@@ -24,6 +24,26 @@ public class EnemySpecialInteraction : MonoBehaviour
                     });
                 //TODO FeedBack OpeningDoor
                 break;
+            case "Enemy":
+            {
+                SoundController.Instance.SendText(this.transform, "HAHAHAHAH");
+                break;
+            }
+            default:
+                break;
+        }
+    }
+    public void CallSpecialRareInteraction()
+    {
+        switch (_interactionConfig)
+        {
+            case "Mimic":
+                break;
+            case "Enemy":
+            {
+                SoundController.Instance.SendText(this.transform, "ha");
+                break;
+            }
             default:
                 break;
         }

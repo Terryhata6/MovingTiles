@@ -3165,6 +3165,7 @@ GameObject:
   - component: {fileID: 9117729478450376680}
   - component: {fileID: -337460968937002296}
   - component: {fileID: -7621308513478277078}
+  - component: {fileID: 5393255721164010650}
   m_Layer: 0
   m_Name: Ork Baked
   m_TagString: Untagged
@@ -3272,6 +3273,21 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
   DebugActive: 0
+--- !u!114 &5393255721164010650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8485764711752938834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e47592f26b2454298997a8a396d1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionTarget: {fileID: 0}
+  _interactionTarget2: {fileID: 0}
+  _interactionConfig: Enemy
 --- !u!1 &8504792014619268617
 GameObject:
   m_ObjectHideFlags: 0
