@@ -26,6 +26,7 @@ namespace Core
         public void Awake()
         {
             _draggingObjectRectTransform = transform as RectTransform;
+            _image.enabled = false;
         }
 
 
@@ -40,9 +41,12 @@ namespace Core
             if (tilableObjectExmple != null)
             {
                 _tilableObjectExmple = tilableObjectExmple;
+                _image.sprite = image.sprite;
                 _tilableObjectInstance =
-                    Instantiate(tilableObjectExmple, transform.position, Quaternion.identity, transform);
+                    TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
                 _tilableObjectInstance.gameObject.SetActive(false);
+                _image.enabled = true;
+                _charges += 1;
             }
         }
 
@@ -107,6 +111,10 @@ namespace Core
                     Instantiate(_tilableObjectExmple.gameObject, transform).GetComponent<TilableObject>();
                 _tilableObjectInstance.gameObject.SetActive(false);
                 _charges--;
+                if (_charges <= 0)
+                {
+                    _image.enabled = false;
+                }
             }
         }
     }

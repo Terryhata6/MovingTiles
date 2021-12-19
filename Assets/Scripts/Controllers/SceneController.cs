@@ -64,7 +64,11 @@ namespace Core
         private void Awake()
         {
             DontDestroyOnLoad(this);
-        }
+            for (int i = 0; i < draggableUi.Length; i++)
+            {
+                draggableUi[i].gameObject.SetActive(true);
+            }
+    }
 
         private void Start()
         {
