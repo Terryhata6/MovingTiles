@@ -14,6 +14,7 @@ public class InGameUIView : BaseMenuView
     [Header("Elements")]
     [SerializeField] private Button _buttonPause;
     [SerializeField] private TextMeshProUGUI _textLevelNumber;
+    [SerializeField] private Button _buttonTutorial;
 
     [SerializeField] private MMProgressBar _healthBar;
     private UIController _uiController;
@@ -50,7 +51,20 @@ public class InGameUIView : BaseMenuView
         _panel.gameObject.SetActive(true);
         IsShow = true;
 
-        _textLevelNumber.text = $"LEVEL {PlayerPrefs.GetInt("CurrentZone")}";
+        var levelNumber = PlayerPrefs.GetInt("CurrentZone");
+        _textLevelNumber.text = $"LEVEL {levelNumber}";
+
+        if (levelNumber == 1)
+        {
+            _buttonTutorial.gameObject.SetActive(true);
+            _buttonTutorial.onClick.AddListener(() => CloseTutorial());
+        }
+    }
+
+    private void CloseTutorial()
+    {
+        _buttonTutorial.onClick.RemoveAllListeners();
+        _buttonTutorial.gameObject.SetActive(false);
     }
 
     public void SetHp(float currentValue, float minValue, float maxValue)
