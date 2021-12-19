@@ -64,12 +64,13 @@ namespace Core.UtilitsSpace
                 {
                     TilableObjectsController.Instance.AddObjectToList(value as TilableObject);
                 }));
+                onEndSpawningCallback?.Invoke();
             }
             else
             {
                 GameObject.Destroy(_playerSkill.gameObject);
             }
-            onEndSpawningCallback?.Invoke();
+            
         }
 
         public void CheckTile(TileBox tile, out bool skillCanSnap)

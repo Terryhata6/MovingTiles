@@ -165,13 +165,13 @@ namespace Core
         #endregion
         #region playerPerk 
 
-        public void SpawnBuilding(Action forEachCall, Action onEndSpawningCallback) //eNTER-ALT
+
+        public TilableObject SpawnSkill(TilableObject skillExample) //eNTER-ALT
         {
-            forEachCall?.Invoke();
             _tempPos = InputController.Instance.TouchPosition();
-            _enemy = Instantiate(_tempBuilding.gameObject, _tempPos,
+            _enemy = Instantiate(skillExample.gameObject, _tempPos,
                 Quaternion.identity,transform).GetComponent<TilableObject>();
-            StartCoroutine(_pointer.PointSkill(_enemy, onEndSpawningCallback));
+            return _enemy;
         }
         
         #endregion //enter-alt
