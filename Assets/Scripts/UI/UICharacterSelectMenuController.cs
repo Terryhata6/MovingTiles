@@ -29,6 +29,8 @@ public class UICharacterSelectMenuController : MonoBehaviour
 
 
         _skinController = FindObjectOfType<PlayerSkinController>();
+
+        
     }
 
     private void SaveAndContinue()
@@ -36,6 +38,7 @@ public class UICharacterSelectMenuController : MonoBehaviour
         //TODO
         //Change scene
         _skinController.SaveSkinPreset();
+        UIEvents.Instance.ButtonNextLevel();
     }
 
     private void HeadRight()
