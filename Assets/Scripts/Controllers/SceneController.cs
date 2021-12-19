@@ -48,25 +48,40 @@ namespace Core
 
         public void GetNewDraggableObject()
         {
+            var j = Random.Range(0, obj.Length);
             for (int i = 0; i < draggableUi.Length; i++)
             {
                 if (draggableUi[i].ItsFree)
                 {
-                    var j = Random.Range(0, obj.Length);
                     if (obj[j] != null && objImage[j] != null)
                     {
                         draggableUi[i].SetNewObject(objImage[j], obj[j]);
                     }
-
+                    return;
+                    
+                }
+                else if (draggableUi[i].CompareObject(obj[j]))
+                {
+                    draggableUi[i].ChangeChargesAmount(+1);
                     return;
                 }
             }
+            if (obj[j] != null && objImage[j] != null)
+            {
+                draggableUi[0].SetNewObject(objImage[j], obj[j]);
+            }
+            
+            
         }
 
         private void Awake()
         {
             DontDestroyOnLoad(this);
-        }
+            for (int i = 0; i < draggableUi.Length; i++)
+            {
+                draggableUi[i].gameObject.SetActive(true);
+            }
+    }
 
         private void Start()
         {

@@ -26,6 +26,7 @@ namespace Core
         public void Awake()
         {
             _draggingObjectRectTransform = transform as RectTransform;
+            EnableImage(false);
         }
 
 
@@ -40,9 +41,12 @@ namespace Core
             if (tilableObjectExmple != null)
             {
                 _tilableObjectExmple = tilableObjectExmple;
+                _image.sprite = image.sprite;
                 _tilableObjectInstance =
-                    Instantiate(tilableObjectExmple, transform.position, Quaternion.identity, transform);
+                    TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
                 _tilableObjectInstance.gameObject.SetActive(false);
+                EnableImage(true);
+                ChangeChargesAmount(+1);
             }
         }
 
@@ -68,7 +72,7 @@ namespace Core
                             StartCoroutine(
                                 TilableObjectsController.Instance.Pointer.PointSkill(_tilableObjectInstance,
                                     SpawnOrNotSpawnCallBack));
-                            _image.enabled = false;
+                            EnableImage(false);
                         }
                     }
                 }
@@ -77,7 +81,7 @@ namespace Core
 
         private void SpawnOrNotSpawnCallBack()
         {
-            Debug.Log("SpawnOrNotSpawnCallBack");
+            ChangeChargesAmount(-1);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -101,13 +105,33 @@ namespace Core
             {
                 _tilableObjectInstance.transform.parent = TileController.Instance.transform;
                 _startCheckingTilable = false;
-                _image.enabled = true;
+                EnableImage(true);
                 _draggingObjectRectTransform.position = _beginPosition;
                 _tilableObjectInstance =
-                    Instantiate(_tilableObjectExmple.gameObject, transform).GetComponent<TilableObject>();
+                    TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
                 _tilableObjectInstance.gameObject.SetActive(false);
-                _charges--;
+
             }
+        }
+
+        public void ChangeChargesAmount(int charge)
+        {
+            _charges += charge;
+            if (_charges <= 0)
+            {
+                EnableImage(false);
+            }
+        }
+
+        public void EnableImage(bool trueOrFalse)
+        {
+            _image.enabled = trueOrFalse;
+        }
+
+        public bool CompareObject(TilableObject obj)
+        {
+            Debug.Log(_tilableObjectExmple.Equals(obj));
+            return _tilableObjectExmple.Equals(obj);
         }
     }
 }
