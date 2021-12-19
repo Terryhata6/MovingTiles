@@ -20,6 +20,7 @@ namespace Core
         public void OnDeath()
         {
             SavePlayerData(_defaultBaseHp, _defaultBaseHp, -1, 0, 0);
+            SceneController.Instance.SetLevelNumber(-1);
         }
 
         public void SavePlayerData(float hp, float maxHp, int currentWeapon, int charges, int weaponDamage)
@@ -37,7 +38,7 @@ namespace Core
             maxHp = PlayerPrefs.GetFloat("StatsPlayerMaxHp", _defaultBaseHp);
             currentWeapon = PlayerPrefs.GetInt("StatsCurrentWeapon", -1);
             charges = PlayerPrefs.GetInt("StatsCharges", 0);
-            weaponDamage = PlayerPrefs.GetInt("StatsCurrentWeaponDamage", 0);
+            weaponDamage = PlayerPrefs.GetInt("StatsCurrentWeaponDamage", 1);
         }
 
         public void SaveCurrentZone(int currentZone)

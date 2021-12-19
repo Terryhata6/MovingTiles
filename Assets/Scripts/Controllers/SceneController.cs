@@ -14,6 +14,8 @@ namespace Core
 {
     public class SceneController : Singleton<SceneController>
     {
+        [SerializeField] private string _characterSelectScene;
+        [SerializeField] private string _endScene;
         [SerializeField] private List<string> _scenes;
         [SerializeField] private bool LevelDebug = false;
         [SerializeField] private LevelController _currentLevelController;
@@ -81,7 +83,7 @@ namespace Core
             
             if (!LevelDebug)
             {
-                LoadLevelScene(_scenes[GetLevelNumber()]);
+                LoadLevelScene(GetLevelNumber());
             }
             else
             {
@@ -92,10 +94,11 @@ namespace Core
 
         public int GetLevelNumber()
         {
-            var currentLevelNumber = PlayerPrefs.GetInt("PlayerLevel", defaultValue:0);
+            var currentLevelNumber = PlayerPrefs.GetInt("CurrentZone", defaultValue:-1);
+
             if (currentLevelNumber >= _scenes.Count)
             {
-                currentLevelNumber = 0;
+                currentLevelNumber = -1; //todo change to EndScene
                 SetLevelNumber(currentLevelNumber);
             }
             return currentLevelNumber;
@@ -107,7 +110,7 @@ namespace Core
             {
                 number = 0;
             }
-            PlayerPrefs.SetInt("PlayerLevel", number);
+            PlayerPrefs.SetInt("CurrentZone", number);
         }
 
         public void ReloadScene()
@@ -118,7 +121,7 @@ namespace Core
             }
             var currentLevelNumber = GetLevelNumber();
             SceneManager.UnloadSceneAsync(_scenes[currentLevelNumber]);
-            LoadLevelScene(_scenes[currentLevelNumber]);
+            LoadLevelScene(currentLevelNumber);
         }
         
         public void LoadNextScene()
@@ -132,20 +135,31 @@ namespace Core
             /*SceneManager.UnloadSceneAsync(_scenes[currentLevelNumber]);*/
             currentLevelNumber += 1;
             SetLevelNumber(currentLevelNumber);
-            LoadLevelScene(_scenes[GetLevelNumber()]);
+            LoadLevelScene(currentLevelNumber);
         }
 
         public delegate void method(Scene scene, LoadSceneMode mode); 
-        public void LoadLevelScene(string sceneName)
+        public void LoadLevelScene(int sceneNumber)
         {
-            //SceneManager.LoadScene(sceneName,LoadSceneMode.Additive);
-            //SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) => FindLevelController();
+            string sceneName;
+            if (sceneNumber == -1)
+            {
+                sceneName = _characterSelectScene;
+            }
+            else
+            {
+                if (sceneNumber < _scenes.Count)
+                {
+                    sceneName = _scenes[sceneNumber];
+                }
+                else
+                {
+                    sceneName = _endScene;
+                }
+            }
             _loader.DestinationSceneName = sceneName;
-            //_loader.Play(Vector3.zero);
             _MMFeedBacks.PlayFeedbacks();
-            //FindObjectOfType<MMAdditiveSceneLoadingManager>().OnLoadTransitionComplete.AddListener(FindLevelController);
             GameEvents.Instance.OnLoadNewLevelController += FindLevelController;
-
         }
 
         public void FindLevelController(LevelController controller)
