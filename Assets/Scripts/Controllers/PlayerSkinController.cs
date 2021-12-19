@@ -1,3 +1,4 @@
+using Core;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,6 +35,7 @@ public class PlayerSkinController : MonoBehaviour
         {
             LoadSkinPreset(false);
             EnviermentController.Instance.DeactivateAll();
+            GameEvents.Instance.HideLevelUI();
         }
         else
         {
