@@ -66,7 +66,7 @@ namespace Core
         {
             if (_eventSystem.IsPointerOverGameObject())
             {
-                Debug.Log($"PointerOverGameObject");
+                //Debug.Log($"TouchStartOnUI");
             }
             else
             {
@@ -78,7 +78,7 @@ namespace Core
         {
             if (_eventSystem.IsPointerOverGameObject())
             {
-                Debug.Log($"Selecting");
+                //Debug.Log($"TouchendOnUi");
             }
             else
             {

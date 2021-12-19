@@ -61,7 +61,7 @@ namespace Core
 
             while (!_gameEnd)
             {
-                Debug.Log($"Начало Цикла, end of turn {_endTurn}");
+                //Debug.Log($"Начало Цикла, end of turn {_endTurn}");
                 yield return new WaitForSeconds(0.5f);
                 yield return new WaitUntil(() => _endTurn);
                 _endTurn = false;
@@ -71,16 +71,16 @@ namespace Core
                     case TurnState.Player:
                     {
                         _currentTurnState = TurnState.Enemy;   //start enemy turn
-                        Debug.Log($"Сейчас ход {_currentTurnState}");
+                        //Debug.Log($"Сейчас ход {_currentTurnState}");
                         StartCoroutine(TilableObjectsController.Instance.ExecuteEnemiesSkills()); //Движения врагов
                         
                         if (turnTasks.ContainsKey(TurnNumber))
                         {
                             _currentTasksNum = 0;
-                            Debug.Log($"Release tasks from turn {TurnNumber}");
+                            //Debug.Log($"Release tasks from turn {TurnNumber}");
                             turnTasks[TurnNumber]?.Invoke(() => _currentTasksNum++, () => _currentTasksNum--);
                             yield return new WaitUntil(() =>  _currentTasksNum == 0);
-                            Debug.Log($"tasks from turn {TurnNumber} done");
+                            //Debug.Log($"tasks from turn {TurnNumber} done");
                             turnTasks.Remove(TurnNumber);
                         }
                         break;
@@ -89,13 +89,13 @@ namespace Core
                     {
                         _currentTurnState = TurnState.Player; //start player turn
                         InputController.Instance.OnGetSwipe += GetSwipe;
-                        Debug.Log($"Сейчас ход {_currentTurnState}");
+                        //Debug.Log($"Сейчас ход {_currentTurnState}");
                         _turnNumber++;
                         
                         break;
                     }
                 }
-                Debug.Log($"Конец Цикла");
+                //Debug.Log($"Конец Цикла");
             }
             //todo endGame animations
         }

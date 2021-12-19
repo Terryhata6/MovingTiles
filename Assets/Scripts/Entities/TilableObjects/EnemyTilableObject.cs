@@ -34,7 +34,6 @@ namespace Core.Entities
         public void EndAttack()
         {
             _endAttack = true;
-            Debug.LogWarning("PlayerEndAttack");
         }
 
         protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
