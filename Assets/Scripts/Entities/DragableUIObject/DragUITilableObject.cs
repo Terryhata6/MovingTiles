@@ -30,7 +30,7 @@ namespace Core
         }
 
 
-        public void SetNewObject(Image image,TilableObject tilableObjectExmple)
+        public void SetNewObject(Sprite image,TilableObject tilableObjectExmple)
         {
             
             if (_tilableObjectInstance != null)
@@ -41,7 +41,7 @@ namespace Core
             if (tilableObjectExmple != null)
             {
                 _tilableObjectExmple = tilableObjectExmple;
-                _image.sprite = image.sprite;
+                _image.sprite = image;
                 _tilableObjectInstance =
                     TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
                 _tilableObjectInstance.gameObject.SetActive(false);
