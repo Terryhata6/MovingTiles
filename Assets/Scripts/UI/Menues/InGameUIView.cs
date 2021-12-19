@@ -13,6 +13,7 @@ public class InGameUIView : BaseMenuView
 
     [Header("Elements")]
     [SerializeField] private Button _buttonPause;
+    [SerializeField] private TextMeshProUGUI _textLevelNumber;
 
     [SerializeField] private MMProgressBar _healthBar;
     private UIController _uiController;
@@ -48,6 +49,8 @@ public class InGameUIView : BaseMenuView
         #endregion
         _panel.gameObject.SetActive(true);
         IsShow = true;
+
+        _textLevelNumber.text = $"LEVEL {PlayerPrefs.GetInt("CurrentZone")}";
     }
 
     public void SetHp(float currentValue, float minValue, float maxValue)
