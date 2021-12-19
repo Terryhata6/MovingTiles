@@ -160,11 +160,11 @@ namespace Core
             if (sceneNumber < _scenes.Count)
             {
                 sceneName = _scenes[sceneNumber];
-                SetLevelNumber(0);
             }
             else
             {
                 sceneName = _endScene;
+                SetLevelNumber(0);
             }
             _loader.DestinationSceneName = sceneName;
             _MMFeedBacks.PlayFeedbacks();
