@@ -5980,7 +5980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tilableObjectInstance: {fileID: 0}
   _tilableObjectExmple: {fileID: 8561278448641487205, guid: 19ca54ca5da88394097a9ba0f0ac4de5, type: 3}
-  _charges: 229
+  _charges: 0
   dampingSpeed: 0.05
   _image: {fileID: 7985387785511539050}
 --- !u!1 &8116722351605215642
@@ -6073,7 +6073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tilableObjectInstance: {fileID: 0}
   _tilableObjectExmple: {fileID: 8561278448641487205, guid: 19ca54ca5da88394097a9ba0f0ac4de5, type: 3}
-  _charges: 229
+  _charges: 0
   dampingSpeed: 0.05
   _image: {fileID: 2304057391553881479}
 --- !u!1 &8264530707470492126
@@ -6366,7 +6366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tilableObjectInstance: {fileID: 0}
   _tilableObjectExmple: {fileID: 2712044866565607552, guid: e190235e9c834634a9b7cab1cff90d61, type: 3}
-  _charges: 229
+  _charges: 0
   dampingSpeed: 0.05
   _image: {fileID: 8951333735519310703}
 --- !u!1 &8951333735746164449

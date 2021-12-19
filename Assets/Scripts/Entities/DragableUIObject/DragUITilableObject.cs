@@ -42,8 +42,8 @@ namespace Core
             {
                 _tilableObjectExmple = tilableObjectExmple;
                 _image.sprite = image;
-                _tilableObjectInstance =
-                    TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
+                _tilableObjectInstance = Instantiate(_tilableObjectExmple.gameObject, transform.position,
+                    Quaternion.identity,transform).GetComponent<TilableObject>();
                 _tilableObjectInstance.gameObject.SetActive(false);
                 EnableImage(true);
                 AddCharge(1);
@@ -107,10 +107,10 @@ namespace Core
                 _startCheckingTilable = false;
                 EnableImage(true);
                 _draggingObjectRectTransform.position = _beginPosition;
-                _tilableObjectInstance =
-                    TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
+                _tilableObjectInstance = Instantiate(_tilableObjectExmple.gameObject, transform.position,
+                                Quaternion.identity,transform).GetComponent<TilableObject>();
                 _tilableObjectInstance.gameObject.SetActive(false);
-
+                _tilableObjectInstance.transform.SetParent(transform);
             }
         }
 
@@ -136,16 +136,6 @@ namespace Core
             if (charge > 0)
             {
                 ChangeChargesAmount(_charges-charge);
-            }
-        }
-        
-        public void Restart()
-        {
-            if (_tilableObjectExmple)
-            {
-                _tilableObjectInstance =
-                    TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
-                _tilableObjectInstance.gameObject.SetActive(false);
             }
         }
 

@@ -74,14 +74,6 @@ namespace Core
             }
         }
 
-        public void RestartDragableObjects()
-        {
-            for (int i = 0; i < draggableUi.Length; i++)
-            {
-                draggableUi[i].Restart();
-            }
-        }
-
         private void Awake()
         {
             DontDestroyOnLoad(this);
@@ -94,9 +86,7 @@ namespace Core
         private void Start()
         {
             UIEvents.Instance.OnButtonNextLevel += LoadNextScene;
-            UIEvents.Instance.OnButtonNextLevel += RestartDragableObjects;
             GameEvents.Instance.OnRestartLevel += ReloadScene;
-            GameEvents.Instance.OnRestartLevel += RestartDragableObjects;
             GameEvents.Instance.OnGetDraggableDrop += GetNewDraggableObject;
 
             _MMFeedBacks = GetComponent<MMFeedbacks>();
