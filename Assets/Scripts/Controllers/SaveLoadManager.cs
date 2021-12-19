@@ -49,7 +49,7 @@ namespace Core
 
         public void GetCurrentZone(out int currentZone)
         {
-            CurrentZone = PlayerPrefs.GetInt("CurrentZone", -1);
+            CurrentZone = PlayerPrefs.GetInt("CurrentZone", 0);
             currentZone = CurrentZone;
         }
 

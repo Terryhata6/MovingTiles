@@ -45,7 +45,7 @@ namespace Core.Entities
 
         public override IEnumerator SpawnAnimation(Action<BaseTilableObject> OnEndSpawn)
         {
-            transform.DOMoveY(_currentTileBox.transform.position.y + 0.5f, 0.2f)
+            transform.DOMoveY(_currentTileBox.transform.position.y, 0.2f)
                 .OnComplete(() => OnEndSpawn.Invoke(this));
 
             yield break;
