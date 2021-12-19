@@ -37,7 +37,7 @@ namespace Core
             maxHp = PlayerPrefs.GetFloat("StatsPlayerMaxHp", _defaultBaseHp);
             currentWeapon = PlayerPrefs.GetInt("StatsCurrentWeapon", -1);
             charges = PlayerPrefs.GetInt("StatsCharges", 0);
-            weaponDamage = PlayerPrefs.GetInt("StatsCurrentWeaponDamage", 0);
+            weaponDamage = PlayerPrefs.GetInt("StatsCurrentWeaponDamage", 1);
         }
 
         public void SaveCurrentZone(int currentZone)
