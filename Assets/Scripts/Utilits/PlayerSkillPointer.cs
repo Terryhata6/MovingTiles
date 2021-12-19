@@ -60,6 +60,7 @@ namespace Core.UtilitsSpace
             if (_skillCanSnap)
             {
                 _playerSkill.SetBox(_tile);
+                
                 _playerSkill.StartCoroutine(_playerSkill.SpawnAnimation((value) =>
                 {
                     TilableObjectsController.Instance.AddObjectToList(value as TilableObject);

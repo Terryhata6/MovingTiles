@@ -18,6 +18,7 @@ namespace Core
         [SerializeField] private ProjectileTilableObject _projectile;
         [SerializeField] private TilableObject _tempBuilding;
         [SerializeField] private WeaponTilableObject[] _weapons;
+        [SerializeField] private EnemyTilableObject _mimicExample;
         [SerializeField] private int StartEnemiesAmount;
         public List<TilableObject> _objects = new List<TilableObject>();
         private int waitingMoves = 0;
@@ -96,6 +97,20 @@ namespace Core
             forEachCall?.Invoke();
             _tilebox = TileController.Instance.GetTileForenemy();
             _enemy = Instantiate(_enemyExample.gameObject, _tilebox.transform.position + Vector3.up * 5f,
+                Quaternion.identity, transform).GetComponent<TilableObject>();
+            _enemy.SetBox(_tilebox);
+            StartCoroutine(_enemy.SpawnAnimation((value) =>
+            {
+                AddObjectToList(value as TilableObject);
+                onEndSpawningCallback?.Invoke();
+            }));
+        }
+        
+        public void SpawnMimic(Action forEachCall, Action onEndSpawningCallback)
+        {
+            forEachCall?.Invoke();
+            _tilebox = TileController.Instance.GetTileForenemy();
+            _enemy = Instantiate(_mimicExample.gameObject, _tilebox.transform.position + Vector3.up * 5f,
                 Quaternion.identity, transform).GetComponent<TilableObject>();
             _enemy.SetBox(_tilebox);
             StartCoroutine(_enemy.SpawnAnimation((value) =>

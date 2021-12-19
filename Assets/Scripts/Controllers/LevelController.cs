@@ -47,13 +47,13 @@ namespace Core
             {
                 CreateNewTask(var.turn, var.taskType);
             }
-
+            EnviermentController.Instance.ActivateSet(_scenarios[PlayerPrefs.GetInt("CurrentZone")].envi);
             
             _currentTurnState = (_firstTurn == TurnState.Player)?TurnState.Enemy:TurnState.Player;
 
 
             _endTurn=(_currentTurnState != TurnState.Enemy);
-            EnviermentController.Instance.ActivateSet(setTypeType);
+            
 
             if (Screen.width > Screen.height)
             {
@@ -101,6 +101,9 @@ namespace Core
                     break;
                 case EncaunterType.SpawnProjectile:
                     taskMethod = EncauntersHolder.Instance.SpawnProjectile;
+                    break;
+                case EncaunterType.SpawnMimic:
+                    taskMethod = EncauntersHolder.Instance.SpawnMimic;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -243,6 +246,7 @@ namespace Core
     public struct LevelScenario
     {
         public List<LevelTask> tasks;
+        public EnviSetType envi;
     }
     [Serializable]
     public struct LevelTask

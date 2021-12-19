@@ -89,6 +89,15 @@ namespace Core
             OnEndCallBack?.Invoke();
         }
 
+        public void SpawnMimic(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteSpawnMimic(OnStartCallBack, OnEndCallBack));
+        private IEnumerator ExecuteSpawnMimic(Action OnStartCallBack, Action OnEndCallBack)
+        {
+            OnStartCallBack?.Invoke();
+            int iterator = 0;
+            TilableObjectsController.Instance.SpawnMimic(() => iterator++, () => iterator--); //
+            yield return new WaitUntil(() => iterator == 0);
+            OnEndCallBack?.Invoke();
+        }
     }
 }
 
@@ -103,6 +112,7 @@ public enum EncaunterType
     SpawnKatana,
     SpawnMace,
     SpawnBigSword,
-    SpawnProjectile
+    SpawnProjectile,
+    SpawnMimic
 }
 
