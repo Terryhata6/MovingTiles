@@ -46,7 +46,7 @@ namespace Core
                     TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
                 _tilableObjectInstance.gameObject.SetActive(false);
                 EnableImage(true);
-                ChangeChargesAmount(+1);
+                AddCharge(1);
             }
         }
 
@@ -81,7 +81,7 @@ namespace Core
 
         private void SpawnOrNotSpawnCallBack()
         {
-            ChangeChargesAmount(-1);
+            RemoveCharge(1);
         }
 
         public void OnBeginDrag(PointerEventData eventData)
@@ -116,16 +116,37 @@ namespace Core
 
         public void ChangeChargesAmount(int charge)
         {
-            _charges += charge;
-            if (charge.Equals(0))
-            {
-                _charges = 0;
-            }
+            _charges = charge;
             if (_charges <= 0)
             {
                 EnableImage(false);
             }
             
+        }
+
+        public void AddCharge(int charge)
+        {
+            if (charge > 0)
+            {
+                ChangeChargesAmount(_charges+charge);
+            }
+        }
+        public void RemoveCharge(int charge)
+        {
+            if (charge > 0)
+            {
+                ChangeChargesAmount(_charges-charge);
+            }
+        }
+        
+        public void Restart()
+        {
+            if (_tilableObjectExmple)
+            {
+                _tilableObjectInstance =
+                    TilableObjectsController.Instance.SpawnSkill(_tilableObjectExmple);
+                _tilableObjectInstance.gameObject.SetActive(false);
+            }
         }
 
         public void EnableImage(bool trueOrFalse)

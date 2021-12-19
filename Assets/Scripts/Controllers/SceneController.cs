@@ -63,7 +63,7 @@ namespace Core
                 }
                 else if (draggableUi[i].CompareObject(obj[j]))
                 {
-                    draggableUi[i].ChangeChargesAmount(+1);
+                    draggableUi[i].AddCharge(1);
                     return;
                 }
             }
@@ -76,12 +76,10 @@ namespace Core
 
         public void RestartDragableObjects()
         {
-            Debug.LogWarning("RestarDrag");
             for (int i = 0; i < draggableUi.Length; i++)
             {
-                draggableUi[i].ChangeChargesAmount(0);
+                draggableUi[i].Restart();
             }
-
         }
 
         private void Awake()
