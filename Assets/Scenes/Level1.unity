@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.33944118, g: 0.17992873, b: 0.5579753, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1616,6 +1616,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -10
       objectReference: {fileID: 0}
+    - target: {fileID: 7617718322829663566, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
+      propertyPath: _pcCamera
+      value: 
+      objectReference: {fileID: 1381845461}
+    - target: {fileID: 7617718322829663566, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
+      propertyPath: _mobileCamera
+      value: 
+      objectReference: {fileID: 1053175675}
     - target: {fileID: 7617718322829663566, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
       propertyPath: _scenarios.Array.data[0].tasks.Array.data[1].turn
       value: 0
