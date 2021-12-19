@@ -171,6 +171,10 @@ namespace Core
             }
             _loader.DestinationSceneName = sceneName;
             _MMFeedBacks.PlayFeedbacks();
+            if (sceneName == _characterSelectScene)
+            {
+                return;
+            }
             GameEvents.Instance.OnLoadNewLevelController += FindLevelController;
         }
 
