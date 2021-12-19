@@ -191,7 +191,7 @@ namespace Core.Entities
                 _baker = GetComponentInChildren<RealTimeSkinnedMeshBaker>();
                 yield return _baker.StartBaking();
             }
-            transform.DOMoveY(_currentTileBox.transform.position.y + 0.5f, 0.2f)
+            transform.DOMoveY(_currentTileBox.transform.position.y, 0.2f)
                 .OnComplete(() => OnEndSpawn.Invoke(this));
             yield break;
         }

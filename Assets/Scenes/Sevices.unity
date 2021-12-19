@@ -467,10 +467,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de41289ad89b41a4abc31fb545363e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterSelectScene: SharacterSelect
-  _endScene: SharacterSelect
+  _characterSelectScene: CharacterSelect
+  _endScene: CharacterSelect
   _scenes:
-  - Level1
+  - CharacterSelect
   - Level1
   - Level1
   - Level1
