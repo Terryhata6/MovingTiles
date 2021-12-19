@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -12,7 +13,8 @@ namespace Core.Entities
 {
     public class EnemyTilableObject : TilableObject
     {
-        [Header("EnemyProps")] [SerializeField]
+        [Header("EnemyProps")]
+        [SerializeField]
         private int _health;
 
         [SerializeField] private MMFeedbacks _mmFeedbacks;
@@ -27,7 +29,13 @@ namespace Core.Entities
         [SerializeField] private bool _haveRagdall = false;
         [SerializeField] private List<Rigidbody> _rigs;
         [SerializeField] private List<Collider> _colliders;
+
+        [SerializeField] private MMProgressBar _healthBar;
+
+        private int _maxHealth;
+
         private bool _endAttack = false;
+
         public int Health => _health;
         public float Damage => _damage;
 
@@ -60,6 +68,8 @@ namespace Core.Entities
                     SetWeapon(2);
                 }
             }
+
+            _maxHealth = _health;
         }
 
         public void ActivateRagdoll()
@@ -132,7 +142,7 @@ namespace Core.Entities
                     _weapons[result].SetActive(true);
                     _damage = damage;
                 }
-                
+
             }
         }
 
@@ -145,7 +155,7 @@ namespace Core.Entities
         {
             if (state == TurnState.Enemy)
             {
-                gameObject.SendMessage("CallSpecialInteraction",SendMessageOptions.DontRequireReceiver);
+                gameObject.SendMessage("CallSpecialInteraction", SendMessageOptions.DontRequireReceiver);
                 if (_needAnimator)
                 {
                     _animator.SetTrigger("Attack");
@@ -200,18 +210,18 @@ namespace Core.Entities
             switch (callbackType)
             {
                 case PlayerCallbackType.Pickup:
-                {
-                    break;
-                }
+                    {
+                        break;
+                    }
                 case PlayerCallbackType.Exit:
-                {
-                    break;
-                }
+                    {
+                        break;
+                    }
                 case PlayerCallbackType.Attack:
-                {
-                    GetDamage(player.CurrentDamage);
-                    break;
-                }
+                    {
+                        GetDamage(player.CurrentDamage);
+                        break;
+                    }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(callbackType), callbackType, null);
             }
@@ -226,14 +236,19 @@ namespace Core.Entities
             }
             else
             {
-                
+
             }
 
             if (Health <= 0)
             {
                 _health = 0;
+
+                _healthBar?.gameObject.SetActive(false);
+
                 StartCoroutine(DestroyAnimation());
             }
+
+            _healthBar?.UpdateBar(_health, 0, _maxHealth);
         }
 
         public override IEnumerator DestroyAnimation()
@@ -255,7 +270,7 @@ namespace Core.Entities
             }
             else
             {
-                
+
                 transform.DOMoveY(-4f, 2f).OnComplete(() => Destroy(this.gameObject));
             }
         }
