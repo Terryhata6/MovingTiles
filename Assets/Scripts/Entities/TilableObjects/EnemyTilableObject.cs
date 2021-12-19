@@ -48,6 +48,18 @@ namespace Core.Entities
                 _colliders = GetComponentsInChildren<Collider>().ToList();
                 DeactivateRagdoll();
             }
+
+            if (Random.Range(0, 6) > 2)
+            {
+                if (Random.Range(0, 6) > 2)
+                {
+                    SetWeapon(3);
+                }
+                else
+                {
+                    SetWeapon(2);
+                }
+            }
         }
 
         public void ActivateRagdoll()
@@ -100,8 +112,28 @@ namespace Core.Entities
 
         public void SetWeapon(int damage)
         {
-            int result = Random.Range(0, _weapons.Length);
-            _weapons[result].SetActive(true);
+            if (_weapons == null)
+            {
+                return;
+            }
+
+            if (_weapons.Length > 0)
+            {
+                int result;
+                if (damage < _weapons.Length)
+                {
+                    result = Random.Range(0, damage);
+                    _weapons[result].SetActive(true);
+                    _damage = damage;
+                }
+                else
+                {
+                    result = Random.Range(0, _weapons.Length);
+                    _weapons[result].SetActive(true);
+                    _damage = damage;
+                }
+                
+            }
         }
 
         public void EndAttack()
@@ -113,6 +145,7 @@ namespace Core.Entities
         {
             if (state == TurnState.Enemy)
             {
+                gameObject.SendMessage("CallSpecialInteraction",SendMessageOptions.DontRequireReceiver);
                 if (_needAnimator)
                 {
                     _animator.SetTrigger("Attack");
