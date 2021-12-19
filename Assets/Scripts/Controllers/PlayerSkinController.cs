@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class PlayerSkinController : MonoBehaviour
 {
@@ -26,7 +26,14 @@ public class PlayerSkinController : MonoBehaviour
     private void Awake()
     {
         _realtimeBaker = GetComponentInChildren<RealTimeSkinnedMeshBaker>();
-        LoadSkinPreset();
+        if (SceneManager.GetActiveScene().name == "CharacterSelect")
+        {
+            LoadSkinPreset(false);
+        }
+        else
+        {
+            LoadSkinPreset(true);
+        }
     }
 
 
@@ -36,7 +43,7 @@ public class PlayerSkinController : MonoBehaviour
         PlayerPrefs.SetInt(_bodySetKey, _currentBodySet);
     }
 
-    public void LoadSkinPreset()
+    public void LoadSkinPreset(bool isBake)
     {
         _currentHeadSet = PlayerPrefs.GetInt(_headSetKey);
         _currentBodySet = PlayerPrefs.GetInt(_bodySetKey);
@@ -44,11 +51,14 @@ public class PlayerSkinController : MonoBehaviour
         ChangeHeadSkin(_currentHeadSet);
         ChangeBodySkin(_currentBodySet);
 
-        _objectsForBake.Clear();
-        _objectsForBake.AddRange(_coreGO);
-        _objectsForBake.AddRange(_headSets[_currentHeadSet].SkinSet);
-        _objectsForBake.AddRange(_bodySets[_currentBodySet].SkinSet);
-        StartCoroutine(_realtimeBaker.StartBaking(_objectsForBake.ToArray()));
+        if (isBake)
+        {
+            _objectsForBake.Clear();
+            _objectsForBake.AddRange(_coreGO);
+            _objectsForBake.AddRange(_headSets[_currentHeadSet].SkinSet);
+            _objectsForBake.AddRange(_bodySets[_currentBodySet].SkinSet);
+            StartCoroutine(_realtimeBaker.StartBaking(_objectsForBake.ToArray()));
+        }
     }
 
     private void ChangeHeadSkin(int id)
@@ -119,6 +129,6 @@ public class PlayerSkinController : MonoBehaviour
             _currentBodySet = _bodySets.Length - 1;
         }
 
-        ChangeBodySkin (_currentBodySet);
+        ChangeBodySkin(_currentBodySet);
     }
 }
