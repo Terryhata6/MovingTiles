@@ -177,13 +177,155 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c48648cf7c4563923c157dce254893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firstTurn: 0
+  _firstTurn: 1
   setTypeType: 0
   _gameEnd: 0
   _endTurn: 0
   _currentTurnState: 0
   _turnNumber: 0
   _currentTasksNum: 0
+  _scenarios:
+  - tasks:
+    - turn: 0
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 0
+    - turn: 2
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 0
+    - turn: 1
+      taskType: 1
+    - turn: 2
+      taskType: 4
+    - turn: 3
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 2
+    - turn: 0
+      taskType: 2
+    - turn: 2
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 0
+    - turn: 1
+      taskType: 0
+    - turn: 2
+      taskType: 9
+    - turn: 3
+      taskType: 1
+    - turn: 3
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 6
+    - turn: 0
+      taskType: 6
+    - turn: 3
+      taskType: 0
+    - turn: 3
+      taskType: 1
+    - turn: 3
+      taskType: 2
+    - turn: 3
+      taskType: 2
+    - turn: 4
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 6
+    - turn: 1
+      taskType: 6
+    - turn: 3
+      taskType: 9
+    - turn: 3
+      taskType: 1
+    - turn: 3
+      taskType: 2
+    - turn: 3
+      taskType: 2
+    - turn: 4
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 0
+    - turn: 2
+      taskType: 9
+    - turn: 2
+      taskType: 9
+    - turn: 3
+      taskType: 2
+    - turn: 3
+      taskType: 0
+    - turn: 4
+      taskType: 2
+    - turn: 4
+      taskType: 0
+    - turn: 4
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 5
+    - turn: 0
+      taskType: 2
+    - turn: 0
+      taskType: 5
+    - turn: 0
+      taskType: 2
+    - turn: 0
+      taskType: 5
+    - turn: 0
+      taskType: 5
+    - turn: 0
+      taskType: 5
+    - turn: 4
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 9
+    - turn: 0
+      taskType: 9
+    - turn: 0
+      taskType: 9
+    - turn: 0
+      taskType: 9
+    - turn: 2
+      taskType: 0
+    - turn: 2
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 9
+    - turn: 1
+      taskType: 9
+    - turn: 2
+      taskType: 9
+    - turn: 3
+      taskType: 9
+    - turn: 2
+      taskType: 3
+    - turn: 2
+      taskType: 3
+  - tasks:
+    - turn: 0
+      taskType: 9
+    - turn: 1
+      taskType: 9
+    - turn: 2
+      taskType: 9
+    - turn: 3
+      taskType: 9
+    - turn: 2
+      taskType: 3
+    - turn: 2
+      taskType: 3
 --- !u!1001 &607210388675757995
 PrefabInstance:
   m_ObjectHideFlags: 0

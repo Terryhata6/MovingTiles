@@ -157,14 +157,28 @@ namespace Core.Entities
             {
                 case WeaponType.Axe:
                 {
-                    ActivateTwoHandedWeapon(charges, damage);
+                    if (_currentWeapon == 0)
+                    {
+                        ActivateTwoHandedWeapon(charges + _currentWeaponCharges, damage);
+                    }
+                    else
+                    {
+                        ActivateTwoHandedWeapon(charges, damage);
+                    }
                     _currentWeapon = 0;
                     _weapons[0].SetActive(true);
                     break;
                 }
                 case WeaponType.BigSword:
                 {
-                    ActivateOneHandedWeapon(charges,damage);
+                    if (_currentWeapon == 1)
+                    {
+                        ActivateTwoHandedWeapon(charges + _currentWeaponCharges, damage);
+                    }
+                    else
+                    {
+                        ActivateTwoHandedWeapon(charges, damage);
+                    }
                     _currentWeapon = 1;
                     _weapons[1].SetActive(true);
                     break;
@@ -178,14 +192,28 @@ namespace Core.Entities
                 }
                 case WeaponType.Mace:
                 {
-                    ActivateTwoHandedWeapon(charges,damage);
+                    if (_currentWeapon == 3)
+                    {
+                        ActivateTwoHandedWeapon(charges + _currentWeaponCharges, damage);
+                    }
+                    else
+                    {
+                        ActivateTwoHandedWeapon(charges, damage);
+                    }
                     _currentWeapon = 3;
                     _weapons[3].SetActive(true);
                     break;
                 }
                 case WeaponType.Pickaxe:
                 {
-                    ActivateOneHandedWeapon(charges,damage);
+                    if (_currentWeapon == 4)
+                    {
+                        ActivateTwoHandedWeapon(charges + _currentWeaponCharges, damage);
+                    }
+                    else
+                    {
+                        ActivateTwoHandedWeapon(charges, damage);
+                    }
                     _currentWeapon = 4;
                     _weapons[4].SetActive(true);
                     break;

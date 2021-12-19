@@ -20,6 +20,8 @@ namespace Core
         [SerializeField] private int _currentTasksNum = 0;
         private Dictionary<int, Action<Action,Action>> turnTasks = new Dictionary<int, Action<Action,Action>>();
 
+        [Header("Scenarios")] [SerializeField] private List<LevelScenario> _scenarios;
+
         public TurnState TurnState => _currentTurnState;
         public int TurnNumber => _turnNumber;
 
@@ -29,22 +31,16 @@ namespace Core
             GameEvents.Instance.LoadNewLevelController(this);
         }
 
-        private void Start()
-        { 
-            
-        }
-
         public void Initialize()
         {
             TileController.Instance.CreateTiles();
-            CreateNewTask(0, EncauntersHolder.Instance.StartSpawnEnemy);
-            CreateNewTask(1, EncauntersHolder.Instance.SpawnProjectile);
-            CreateNewTask(1, EncauntersHolder.Instance.SpawnKatana);
-            CreateNewTask(4, EncauntersHolder.Instance.SpawnEnemy);
-            CreateNewTask(4, EncauntersHolder.Instance.SpawnHeal);
-            CreateNewTask(4, EncauntersHolder.Instance.SpawnExitDoor);
-            CreateNewTask(6, EncauntersHolder.Instance.SpawnEnemy);
+            
             //TilableObjectsController.Instance.SpawnStartEnemyes
+            foreach (var var in _scenarios[PlayerPrefs.GetInt("CurrentZone")].tasks)
+            {
+                CreateNewTask(var.turn, var.taskType);
+            }
+
             
             _currentTurnState = (_firstTurn == TurnState.Player)?TurnState.Enemy:TurnState.Player;
 
@@ -52,6 +48,48 @@ namespace Core
             _endTurn=(_currentTurnState != TurnState.Enemy);
             EnviermentController.Instance.ActivateSet(setTypeType);
         }
+
+        private Action<Action, Action> taskMethod;
+        public void CreateNewTask(int turn, EncaunterType type)
+        {
+            switch (type)
+            {
+                case EncaunterType.StartSpawnEnemy:
+                    taskMethod = EncauntersHolder.Instance.StartSpawnEnemy;
+                    break;
+                case EncaunterType.SpawnEnemy:
+                    taskMethod = EncauntersHolder.Instance.SpawnEnemy;
+                    break;
+                case EncaunterType.SpawnHeal:
+                    taskMethod = EncauntersHolder.Instance.SpawnHeal;
+                    break;
+                case EncaunterType.SpawnExitDoor:
+                    taskMethod = EncauntersHolder.Instance.SpawnExitDoor;
+                    break;
+                case EncaunterType.SpawnAxe:
+                    taskMethod = EncauntersHolder.Instance.SpawnAxe;
+                    break;
+                case EncaunterType.SpawnPickaxe:
+                    taskMethod = EncauntersHolder.Instance.SpawnPickaxe;
+                    break;
+                case EncaunterType.SpawnKatana:
+                    taskMethod = EncauntersHolder.Instance.SpawnKatana;
+                    break;
+                case EncaunterType.SpawnMace:
+                    taskMethod = EncauntersHolder.Instance.SpawnMace;
+                    break;
+                case EncaunterType.SpawnBigSword:
+                    taskMethod = EncauntersHolder.Instance.SpawnBigSword;
+                    break;
+                case EncaunterType.SpawnProjectile:
+                    taskMethod = EncauntersHolder.Instance.SpawnProjectile;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+            CreateNewTask(turn, taskMethod);
+        }
+
 
         private IEnumerator Turns()
         {
@@ -181,5 +219,17 @@ namespace Core
     {
         Player,
         Enemy
+    }
+
+    [Serializable]
+    public struct LevelScenario
+    {
+        public List<LevelTask> tasks;
+    }
+    [Serializable]
+    public struct LevelTask
+    {
+        public int turn;
+        public EncaunterType taskType;
     }
 }
