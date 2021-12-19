@@ -223,17 +223,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &194835730 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1650744594238892125, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
-  m_PrefabInstance: {fileID: 8951333734744872285}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b56e737dc8445a4bb698b8561c3d31b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &205411309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -476,6 +465,13 @@ MonoBehaviour:
   - Level1
   - Level1
   - Level1
+  - Level1
+  - Level1
+  - Level1
+  - Level1
+  - Level1
+  - Level1
+  - Level1
   LevelDebug: 0
   _currentLevelController: {fileID: 0}
   _MMFeedBacks: {fileID: 0}
@@ -491,7 +487,7 @@ MonoBehaviour:
   obj:
   - {fileID: 2712044866565607552, guid: e190235e9c834634a9b7cab1cff90d61, type: 3}
   objImage:
-  - {fileID: 3866642863966997771, guid: 7df685a450488cf48bd7c7e9bb236090, type: 3}
+  - {fileID: 0}
 --- !u!4 &733355313
 Transform:
   m_ObjectHideFlags: 0
@@ -915,17 +911,6 @@ MonoBehaviour:
   blendDistance: 0
   weight: 0.82
   priority: 0
---- !u!114 &1082100482 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2324846526938315737, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
-  m_PrefabInstance: {fileID: 8951333734744872285}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b56e737dc8445a4bb698b8561c3d31b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1147492477 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8951333735519310700, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
@@ -1305,17 +1290,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1533079798 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3530961221276678925, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
-  m_PrefabInstance: {fileID: 8951333734744872285}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b56e737dc8445a4bb698b8561c3d31b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1651680138
@@ -1748,7 +1722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4228124796130797640, guid: bc036d8c36b76e944866702aa86ac1f2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7233702216233887027, guid: bc036d8c36b76e944866702aa86ac1f2, type: 3}
       propertyPath: m_RootOrder
@@ -1909,7 +1883,7 @@ PrefabInstance:
     - target: {fileID: 893799955823581503, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
       propertyPath: _tilableObjectInstance
       value: 
-      objectReference: {fileID: 1533079798}
+      objectReference: {fileID: 0}
     - target: {fileID: 1452452687651670608, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
       propertyPath: Active
       value: 0
@@ -2097,7 +2071,7 @@ PrefabInstance:
     - target: {fileID: 8234817466475639670, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
       propertyPath: _tilableObjectInstance
       value: 
-      objectReference: {fileID: 194835730}
+      objectReference: {fileID: 0}
     - target: {fileID: 8951333735519310700, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
       propertyPath: _tilableObjectExmple
       value: 
@@ -2105,7 +2079,7 @@ PrefabInstance:
     - target: {fileID: 8951333735519310700, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
       propertyPath: _tilableObjectInstance
       value: 
-      objectReference: {fileID: 1082100482}
+      objectReference: {fileID: 0}
     - target: {fileID: 8951333735519310701, guid: fca6bd9f884da3f47bf8682b529db520, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

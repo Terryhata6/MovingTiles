@@ -22,6 +22,7 @@ namespace Core
 
         [Header("Scenarios")] [SerializeField] private List<LevelScenario> _scenarios;
 
+
         public TurnState TurnState => _currentTurnState;
         public int TurnNumber => _turnNumber;
 
