@@ -3,6 +3,8 @@ using Core.Entities;
 using MoreMountains.Tools;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class InGameUIView : BaseMenuView
 {

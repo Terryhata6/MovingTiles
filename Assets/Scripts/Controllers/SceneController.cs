@@ -160,7 +160,6 @@ namespace Core
             if (sceneNumber < _scenes.Count)
             {
                 sceneName = _scenes[sceneNumber];
-                
             }
             else
             {

@@ -61,5 +61,10 @@ namespace Core
             OnGetDraggableDrop?.Invoke();
         }
 
+        public Action OnHideLevelUI;
+        public void HideLevelUI()
+        {
+            OnHideLevelUI?.Invoke();
+        }
     }
 }
