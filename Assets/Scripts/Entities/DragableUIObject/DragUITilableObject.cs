@@ -18,6 +18,7 @@ namespace Core
         private Vector3 _beginPosition;
         private bool _startCheckingTilable = false;
         private Vector3 _velocityVector = Vector3.zero;
+        private Vector3 _tempPos;
         [SerializeField] private float dampingSpeed;
         private Vector3 globalMousePosition;
         [SerializeField] private Image _image;
@@ -110,7 +111,6 @@ namespace Core
                 _tilableObjectInstance = Instantiate(_tilableObjectExmple.gameObject, transform.position,
                                 Quaternion.identity,transform).GetComponent<TilableObject>();
                 _tilableObjectInstance.gameObject.SetActive(false);
-                _tilableObjectInstance.transform.SetParent(transform);
             }
         }
 
