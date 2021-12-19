@@ -45,6 +45,7 @@ public class PlayerSkinController : MonoBehaviour
         ChangeBodySkin(_currentBodySet);
 
         _objectsForBake.Clear();
+        _objectsForBake.AddRange(_coreGO);
         _objectsForBake.AddRange(_headSets[_currentHeadSet].SkinSet);
         _objectsForBake.AddRange(_bodySets[_currentBodySet].SkinSet);
         StartCoroutine(_realtimeBaker.StartBaking(_objectsForBake.ToArray()));
