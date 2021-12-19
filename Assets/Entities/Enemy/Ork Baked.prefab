@@ -6858,6 +6858,41 @@ MonoBehaviour:
   _interactionTarget: {fileID: 0}
   _interactionTarget2: {fileID: 0}
   _interactionConfig: Enemy
+  MovesPhrazes:
+  - '-Stop right there, human! '
+  - -You shall not pass!
+  - '-Come here! '
+  - -Small step for an ork and big step for orkanity!
+  - -Catch this human!
+  - -Why is he staying?
+  - -For Orkhny greenhand!
+  - ' -Go! Go! Go! '
+  - -Time for a beatdown!
+  - '-Finish him! '
+  YouMovesPhrazes:
+  - '-What was that? '
+  - -Hey!
+  - -Stop it!
+  - '-What the... '
+  - -Oh my Underlord!
+  AttackPhrazes:
+  - -Ha ha!
+  - -Face your destiny!
+  - -Got ya!
+  - '-For the Orkland! '
+  - -I will crush you!
+  GetdamagePhrazes:
+  - -Ouch...
+  - -Dude is strong!
+  - '-Am I joke for ya? '
+  - -Not bad...
+  - -Ugh!
+  - -How you dare?
+  - -Argh!
+  DiesPhrazes:
+  - '-See ya next time! '
+  - '-I''ll be back! '
+  - -That was too much!
 --- !u!1 &8504792014619268617
 GameObject:
   m_ObjectHideFlags: 0

@@ -600,7 +600,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593359338}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!4 &593359340
 Transform:
   m_ObjectHideFlags: 0
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593359338}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e8aa3525151bb343b66b059b6095946, type: 3}
   m_Name: 
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f9f16a22943814196e731ffb6b0f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadingAudioListener: {fileID: 593359339}
+  LoadingAudioListener: {fileID: 0}
   FaderID: 500
   DebugMode: 0
   SetRealtimeProgressValue:

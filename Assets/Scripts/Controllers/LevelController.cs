@@ -232,6 +232,7 @@ namespace Core
         private void OnDestroy()
         {
             StopAllCoroutines();
+            InputController.Instance.OnGetSwipe -= GetSwipe;
         }
     }
 

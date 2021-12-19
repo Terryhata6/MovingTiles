@@ -155,7 +155,11 @@ namespace Core.Entities
         {
             if (state == TurnState.Enemy)
             {
-                gameObject.SendMessage("CallSpecialInteraction", SendMessageOptions.DontRequireReceiver);
+                if (haveInteraction)
+                {
+                    interaction.CallSpecialRareInteraction(EnemySpecialInteraction.stringTypePhrazes.AttackPhrazes);
+                }
+
                 if (_needAnimator)
                 {
                     _animator.SetTrigger("Attack");
@@ -242,10 +246,20 @@ namespace Core.Entities
             if (Health <= 0)
             {
                 _health = 0;
-
+                if (haveInteraction)
+                {
+                    interaction.CallSpecialRareInteraction(EnemySpecialInteraction.stringTypePhrazes.DiesPhrazes);
+                }
                 _healthBar?.gameObject.SetActive(false);
 
                 StartCoroutine(DestroyAnimation());
+            }
+            else
+            {
+                if (haveInteraction)
+                {
+                    interaction.CallSpecialRareInteraction(EnemySpecialInteraction.stringTypePhrazes.GetdamagePhrazes);
+                }
             }
 
             _healthBar?.UpdateBar(_health, 0, _maxHealth);
