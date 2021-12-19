@@ -125,7 +125,7 @@ Material:
     - _OcclusionStrength: 1
     - _OutlineDepthOffset: 0.03
     - _OutlineEnabled: 1
-    - _OutlineWidth: 0.04
+    - _OutlineWidth: 0.5
     - _OverrideBakedGi: 0
     - _OverrideLightAttenuation: 0
     - _OverrideLightmapDir: 0

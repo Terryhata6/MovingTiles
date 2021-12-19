@@ -6,7 +6,12 @@ ModelImporter:
   - first:
       74: 1827226128182048838
     second: WarCry
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: atlas
+    second: {fileID: 2100000, guid: fcc90b78c59d24a4db76e3307f3a7f10, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -10,19 +10,29 @@ namespace Core.Entities
     public class TilableObject : BaseTilableObject, ITilable
     {
         [SerializeField] private bool _canMove;
-        [SerializeField][Range(1,2)] private int _moveDistance;
+        [SerializeField] [Range(1, 2)] private int _moveDistance;
         [SerializeField] private bool _haveSkills = false;
         [SerializeField] private List<Skill> _skills = new List<Skill>();
         [SerializeField] private bool _needDebugLog = false;
         [SerializeField] private bool _wantToMoveToHero = false;
-        
-        
+        [SerializeField] protected EnemySpecialInteraction interaction;
+        [SerializeField] protected bool haveInteraction;
+
         public bool HaveSkills => _haveSkills;
         public bool CanMove => _canMove;
 
         public override void Awake()
         {
             base.Awake();
+            if (TryGetComponent<EnemySpecialInteraction>(out interaction))
+            {
+                haveInteraction = true;
+            }
+            else
+            {
+                haveInteraction = false;
+            }
+
             if (_skills.Count > 0)
             {
                 _haveSkills = true;
@@ -38,21 +48,21 @@ namespace Core.Entities
             {
                 return;
             }
-            else if(_wantToMoveToHero)
+            else if (_wantToMoveToHero)
             {
                 _path = TileController.Instance.FindPath(_currentTileBox);
                 if (_path == null)
                 {
-
-                    if(_needDebugLog)
+                    if (_needDebugLog)
                     {
                         Debug.Log($"{gameObject} doesn't have path", this);
-                    }        
+                    }
+
                     CallBackMethod.Invoke();
-                    if(_needDebugLog)
+                    if (_needDebugLog)
                     {
                         Debug.Log($"{gameObject} still invoked", this);
-                    } 
+                    }
                 }
                 else
                 {
@@ -93,6 +103,7 @@ namespace Core.Entities
                             _currentTileBox.WillFree = true;
                         }
                     }
+
                     break;
                 }
                 case SwipeDirections.Right:
@@ -102,6 +113,7 @@ namespace Core.Entities
                         if (_currentTileBox.RightNeighbour.WillFree || !_currentTileBox.RightNeighbour.TileBusy)
                             _currentTileBox.WillFree = true;
                     }
+
                     break;
                 }
                 case SwipeDirections.Up:
@@ -111,16 +123,17 @@ namespace Core.Entities
                         if (_currentTileBox.ForwardNeighbour.WillFree || !_currentTileBox.ForwardNeighbour.TileBusy)
                             _currentTileBox.WillFree = true;
                     }
+
                     break;
                 }
                 case SwipeDirections.Down:
                 {
                     if (_currentTileBox.BackNeighbourExists)
                     {
-                        
                         if (_currentTileBox.BackNeighbour.WillFree || !_currentTileBox.BackNeighbour.TileBusy)
                             _currentTileBox.WillFree = true;
                     }
+
                     break;
                 }
                 default:
@@ -203,7 +216,6 @@ namespace Core.Entities
 
         public IEnumerator TryMoveToBox(TileBox box, Action endAnimationCallBack, TurnState state)
         {
-            gameObject.SendMessage("CallSpecialRareInteraction",SendMessageOptions.DontRequireReceiver);
             if (this.gameObject == null)
             {
                 endAnimationCallBack.Invoke();
@@ -212,9 +224,21 @@ namespace Core.Entities
 
             transform.DOLookAt(box.transform.position, 0.05f);
             var pos = transform.position;
-            
+
             if (!box.TileBusy || box.WillFree)
             {
+                if (haveInteraction)
+                {
+                    if (state == TurnState.Enemy)
+                    {
+                        interaction.CallSpecialRareInteraction(EnemySpecialInteraction.stringTypePhrazes.MovesPhrazes);
+                    }
+                    else
+                    {
+                        interaction.CallSpecialRareInteraction(EnemySpecialInteraction.stringTypePhrazes.YouMovesPhrazes);
+                    }
+                }
+
                 SetBox(box);
                 for (float i = 0; i < 1; i += Time.deltaTime * _jumpSpeed)
                 {
@@ -253,6 +277,7 @@ namespace Core.Entities
                         break;
                 }
             }
+
             endAnimationCallBack.Invoke();
         }
 
