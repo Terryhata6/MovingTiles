@@ -35,7 +35,12 @@ namespace Core.Entities
         {
             _damage = _baseDamage;
             _animator = GetComponentInChildren<Animator>();
-            
+            SaveLoadManager.Instance.LoadPlayerData(out _health, out _healthMax, out int _currentWeapon, out _currentWeaponCharges, out _damage);
+            if (_currentWeapon >= 0 && _currentWeapon < _weapons.Length)
+            {
+                SetWeapon((WeaponType) _currentWeapon, _damage, _currentWeaponCharges);
+            }
+
             yield return null;
             SetBox(TileController.Instance.Center);
             UpdateHealthUi();
@@ -86,6 +91,7 @@ namespace Core.Entities
 
         public void PlayStartAnimation()
         {
+            //
         }
 
         public void GetDamage(float Damage, BaseTilableObject enemy)
@@ -93,7 +99,7 @@ namespace Core.Entities
             GetDamage(Damage);
             if (_canCounterAttack)
             {
-                
+                enemy.CallbackForPlayerMoves(PlayerCallbackType.Attack, this);
             }
         }
         

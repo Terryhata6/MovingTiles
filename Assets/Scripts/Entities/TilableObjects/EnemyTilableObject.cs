@@ -46,7 +46,7 @@ namespace Core.Entities
                 _animator.SetTrigger("Attack");
                 yield return new WaitUntil(() => _endAttack);
                 _endAttack = false;
-                (box.TiledObject as PlayerTilableObject).GetDamage(BaseDamage);
+                (box.TiledObject as PlayerTilableObject).GetDamage(BaseDamage, this);
                 /*
                 for (float i = 0; i < 0.5f; i += 0.01f * _jumpSpeed)
                 {
