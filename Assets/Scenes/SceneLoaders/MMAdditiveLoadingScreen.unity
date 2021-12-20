@@ -178,7 +178,7 @@ MonoBehaviour:
   ID: 500
   FadeInDirection: 0
   FadeOutDirection: 2
-  DefaultDuration: 0.5
+  DefaultDuration: 1
   DefaultTween:
     MMTweenDefinitionType: 0
     MMTweenCurve: 17

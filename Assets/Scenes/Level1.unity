@@ -544,7 +544,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1381845460}
-  m_LocalRotation: {x: 0.25977254, y: 0.19233471, z: -0.05287995, w: 0.9448436}
+  m_LocalRotation: {x: 0.25977257, y: 0.19233471, z: -0.05287995, w: 0.9448436}
   m_LocalPosition: {x: -3.47, y: 5.28, z: 21.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1785,6 +1785,10 @@ PrefabInstance:
       propertyPath: _mobileCamera
       value: 
       objectReference: {fileID: 1053175675}
+    - target: {fileID: 7617718322829663566, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
+      propertyPath: _scenarios.Array.data[1].envi
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7617718322829663566, guid: 50bf8ad8bfde2a8429e2abb35697d576, type: 3}
       propertyPath: _scenarios.Array.data[6].tasks.Array.size
       value: 9

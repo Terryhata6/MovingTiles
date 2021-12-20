@@ -13,8 +13,7 @@ namespace Core.Entities
 {
     public class EnemyTilableObject : TilableObject
     {
-        [Header("EnemyProps")]
-        [SerializeField]
+        [Header("EnemyProps")] [SerializeField]
         private int _health;
 
         [SerializeField] private MMFeedbacks _mmFeedbacks;
@@ -57,9 +56,9 @@ namespace Core.Entities
                 DeactivateRagdoll();
             }
 
-            if (Random.Range(0, 7) > 5)
+            if (Random.Range(0, 10) > 5)
             {
-                if (Random.Range(0, 7) > 5)
+                if (Random.Range(0, 10) > 8)
                 {
                     SetWeapon(2);
                 }
@@ -129,21 +128,21 @@ namespace Core.Entities
 
             if (_weapons.Length > 0)
             {
-                int result;
-                if (damage < _weapons.Length)
-                {
-                    result = Random.Range(0, damage);
-                    _weapons[result].SetActive(true);
-                    _damage = damage;
-                }
-                else
-                {
-                    result = Random.Range(0, _weapons.Length);
-                    _weapons[result].SetActive(true);
-                    _damage = damage;
-                }
-
+                int result = Random.Range(0, _weapons.Length);
+                _weapons[result].SetActive(true);
+                _damage = damage;
+                ActivateWeaponMesh(result);
             }
+        }
+
+        public void ActivateWeaponMesh(int result)
+        {
+            foreach (var go in _weapons)
+            {
+                go.SetActive(false);
+            }
+
+            _weapons[result].SetActive(true);
         }
 
         public void EndAttack()
@@ -173,6 +172,7 @@ namespace Core.Entities
                             transform.DOMove(_currentTileBox.transform.position, 0.2f);
                         });
                 }
+
                 yield return new WaitUntil(() => _endAttack);
                 _endAttack = false;
                 (box.TiledObject as PlayerTilableObject).GetDamage(Damage, this);
@@ -214,18 +214,18 @@ namespace Core.Entities
             switch (callbackType)
             {
                 case PlayerCallbackType.Pickup:
-                    {
-                        break;
-                    }
+                {
+                    break;
+                }
                 case PlayerCallbackType.Exit:
-                    {
-                        break;
-                    }
+                {
+                    break;
+                }
                 case PlayerCallbackType.Attack:
-                    {
-                        GetDamage(player.CurrentDamage);
-                        break;
-                    }
+                {
+                    GetDamage(player.CurrentDamage);
+                    break;
+                }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(callbackType), callbackType, null);
             }
@@ -240,7 +240,6 @@ namespace Core.Entities
             }
             else
             {
-
             }
 
             if (Health <= 0)
@@ -250,6 +249,7 @@ namespace Core.Entities
                 {
                     interaction.CallSpecialRareInteraction(EnemySpecialInteraction.stringTypePhrazes.DiesPhrazes);
                 }
+
                 _healthBar?.gameObject.SetActive(false);
 
                 StartCoroutine(DestroyAnimation());
@@ -284,7 +284,6 @@ namespace Core.Entities
             }
             else
             {
-
                 transform.DOMoveY(-4f, 2f).OnComplete(() => Destroy(this.gameObject));
             }
         }

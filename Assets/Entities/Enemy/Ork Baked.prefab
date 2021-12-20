@@ -1495,8 +1495,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3107526689728338830}
-  m_LocalRotation: {x: -0.06598134, y: -0.000007721279, z: -0.99782085, w: -0.00000007274699}
-  m_LocalPosition: {x: -30.032677, y: -0.9520098, z: 1.4848363}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8114066652841609373}
@@ -6778,6 +6778,8 @@ MonoBehaviour:
   _haveSkills: 0
   _needDebugLog: 1
   _wantToMoveToHero: 1
+  interaction: {fileID: 0}
+  haveInteraction: 0
   _health: 2
   _mmFeedbacks: {fileID: -7621308513478277078}
   _baseDamage: 1
