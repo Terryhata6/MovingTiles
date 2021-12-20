@@ -396,6 +396,11 @@ namespace MoreMountains.Tools
 
             this.transform.position = position;
 
+            if (_pooler == null)
+            {
+                return;
+            }
+
             GameObject nextGameObject = _pooler.GetPooledGameObject();
 
             float lifetimeMultiplier = IntensityImpactsLifetime ? intensity * IntensityLifetimeMultiplier : 1f;

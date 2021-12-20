@@ -48,8 +48,8 @@ public class EnemySpecialInteraction : MonoBehaviour
 
     public IEnumerator RareInteraction(stringTypePhrazes switchTypePhrazes)
     {
-        try
-        {
+        /*try
+        {*/
             switch (_interactionConfig)
             {
                 case "Mimic":
@@ -88,11 +88,11 @@ public class EnemySpecialInteraction : MonoBehaviour
                 default:
                     break;
             }
-        }
-        catch (Exception e)
+        /*}
+        finally
         {
-            
-        }
+        }*/
+
         yield return null;
     }
 
