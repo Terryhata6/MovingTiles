@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Core.UtilitsSpace
 {
-    public class PlayerSkillPointer
+    public class PlayerSkillPointer: Singleton<PlayerSkillPointer>
     {
         private Vector3 _tempPos;
         private RaycastHit _hit;
@@ -14,13 +14,17 @@ namespace Core.UtilitsSpace
         private bool _skillCanSnap;
         private bool _pointSkill = false;
         private TileBox _tile;
-
+        [SerializeField] private GameObject greenBlock;
+        [SerializeField] private GameObject redBlock;
+        
 
        
         public IEnumerator PointSkill(TilableObject _playerSkill, [CanBeNull]Action onEndSpawningCallback) //eNTER-ALT
         {
             _pointSkill = true;
             _playerSkill.gameObject.SetActive(true);
+            greenBlock.SetActive(true);
+            redBlock.SetActive(false);
             while (_pointSkill)
             {
                 _tempPos = InputController.Instance.TouchPosition(out _hit, ~(1<<7));
@@ -37,7 +41,7 @@ namespace Core.UtilitsSpace
                             CheckTile(_tile, out _skillCanSnap);
                             _tempPos = _hit.collider.transform.position;
                             _lastGameObj = _hit.collider;
-                            _playerSkill.transform.position = _tempPos;
+                            redBlock.transform.position = greenBlock.transform.position = _playerSkill.transform.position = _tempPos;
                         }
                     }
                     else
@@ -45,7 +49,7 @@ namespace Core.UtilitsSpace
                         _skillCanSnap = false;
                         _lastGameObj = null;
                         _tempPos.y = 1f;
-                        _playerSkill.transform.position = _tempPos;
+                        redBlock.transform.position = greenBlock.transform.position = _playerSkill.transform.position = _tempPos;
                     }
                 }
                 else
@@ -53,7 +57,7 @@ namespace Core.UtilitsSpace
                     _skillCanSnap = false;
                     _lastGameObj = null;
                     _tempPos.y = 1f;
-                    _playerSkill.transform.position = _tempPos;
+                    redBlock.transform.position = greenBlock.transform.position = _playerSkill.transform.position = _tempPos;
                 }
                 yield return null;
             }
@@ -81,12 +85,14 @@ namespace Core.UtilitsSpace
                 if (tile!.TileBusy)
                 {
                     skillCanSnap = false;
-                    Debug.Log("несвободно");
+                    greenBlock.SetActive(false);
+                    redBlock.SetActive(true);
                 }
                 else
                 {
                     skillCanSnap = true;
-                    Debug.Log("свободно");
+                    greenBlock.SetActive(true);
+                    redBlock.SetActive(false);
                 }
             }
             else

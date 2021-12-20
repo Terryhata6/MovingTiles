@@ -48,7 +48,8 @@ namespace Core.Entities
                     _currentTileBox.ChangeTiledObject();
                 }
             }
-
+            
+            transform.parent = box.transform;
             _currentTileBox = box;
             box.ChangeTiledObject(this);
 

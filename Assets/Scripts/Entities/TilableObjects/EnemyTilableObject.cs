@@ -156,6 +156,7 @@ namespace Core.Entities
             {
                 if (haveInteraction)
                 {
+                    interaction.CallSpecialInteraction();
                     interaction.CallSpecialRareInteraction(EnemySpecialInteraction.stringTypePhrazes.AttackPhrazes);
                 }
 

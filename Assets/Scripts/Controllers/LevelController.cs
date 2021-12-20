@@ -11,22 +11,24 @@ namespace Core
     public class LevelController : MonoBehaviour
     {
         public static LevelController Instance;
-        [Header("Properties")] [SerializeField]
-        private TurnState _firstTurn;
-        [SerializeField]private EnviSetType setTypeType;
-        [SerializeField]private bool _gameEnd = false;
-        [SerializeField]private bool _endTurn = false;
+        [Header("Properties")] 
+        [SerializeField] private TurnState _firstTurn;
+        [SerializeField] private EnviSetType setTypeType;
+        [SerializeField] private bool _gameEnd = false;
+        [SerializeField] private bool _endTurn = false;
         private Coroutine _turnsCoroutine;
-        [Header("Tasks")][SerializeField]private TurnState _currentTurnState;
-        [SerializeField]private int _turnNumber = 0;
+        [Header("Tasks")]
+        [SerializeField] private TurnState _currentTurnState;
+        [SerializeField] private int _turnNumber = 0;
         [SerializeField] private int _currentTasksNum = 0;
         private Dictionary<int, Action<Action,Action>> turnTasks = new Dictionary<int, Action<Action,Action>>();
 
-        [Header("Scenarios")] [SerializeField] private List<LevelScenario> _scenarios;
+        [Header("Scenarios")]
+        [SerializeField] private List<LevelScenario> _scenarios;
         [Header("Camera")]
         [SerializeField] private CinemachineVirtualCamera _mobileCamera;
         [SerializeField] private CinemachineVirtualCamera _pcCamera;
-
+        
 
 
         public TurnState TurnState => _currentTurnState;
