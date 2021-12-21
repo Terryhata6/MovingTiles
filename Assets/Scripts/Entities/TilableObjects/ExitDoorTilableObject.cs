@@ -39,7 +39,7 @@ namespace Core.Entities
             transform.DORotate(Vector3.zero, 1f, RotateMode.FastBeyond360);
             doorScaled = false;
             yield return new WaitUntil(() => doorScaled);
-            player.GoToExitDoor();
+            player.GoToExitDoor(_config);
             yield return null;
         }
 

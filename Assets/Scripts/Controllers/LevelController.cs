@@ -45,6 +45,15 @@ namespace Core
             TileController.Instance.CreateTiles();
             
             //TilableObjectsController.Instance.SpawnStartEnemyes
+            if (PlayerPrefs.GetInt("GetGoldenDoor") > 0)
+            {
+                PlayerPrefs.SetInt("GetGoldenDoor", 0);
+                CreateNewTask(0, EncaunterType.SpawnKatana);
+                CreateNewTask(0, EncaunterType.SpawnKatana);
+                CreateNewTask(0, EncaunterType.SpawnKatana);
+            }
+            
+
             foreach (var var in _scenarios[PlayerPrefs.GetInt("CurrentZone")].tasks)
             {
                 CreateNewTask(var.turn, var.taskType);
@@ -106,6 +115,9 @@ namespace Core
                     break;
                 case EncaunterType.SpawnMimic:
                     taskMethod = EncauntersHolder.Instance.SpawnMimic;
+                    break;
+                case EncaunterType.SpawnGoldenDoor:
+                    taskMethod = EncauntersHolder.Instance.SpawnGoldenDoor;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);

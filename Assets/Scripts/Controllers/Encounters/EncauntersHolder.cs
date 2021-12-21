@@ -64,6 +64,16 @@ namespace Core
             OnEndCallBack?.Invoke();
         }
         
+        public void SpawnGoldenDoor(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteGoldenDoor(OnStartCallBack, OnEndCallBack));
+        private IEnumerator ExecuteGoldenDoor(Action OnStartCallBack, Action OnEndCallBack) //Enter-alt
+        {
+            OnStartCallBack?.Invoke();
+            int iterator = 0;
+            TilableObjectsController.Instance.SpawnGoldenDoor(() => iterator++, () => iterator--); //
+            yield return new WaitUntil(() => iterator == 0);
+            OnEndCallBack?.Invoke();
+        }
+        
 
         public void SpawnAxe(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteWeapon(OnStartCallBack, OnEndCallBack, WeaponType.Axe));
         public void SpawnPickaxe(Action OnStartCallBack, Action OnEndCallBack) => StartCoroutine( ExecuteWeapon(OnStartCallBack, OnEndCallBack, WeaponType.Pickaxe));
@@ -98,6 +108,8 @@ namespace Core
             yield return new WaitUntil(() => iterator == 0);
             OnEndCallBack?.Invoke();
         }
+        
+        
     }
 }
 
@@ -113,6 +125,7 @@ public enum EncaunterType
     SpawnMace,
     SpawnBigSword,
     SpawnProjectile,
-    SpawnMimic
+    SpawnMimic,
+    SpawnGoldenDoor
 }
 

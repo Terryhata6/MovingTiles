@@ -151,6 +151,7 @@ MonoBehaviour:
   _enemyExample: {fileID: -337460968937002296, guid: 835e995dd90218f48945e95b366f0802, type: 3}
   _healExample: {fileID: 3235498240630013834, guid: ffd077b1b7ba0e94c8d25443c7eafe25, type: 3}
   _exitDoorExample: {fileID: 347175675493459151, guid: 9e67817d0e1ac0f43bc0e0017123e0ae, type: 3}
+  _goldenDoorExample: {fileID: 347175675493459151, guid: bff9fc93f7067014cbc83ec9ac118b71, type: 3}
   _projectile: {fileID: 5180620153415666575, guid: 152ff7568c2949843af3ff931ad0c845, type: 3}
   _tempBuilding: {fileID: 0}
   _weapons:
@@ -349,9 +350,11 @@ MonoBehaviour:
       taskType: 5
     - turn: 0
       taskType: 5
-    - turn: 2
-      taskType: 5
-    - turn: 4
+    - turn: 3
+      taskType: 10
+    - turn: 3
+      taskType: 10
+    - turn: 3
       taskType: 3
     envi: 2
   - tasks:

@@ -102,8 +102,8 @@ namespace Core.Entities
             }
             _currentTileBox = box;
             _currentTileBox.ChangeTiledObject(this);
-            transform.position = box.transform.position + new Vector3(0f,5f,0f);
-            yield return PlayStartAnimation(box.transform.position.y);
+            transform.position = box.transform.position + new Vector3(0f,15f,0f);
+            yield return PlayStartAnimation(box.transform.position.y );
         }
 
         public IEnumerator PlayStartAnimation(float yValue)
@@ -160,10 +160,30 @@ namespace Core.Entities
             StartCoroutine(LevelController.Instance.LevelFailed());
         }
 
-        public void GoToExitDoor()
+        public void GoToExitDoor(string config)
         {
-            SaveLoadManager.Instance.SavePlayerData(_health, _healthMax, _currentWeapon, _currentWeaponCharges, _damage);
-            LevelController.Instance.LevelVictory();
+            switch (config)
+            {
+                case "Exit":
+                {
+                    SaveLoadManager.Instance.SavePlayerData(_health, _healthMax, _currentWeapon, _currentWeaponCharges,
+                        _damage);
+                    LevelController.Instance.LevelVictory();
+                    break;
+                }
+                case "GoldenDoor":
+                {
+                    PlayerPrefs.SetInt("GetGoldenDoor", 1);
+                    SaveLoadManager.Instance.SavePlayerData(_health, _healthMax, _currentWeapon, _currentWeaponCharges,
+                        _damage);
+                    LevelController.Instance.LevelVictory();
+                    break;;
+                }
+                default:
+                    break;
+            }
+
+            
         }
 
         public void SetWeapon(WeaponType type, int damage, int charges)
