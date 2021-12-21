@@ -318,7 +318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &324000676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1034,7 +1034,7 @@ Skybox:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: e71ddaf9686e56d4ab4a735a0bc34170, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: 42a073b853f44e349808808b70d3916d, type: 2}
 --- !u!114 &963194233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1997,7 +1997,7 @@ MonoBehaviour:
   TestButton: 0
   TestStopButton: 0
   MinVolume: 0.3
-  MaxVolume: 1
+  MaxVolume: 0.7
   MinPitch: 1
   MaxPitch: 1
   MmSoundManagerTrack: 3

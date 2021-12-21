@@ -33,7 +33,6 @@ public class EnemySpecialInteraction : MonoBehaviour
                 break;
             case "Enemy":
             {
-                SoundController.Instance.SendText(this.transform, "HAHAHAHAH");
                 break;
             }
             default:
