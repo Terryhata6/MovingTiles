@@ -32,7 +32,7 @@ public class EnviermentController : Singleton<EnviermentController>
         
     }
 
-    public void ActivateSet(EnviSetType setTypeType)
+    public void ActivateSet(EnviSetType setTypeType, out EnviSetType envySetType)
     {
         int index;
         for (index = 0; index < GOSets.Count; index++)
@@ -49,11 +49,12 @@ public class EnviermentController : Singleton<EnviermentController>
                 {
                     _customSkybox.material = GOSets[index].skyboxMaterial;
                 }
-
+                envySetType = GOSets[index].setTypeType;
                 return;
             }
         }
-        
+
+        envySetType = EnviSetType.Grass;
     }
 }
 

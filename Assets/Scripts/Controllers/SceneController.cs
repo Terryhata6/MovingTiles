@@ -186,7 +186,7 @@ namespace Core
             if (_currentLevelController != null)
             {
                 GameEvents.Instance.OnLoadNewLevelController -= FindLevelController;
-                UIEvents.Instance.OnButtonStartGame += _currentLevelController.LevelStart;
+                
                 _currentLevelController.Initialize();
             }
             else

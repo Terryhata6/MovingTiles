@@ -73,6 +73,8 @@ namespace Core.UtilitsSpace
             }
             else
             {
+                greenBlock.SetActive(false);
+                redBlock.SetActive(false);
                 GameObject.Destroy(_playerSkill.gameObject);
             }
             
@@ -104,6 +106,8 @@ namespace Core.UtilitsSpace
 
         public void DropSkill()
         {
+            greenBlock.SetActive(false);
+            redBlock.SetActive(false);
             _pointSkill = false;
         }
         

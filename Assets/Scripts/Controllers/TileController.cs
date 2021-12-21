@@ -66,6 +66,12 @@ namespace Core
             StopAllCoroutines();
         }
 
+        public void CreateTiles(TileBoxType tilType)
+        {
+            _spawnType = tilType;
+            CreateTiles();
+        }
+
         public void CreateTiles()
         {
             if (!_useInstantiate)

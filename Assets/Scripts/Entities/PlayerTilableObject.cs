@@ -142,6 +142,7 @@ namespace Core.Entities
 
         public void GetHeal(float heal)
         {
+            SoundController.Instance.SendText(this.transform, $"+{heal}");
             _health += heal;
             if (_health > _healthMax)
             {
@@ -153,15 +154,22 @@ namespace Core.Entities
 
         public void GetDamage(float damage)
         {
-            //_hips.DOShakePosition(0.4f, snapping: false, strength: new Vector3(0.3f, 0, 0.3f)).OnComplete(() => _hips.localPosition = Vector3.up * 0.5f);
             _animator.SetTrigger("Hit");
             _health -= damage;
+            
             UpdateHealthUi();
             if (_health <= 0)
             {
+                SoundController.Instance.SendText(transform, "GG");
                 _health = 0;
                 NearDeath();
             }
+            else if (_health <= 2)
+            {
+                SoundController.Instance.SendText(transform, $"I need to heal!");
+            }
+            SoundController.Instance.SendText(transform, $"-{damage}");
+            
         }
 
         public void UpdateHealthUi()

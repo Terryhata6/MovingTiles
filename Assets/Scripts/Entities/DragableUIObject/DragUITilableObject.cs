@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Core.Entities;
 using Core.UtilitsSpace;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,7 +14,9 @@ namespace Core
     {
         [SerializeField] private TilableObject _tilableObjectInstance;
         [SerializeField] private TilableObject _tilableObjectExmple;
+        [SerializeField] private GameObject _tutorial;
         [SerializeField] private int _charges = 0;
+        private bool _tutorialReady = false;
         private RectTransform _draggingObjectRectTransform;
         private Vector3 _beginPosition;
         private bool _startCheckingTilable = false;
@@ -28,6 +31,13 @@ namespace Core
         {
             _draggingObjectRectTransform = transform as RectTransform;
             EnableImage(false);
+            if (_tutorial != null)
+            {
+                if(PlayerPrefs.GetInt("IconTutorialWasLearned", 0) < 1)
+                {
+                    _tutorialReady = true;
+                }
+            }
         }
 
 
@@ -50,6 +60,11 @@ namespace Core
                     Vector3.one*(_tilableObjectInstance.gameObject.transform.localScale.x /
                     UIController.Current.transform.localScale.x);
                 EnableImage(true);
+                if (_tutorialReady)
+                {
+                    _tutorial.SetActive(true);
+                }
+
                 AddCharge(1);
             }
         }
@@ -77,6 +92,12 @@ namespace Core
                                 TilableObjectsController.Instance.Pointer.PointSkill(_tilableObjectInstance,
                                     SpawnOrNotSpawnCallBack));
                             EnableImage(false);
+                            if (_tutorialReady)
+                            {
+                                _tutorial.SetActive(false);
+                                PlayerPrefs.SetInt("IconTutorialWasLearned", 1);
+                                _tutorialReady = false;
+                            }
                         }
                     }
                 }

@@ -31,7 +31,7 @@ namespace Core
         private void Awake()
         {
             Instance = this;
-            _pointer = new PlayerSkillPointer(); //Enter-alt
+            _pointer = PlayerSkillPointer.Instance; //Enter-alt
         }
 
         private void Start()

@@ -42,8 +42,7 @@ namespace Core
 
         public void Initialize()
         {
-            TileController.Instance.CreateTiles();
-            
+            UIEvents.Instance.OnButtonStartGame += LevelStart;
             //TilableObjectsController.Instance.SpawnStartEnemyes
             if (PlayerPrefs.GetInt("GetGoldenDoor") > 0)
             {
@@ -58,7 +57,22 @@ namespace Core
             {
                 CreateNewTask(var.turn, var.taskType);
             }
-            EnviermentController.Instance.ActivateSet(_scenarios[PlayerPrefs.GetInt("CurrentZone")].envi);
+            EnviermentController.Instance.ActivateSet(_scenarios[PlayerPrefs.GetInt("CurrentZone")].envi, out setTypeType);
+            switch (setTypeType)
+            {
+                case EnviSetType.Grass:
+                    TileController.Instance.CreateTiles(TileBoxType.Grass);
+                    break;
+                case EnviSetType.GrassAndStone:
+                    TileController.Instance.CreateTiles(TileBoxType.GrassAndStone);
+                    break;
+                case EnviSetType.Stone:
+                    TileController.Instance.CreateTiles(TileBoxType.Stone);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
             
             _currentTurnState = (_firstTurn == TurnState.Player)?TurnState.Enemy:TurnState.Player;
 
@@ -224,9 +238,10 @@ namespace Core
 
         public IEnumerator LevelFailed()
         {
+            
             SaveLoadManager.Instance.OnDeath();
             LevelEnd();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             GameEvents.Instance.LevelFailed();
             
         }
@@ -247,6 +262,7 @@ namespace Core
         {
             StopAllCoroutines();
             InputController.Instance.OnGetSwipe -= GetSwipe;
+            UIEvents.Instance.OnButtonStartGame -= LevelStart;
         }
     }
 
