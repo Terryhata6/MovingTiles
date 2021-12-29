@@ -22,18 +22,17 @@ public class EnemySpecialInteraction : MonoBehaviour
         switch (_interactionConfig)
         {
             case "Mimic":
-                value = Random.Range(-35f, -55f);
+                value = Random.Range(35f, 55f);
                 _interactionTarget2.transform.DOLocalMove(Vector3.forward* 0.2f, 0.2f);
-                _interactionTarget.DORotate(new Vector3(0, value, 0), 0.3f).OnComplete(
+                _interactionTarget.DORotate(new Vector3(0, value, 0), 0.5f).OnComplete(
                     () =>
                     {
-                        _interactionTarget.DORotate(new Vector3(0, -value, 0), 0.2f);
+                        _interactionTarget.DORotate(new Vector3(0, -value, 0), 0.5f);
                     });
                 //TODO FeedBack OpeningDoor
                 break;
             case "Enemy":
             {
-                SoundController.Instance.SendText(this.transform, "HAHAHAHAH");
                 break;
             }
             default:

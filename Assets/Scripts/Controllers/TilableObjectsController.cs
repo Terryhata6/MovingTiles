@@ -15,6 +15,7 @@ namespace Core
         [SerializeField] private TilableObject _enemyExample;
         [SerializeField] private HealPackTilableObject _healExample;
         [SerializeField] private ExitDoorTilableObject _exitDoorExample;
+        [SerializeField] private ExitDoorTilableObject _goldenDoorExample;
         [SerializeField] private ProjectileTilableObject _projectile;
         [SerializeField] private TilableObject _tempBuilding;
         [SerializeField] private WeaponTilableObject[] _weapons;
@@ -30,7 +31,7 @@ namespace Core
         private void Awake()
         {
             Instance = this;
-            _pointer = new PlayerSkillPointer(); //Enter-alt
+            _pointer = PlayerSkillPointer.Instance; //Enter-alt
         }
 
         private void Start()
@@ -138,6 +139,19 @@ namespace Core
             forEachCall?.Invoke();
             _tilebox = TileController.Instance.GetTileForenemy();
             _enemy = Instantiate(_exitDoorExample.gameObject, _tilebox.transform.position + Vector3.up * 5f,
+                Quaternion.identity, transform).GetComponent<ExitDoorTilableObject>();
+            _enemy.SetBox(_tilebox);
+            StartCoroutine(_enemy.SpawnAnimation((value) =>
+            {
+                AddObjectToList(value as TilableObject);
+                onEndSpawningCallback?.Invoke();
+            }));
+        }
+        public void SpawnGoldenDoor(Action forEachCall, Action onEndSpawningCallback) //Enter-alt
+        {
+            forEachCall?.Invoke();
+            _tilebox = TileController.Instance.GetTileForenemy();
+            _enemy = Instantiate(_goldenDoorExample.gameObject, _tilebox.transform.position + Vector3.up * 5f,
                 Quaternion.identity, transform).GetComponent<ExitDoorTilableObject>();
             _enemy.SetBox(_tilebox);
             StartCoroutine(_enemy.SpawnAnimation((value) =>

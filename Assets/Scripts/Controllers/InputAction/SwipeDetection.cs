@@ -25,8 +25,18 @@ namespace Core
         {
             _inputController.OnStartTouch += SwipeStart;
             _inputController.OnEndTouch += SwipeEnd;
+            GameEvents.Instance.OnSwipeFromArrow += SwipeFromArrow;
         }
-        
+
+        private void SwipeFromArrow(Vector3 direction)
+        {
+            _startPosition = Vector3.zero;
+            _endPosition = direction;
+            _startTime = 0f;
+            _endTime = _startTime + _maximumTime * 0.5f;
+            DetectSwipe();
+        }
+
         private void SwipeStart(Vector3 position, float time)
         {
             _startPosition = position;
@@ -82,6 +92,7 @@ namespace Core
         {
             _inputController.OnStartTouch -= SwipeStart;
             _inputController.OnEndTouch -= SwipeEnd;
+            GameEvents.Instance.OnSwipeFromArrow -= SwipeFromArrow;
         }
     }
 

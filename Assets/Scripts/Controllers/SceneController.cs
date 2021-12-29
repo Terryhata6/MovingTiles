@@ -86,6 +86,9 @@ namespace Core
 
         private void Start()
         {
+            //Application.targetFrameRate = Mathf.Clamp(Screen.currentResolution.refreshRate, 0 ,60);
+            
+            
             UIEvents.Instance.OnButtonNextLevel += LoadNextScene;
             GameEvents.Instance.OnRestartLevel += ReloadScene;
             GameEvents.Instance.OnGetDraggableDrop += GetNewDraggableObject;
@@ -183,7 +186,7 @@ namespace Core
             if (_currentLevelController != null)
             {
                 GameEvents.Instance.OnLoadNewLevelController -= FindLevelController;
-                UIEvents.Instance.OnButtonStartGame += _currentLevelController.LevelStart;
+                
                 _currentLevelController.Initialize();
             }
             else

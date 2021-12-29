@@ -11,22 +11,23 @@ namespace Core
     public class LevelController : MonoBehaviour
     {
         public static LevelController Instance;
-        [Header("Properties")] [SerializeField]
-        private TurnState _firstTurn;
-        [SerializeField]private EnviSetType setTypeType;
-        [SerializeField]private bool _gameEnd = false;
-        [SerializeField]private bool _endTurn = false;
+        [Header("Properties")] 
+        [SerializeField] private TurnState _firstTurn;
+        [SerializeField] private EnviSetType setTypeType;
+        [SerializeField] private bool _gameEnd = false;
+        [SerializeField] private bool _endTurn = false;
         private Coroutine _turnsCoroutine;
-        [Header("Tasks")][SerializeField]private TurnState _currentTurnState;
-        [SerializeField]private int _turnNumber = 0;
+        [Header("Tasks")]
+        [SerializeField] private TurnState _currentTurnState;
+        [SerializeField] private int _turnNumber = 0;
         [SerializeField] private int _currentTasksNum = 0;
         private Dictionary<int, Action<Action,Action>> turnTasks = new Dictionary<int, Action<Action,Action>>();
 
-        [Header("Scenarios")] [SerializeField] private List<LevelScenario> _scenarios;
+        [Header("Scenarios")]
+        [SerializeField] private List<LevelScenario> _scenarios;
         [Header("Camera")]
         [SerializeField] private CinemachineVirtualCamera _mobileCamera;
         [SerializeField] private CinemachineVirtualCamera _pcCamera;
-
 
 
         public TurnState TurnState => _currentTurnState;
@@ -40,14 +41,37 @@ namespace Core
 
         public void Initialize()
         {
-            TileController.Instance.CreateTiles();
-            
+            UIEvents.Instance.OnButtonStartGame += LevelStart;
             //TilableObjectsController.Instance.SpawnStartEnemyes
+            if (PlayerPrefs.GetInt("GetGoldenDoor") > 0)
+            {
+                PlayerPrefs.SetInt("GetGoldenDoor", 0);
+                CreateNewTask(0, EncaunterType.SpawnKatana);
+                CreateNewTask(0, EncaunterType.SpawnKatana);
+                CreateNewTask(0, EncaunterType.SpawnKatana);
+            }
+            
+
             foreach (var var in _scenarios[PlayerPrefs.GetInt("CurrentZone")].tasks)
             {
                 CreateNewTask(var.turn, var.taskType);
             }
-            EnviermentController.Instance.ActivateSet(_scenarios[PlayerPrefs.GetInt("CurrentZone")].envi);
+            EnviermentController.Instance.ActivateSet(_scenarios[PlayerPrefs.GetInt("CurrentZone")].envi, out setTypeType);
+            switch (setTypeType)
+            {
+                case EnviSetType.Grass:
+                    TileController.Instance.CreateTiles(TileBoxType.Grass);
+                    break;
+                case EnviSetType.GrassAndStone:
+                    TileController.Instance.CreateTiles(TileBoxType.GrassAndStone);
+                    break;
+                case EnviSetType.Stone:
+                    TileController.Instance.CreateTiles(TileBoxType.Stone);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
             
             _currentTurnState = (_firstTurn == TurnState.Player)?TurnState.Enemy:TurnState.Player;
 
@@ -104,6 +128,9 @@ namespace Core
                     break;
                 case EncaunterType.SpawnMimic:
                     taskMethod = EncauntersHolder.Instance.SpawnMimic;
+                    break;
+                case EncaunterType.SpawnGoldenDoor:
+                    taskMethod = EncauntersHolder.Instance.SpawnGoldenDoor;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -210,9 +237,10 @@ namespace Core
 
         public IEnumerator LevelFailed()
         {
+            
             SaveLoadManager.Instance.OnDeath();
             LevelEnd();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             GameEvents.Instance.LevelFailed();
             
         }
@@ -233,6 +261,7 @@ namespace Core
         {
             StopAllCoroutines();
             InputController.Instance.OnGetSwipe -= GetSwipe;
+            UIEvents.Instance.OnButtonStartGame -= LevelStart;
         }
     }
 

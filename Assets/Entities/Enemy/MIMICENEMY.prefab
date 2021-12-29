@@ -137,6 +137,8 @@ MonoBehaviour:
   _haveSkills: 0
   _needDebugLog: 0
   _wantToMoveToHero: 1
+  interaction: {fileID: 8227732571081519622}
+  haveInteraction: 1
   _health: 10
   _mmFeedbacks: {fileID: 0}
   _baseDamage: 4
@@ -165,6 +167,11 @@ MonoBehaviour:
   _interactionTarget: {fileID: 9143070591227933699}
   _interactionTarget2: {fileID: 3432779616737397973}
   _interactionConfig: Mimic
+  MovesPhrazes: []
+  YouMovesPhrazes: []
+  AttackPhrazes: []
+  GetdamagePhrazes: []
+  DiesPhrazes: []
 --- !u!1 &7542283427082660570
 GameObject:
   m_ObjectHideFlags: 0

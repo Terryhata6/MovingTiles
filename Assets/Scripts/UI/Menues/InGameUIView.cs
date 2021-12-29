@@ -38,6 +38,7 @@ public class InGameUIView : BaseMenuView
         if (!IsShow) return;
         _panel.gameObject.SetActive(false);
         GameEvents.Instance.OnPlayerHpChange -= SetHp;
+        UIEvents.Instance.HidePlayerUi();
         IsShow = false;
     }
 
@@ -47,6 +48,7 @@ public class InGameUIView : BaseMenuView
 
         #region debug
         GameEvents.Instance.OnPlayerHpChange += SetHp;
+        UIEvents.Instance.ShowPlayerUi();
         #endregion
         _panel.gameObject.SetActive(true);
         IsShow = true;

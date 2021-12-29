@@ -154,10 +154,10 @@ Material:
     - _DetailMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0.990566, g: 0, b: 0, a: 0.85056}
-    - _FlatSpecularColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 0.92941177}
+    - _FlatSpecularColor: {r: 1.3003829, g: 1.2967025, b: 1.2930222, a: 0.92941177}
     - _LightAttenuation: {r: 0, g: 1, b: 0, a: 0}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0.3207547, g: 0.27960128, b: 0.27960128, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
@@ -180,7 +180,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: z__GradientRampTex{"mode":0,"colorKeys":[{"color":{"r":0.7830188870429993,"g":0.7830188870429993,"b":0.7830188870429993,"a":1.0},"time":0.0},{"color":{"r":1.0,"g":0.9292452931404114,"b":0.9292452931404114,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
+  m_Name: z__GradientRampTex{"mode":0,"colorKeys":[{"color":{"r":0.6415094137191773,"g":0.5840156674385071,"b":0.5840156674385071,"a":1.0},"time":0.0},{"color":{"r":1.0,"g":1.0,"b":1.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -215,7 +215,7 @@ Texture2D:
   m_ColorSpace: 1
   m_PlatformBlob: 
   image data: 1024
-  _typelessdata: ffc8c8c8ffc8c8c8ffc8c8c8ffc8c8c8ffc9c8c8ffc9c8c8ffc9c9c9ffc9c9c9ffc9c9c9ffcac9c9ffcac9c9ffcac9c9ffcac9c9ffcacacaffcbcacaffcbcacaffcbcacaffcbcacaffcccacaffcccacaffcccbcbffcccbcbffcccbcbffcdcbcbffcdcbcbffcdcbcbffcdcbcbffceccccffceccccffceccccffceccccffceccccffcfccccffcfccccffcfcdcdffcfcdcdffcfcdcdffd0cdcdffd0cdcdffd0cdcdffd0ceceffd1ceceffd1ceceffd1ceceffd1ceceffd1ceceffd2ceceffd2cfcfffd2cfcfffd2cfcfffd3cfcfffd3cfcfffd3cfcfffd3cfcfffd3d0d0ffd4d0d0ffd4d0d0ffd4d0d0ffd4d0d0ffd4d0d0ffd5d0d0ffd5d1d1ffd5d1d1ffd5d1d1ffd6d1d1ffd6d1d1ffd6d1d1ffd6d1d1ffd6d2d2ffd7d2d2ffd7d2d2ffd7d2d2ffd7d2d2ffd8d2d2ffd8d2d2ffd8d3d3ffd8d3d3ffd8d3d3ffd9d3d3ffd9d3d3ffd9d3d3ffd9d4d4ffd9d4d4ffdad4d4ffdad4d4ffdad4d4ffdad4d4ffdbd4d4ffdbd5d5ffdbd5d5ffdbd5d5ffdbd5d5ffdcd5d5ffdcd5d5ffdcd5d5ffdcd6d6ffddd6d6ffddd6d6ffddd6d6ffddd6d6ffddd6d6ffded6d6ffded7d7ffded7d7ffded7d7ffded7d7ffdfd7d7ffdfd7d7ffdfd7d7ffdfd8d8ffe0d8d8ffe0d8d8ffe0d8d8ffe0d8d8ffe0d8d8ffe1d8d8ffe1d9d9ffe1d9d9ffe1d9d9ffe1d9d9ffe2d9d9ffe2d9d9ffe2dadaffe2dadaffe3dadaffe3dadaffe3dadaffe3dadaffe3dadaffe4dbdbffe4dbdbffe4dbdbffe4dbdbffe5dbdbffe5dbdbffe5dbdbffe5dcdcffe5dcdcffe6dcdcffe6dcdcffe6dcdcffe6dcdcffe6dcdcffe7ddddffe7ddddffe7ddddffe7ddddffe8ddddffe8ddddffe8ddddffe8dedeffe8dedeffe9dedeffe9dedeffe9dedeffe9dedeffeadedeffeadfdfffeadfdfffeadfdfffeadfdfffebdfdfffebdfdfffebe0e0ffebe0e0ffebe0e0ffece0e0ffece0e0ffece0e0ffece0e0ffede1e1ffede1e1ffede1e1ffede1e1ffede1e1ffeee1e1ffeee1e1ffeee2e2ffeee2e2ffefe2e2ffefe2e2ffefe2e2ffefe2e2ffefe2e2fff0e3e3fff0e3e3fff0e3e3fff0e3e3fff0e3e3fff1e3e3fff1e3e3fff1e4e4fff1e4e4fff2e4e4fff2e4e4fff2e4e4fff2e4e4fff2e4e4fff3e5e5fff3e5e5fff3e5e5fff3e5e5fff4e5e5fff4e5e5fff4e6e6fff4e6e6fff4e6e6fff5e6e6fff5e6e6fff5e6e6fff5e6e6fff5e7e7fff6e7e7fff6e7e7fff6e7e7fff6e7e7fff7e7e7fff7e7e7fff7e8e8fff7e8e8fff7e8e8fff8e8e8fff8e8e8fff8e8e8fff8e8e8fff8e9e9fff9e9e9fff9e9e9fff9e9e9fff9e9e9fffae9e9fffae9e9fffaeaeafffaeaeafffaeaeafffbeaeafffbeaeafffbeaeafffbeaeafffcebebfffcebebfffcebebfffcebebfffcebebfffdebebfffdebebfffdececfffdececfffdececfffeececfffeececfffeececfffeededffffededffffededffffeded
+  _typelessdata: ffa49595ffa49595ffa49696ffa59696ffa59797ffa59797ffa69797ffa69898ffa69898ffa79999ffa79999ffa89999ffa89a9affa89a9affa99b9bffa99b9bffa99c9cffaa9c9cffaa9c9cffaa9d9dffab9d9dffab9e9effab9e9effac9e9effac9f9fffad9f9fffada0a0ffada0a0ffaea1a1ffaea1a1ffaea1a1ffafa2a2ffafa2a2ffafa3a3ffb0a3a3ffb0a3a3ffb0a4a4ffb1a4a4ffb1a5a5ffb2a5a5ffb2a6a6ffb2a6a6ffb3a6a6ffb3a7a7ffb3a7a7ffb4a8a8ffb4a8a8ffb4a8a8ffb5a9a9ffb5a9a9ffb6aaaaffb6aaaaffb6ababffb7ababffb7ababffb7acacffb8acacffb8adadffb8adadffb9adadffb9aeaeffb9aeaeffbaafafffbaafafffbbb0b0ffbbb0b0ffbbb0b0ffbcb1b1ffbcb1b1ffbcb2b2ffbdb2b2ffbdb2b2ffbdb3b3ffbeb3b3ffbeb4b4ffbeb4b4ffbfb5b5ffbfb5b5ffc0b5b5ffc0b6b6ffc0b6b6ffc1b7b7ffc1b7b7ffc1b7b7ffc2b8b8ffc2b8b8ffc2b9b9ffc3b9b9ffc3babaffc3babaffc4babaffc4bbbbffc5bbbbffc5bcbcffc5bcbcffc6bcbcffc6bdbdffc6bdbdffc7bebeffc7bebeffc7bfbfffc8bfbfffc8bfbfffc9c0c0ffc9c0c0ffc9c1c1ffcac1c1ffcac1c1ffcac2c2ffcbc2c2ffcbc3c3ffcbc3c3ffccc4c4ffccc4c4ffccc4c4ffcdc5c5ffcdc5c5ffcec6c6ffcec6c6ffcec6c6ffcfc7c7ffcfc7c7ffcfc8c8ffd0c8c8ffd0c9c9ffd0c9c9ffd1c9c9ffd1cacaffd1cacaffd2cbcbffd2cbcbffd3cbcbffd3ccccffd3ccccffd4cdcdffd4cdcdffd4cdcdffd5ceceffd5ceceffd5cfcfffd6cfcfffd6d0d0ffd6d0d0ffd7d0d0ffd7d1d1ffd8d1d1ffd8d2d2ffd8d2d2ffd9d2d2ffd9d3d3ffd9d3d3ffdad4d4ffdad4d4ffdad5d5ffdbd5d5ffdbd5d5ffdcd6d6ffdcd6d6ffdcd7d7ffddd7d7ffddd7d7ffddd8d8ffded8d8ffded9d9ffded9d9ffdfdadaffdfdadaffdfdadaffe0dbdbffe0dbdbffe1dcdcffe1dcdcffe1dcdcffe2ddddffe2ddddffe2dedeffe3dedeffe3dfdfffe3dfdfffe4dfdfffe4e0e0ffe4e0e0ffe5e1e1ffe5e1e1ffe6e1e1ffe6e2e2ffe6e2e2ffe7e3e3ffe7e3e3ffe7e4e4ffe8e4e4ffe8e4e4ffe8e5e5ffe9e5e5ffe9e6e6ffe9e6e6ffeae6e6ffeae7e7ffebe7e7ffebe8e8ffebe8e8ffece9e9ffece9e9ffece9e9ffedeaeaffedeaeaffedebebffeeebebffeeebebffefececffefececffefededfff0ededfff0eeeefff0eeeefff1eeeefff1efeffff1efeffff2f0f0fff2f0f0fff2f0f0fff3f1f1fff3f1f1fff4f2f2fff4f2f2fff4f3f3fff5f3f3fff5f3f3fff5f4f4fff6f4f4fff6f5f5fff6f5f5fff7f5f5fff7f6f6fff7f6f6fff8f7f7fff8f7f7fff9f8f8fff9f8f8fff9f8f8fffaf9f9fffaf9f9fffafafafffbfafafffbfafafffbfbfbfffcfbfbfffcfcfcfffcfcfcfffdfdfdfffdfdfdfffefdfdfffefefefffefefeffffffffffffffff
   m_StreamData:
     serializedVersion: 2
     offset: 0

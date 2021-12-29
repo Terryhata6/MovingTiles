@@ -9,7 +9,6 @@ namespace Core.Entities
     [DefaultExecutionOrder(1)]
     public class PlayerTilableObject : BaseTilableObject, ITilable, IAnimatorEventListner
     {
-
         [SerializeField] private bool _canCounterAttack = false;
         [SerializeField] private float _health;
         [SerializeField] private float _healthMax;
@@ -20,23 +19,24 @@ namespace Core.Entities
         [SerializeField] private int _currentWeaponCharges = 0;
         [SerializeField] private int _currentWeapon = -1;
         [SerializeField] private GameObject[] _weapons;
-
+        private bool playerUiLoaded = false;
         public float HP => _health;
         public float MaxHP => _healthMax;
+
         public int CurrentDamage
         {
-            get
-            {
-                return _damage;
-            }
+            get { return _damage; }
         }
 
 
         private IEnumerator Start()
         {
+            UIEvents.Instance.OnShowPlayerUi += UiShowed;
+            UIEvents.Instance.OnHidePlayerUi += UiHided;
             _damage = _baseDamage;
             _animator = GetComponentInChildren<Animator>();
-            SaveLoadManager.Instance.LoadPlayerData(out _health, out _healthMax, out _currentWeapon, out _currentWeaponCharges, out _damage);
+            SaveLoadManager.Instance.LoadPlayerData(out _health, out _healthMax, out _currentWeapon,
+                out _currentWeaponCharges, out _damage);
             if (_currentWeapon >= 0 && _currentWeapon < _weapons.Length)
             {
                 SetWeapon((WeaponType) _currentWeapon, _damage, _currentWeaponCharges);
@@ -44,7 +44,18 @@ namespace Core.Entities
 
             yield return SetBoxCorutine(TileController.Instance.Center);
             UpdateHealthUi();
-            
+            yield return new WaitUntil(() => playerUiLoaded);
+            UpdateHealthUi();
+        }
+
+        private void UiShowed()
+        {
+            playerUiLoaded = true;
+        }
+
+        private void UiHided()
+        {
+            playerUiLoaded = false;
         }
 
         public void ActivateOneHandedWeapon(int charges, int damage)
@@ -67,6 +78,7 @@ namespace Core.Entities
             {
                 _weapons[i].SetActive(false);
             }
+
             //TODO DeactivateWeaponFeedBack
             _animator.SetBool("ThoHand", false);
             _damage = _baseDamage;
@@ -80,39 +92,43 @@ namespace Core.Entities
             {
                 _currentTileBox.ChangeTiledObject();
             }
+
             if (box == null)
             {
                 return;
             }
+
             _currentTileBox = box;
             _currentTileBox.ChangeTiledObject(this);
             transform.position = box.transform.position;
             PlayStartAnimation(box.transform.position.y);
         }
-        
+
         public IEnumerator SetBoxCorutine(TileBox box)
         {
             if (_currentTileBox != null)
             {
                 _currentTileBox.ChangeTiledObject();
             }
+
             if (box == null)
             {
                 yield break;
             }
+
             _currentTileBox = box;
             _currentTileBox.ChangeTiledObject(this);
-            transform.position = box.transform.position + new Vector3(0f,5f,0f);
+            transform.position = box.transform.position + new Vector3(0f, 15f, 0f);
             yield return PlayStartAnimation(box.transform.position.y);
         }
 
         public IEnumerator PlayStartAnimation(float yValue)
         {
-            _animator.SetBool("Flying",true);
+            _animator.SetBool("Flying", true);
             int i = 1;
-            transform.DOMoveY(yValue, 0.6f).OnComplete(()=> i = 0);
+            transform.DOMoveY(yValue, 0.6f).OnComplete(() => i = 0);
             yield return new WaitUntil(() => i == 0);
-            _animator.SetBool("Flying",false);
+            _animator.SetBool("Flying", false);
         }
 
         public void GetDamage(float Damage, BaseTilableObject enemy)
@@ -123,9 +139,10 @@ namespace Core.Entities
                 enemy.CallbackForPlayerMoves(PlayerCallbackType.Attack, this);
             }
         }
-        
+
         public void GetHeal(float heal)
         {
+            SoundController.Instance.SendText(this.transform, $"+{heal}");
             _health += heal;
             if (_health > _healthMax)
             {
@@ -134,23 +151,30 @@ namespace Core.Entities
 
             UpdateHealthUi();
         }
-        
+
         public void GetDamage(float damage)
         {
-            //_hips.DOShakePosition(0.4f, snapping: false, strength: new Vector3(0.3f, 0, 0.3f)).OnComplete(() => _hips.localPosition = Vector3.up * 0.5f);
             _animator.SetTrigger("Hit");
             _health -= damage;
+            
             UpdateHealthUi();
             if (_health <= 0)
             {
+                SoundController.Instance.SendText(transform, "GG");
                 _health = 0;
                 NearDeath();
             }
+            else if (_health <= 2)
+            {
+                SoundController.Instance.SendText(transform, $"I need to heal!");
+            }
+            SoundController.Instance.SendText(transform, $"-{damage}");
+            
         }
 
         public void UpdateHealthUi()
         {
-            GameEvents.Instance.PlayerHpChange(_health,0,_healthMax);
+            GameEvents.Instance.PlayerHpChange(_health, 0, _healthMax);
         }
 
 
@@ -160,10 +184,29 @@ namespace Core.Entities
             StartCoroutine(LevelController.Instance.LevelFailed());
         }
 
-        public void GoToExitDoor()
+        public void GoToExitDoor(string config)
         {
-            SaveLoadManager.Instance.SavePlayerData(_health, _healthMax, _currentWeapon, _currentWeaponCharges, _damage);
-            LevelController.Instance.LevelVictory();
+            switch (config)
+            {
+                case "Exit":
+                {
+                    SaveLoadManager.Instance.SavePlayerData(_health, _healthMax, _currentWeapon, _currentWeaponCharges,
+                        _damage);
+                    LevelController.Instance.LevelVictory();
+                    break;
+                }
+                case "GoldenDoor":
+                {
+                    PlayerPrefs.SetInt("GetGoldenDoor", 1);
+                    SaveLoadManager.Instance.SavePlayerData(_health, _healthMax, _currentWeapon, _currentWeaponCharges,
+                        _damage);
+                    LevelController.Instance.LevelVictory();
+                    break;
+                    ;
+                }
+                default:
+                    break;
+            }
         }
 
         public void SetWeapon(WeaponType type, int damage, int charges)
@@ -172,6 +215,7 @@ namespace Core.Entities
             {
                 _weapons[i].SetActive(false);
             }
+
             switch (type)
             {
                 case WeaponType.Axe:
@@ -184,6 +228,7 @@ namespace Core.Entities
                     {
                         ActivateTwoHandedWeapon(charges, damage);
                     }
+
                     _currentWeapon = 0;
                     _weapons[0].SetActive(true);
                     break;
@@ -198,13 +243,14 @@ namespace Core.Entities
                     {
                         ActivateTwoHandedWeapon(charges, damage);
                     }
+
                     _currentWeapon = 1;
                     _weapons[1].SetActive(true);
                     break;
                 }
                 case WeaponType.Katana:
                 {
-                    ActivateOneHandedWeapon(charges,damage);
+                    ActivateOneHandedWeapon(charges, damage);
                     _currentWeapon = 2;
                     _weapons[2].SetActive(true);
                     break;
@@ -219,6 +265,7 @@ namespace Core.Entities
                     {
                         ActivateTwoHandedWeapon(charges, damage);
                     }
+
                     _currentWeapon = 3;
                     _weapons[3].SetActive(true);
                     break;
@@ -233,6 +280,7 @@ namespace Core.Entities
                     {
                         ActivateTwoHandedWeapon(charges, damage);
                     }
+
                     _currentWeapon = 4;
                     _weapons[4].SetActive(true);
                     break;
@@ -251,14 +299,14 @@ namespace Core.Entities
                 {
                     break;
                 }
-                case "Exit"://Enter-alt
+                case "Exit": //Enter-alt
                 {
-                    StartCoroutine(Exit(obj)); 
+                    StartCoroutine(Exit(obj));
                     break;
                 }
-                case "Collectable"://Enter-alt
+                case "Collectable": //Enter-alt
                 {
-                    StartCoroutine(Pickup(obj)); 
+                    StartCoroutine(Pickup(obj));
                     break;
                 }
                 case "Enemy":
@@ -277,21 +325,22 @@ namespace Core.Entities
 
         private bool _attackStarted = false;
         private bool _endAttack = false;
+
         public void EndAttack()
         {
             if (_attackStarted)
             {
                 _endAttack = true;
                 //Debug.LogWarning("PlayerEndAttack");
-                
             }
         }
 
         public IEnumerator Attack(BaseTilableObject obj)
         {
-            if (LevelController.Instance.TurnState == TurnState.Player/* || _canCounterAttack*/)
+            if (LevelController.Instance.TurnState == TurnState.Player /* || _canCounterAttack*/)
             {
-                transform.DORotateQuaternion(Quaternion.LookRotation(obj.transform.position - transform.position, Vector3.up) , 0.05f);
+                transform.DORotateQuaternion(
+                    Quaternion.LookRotation(obj.transform.position - transform.position, Vector3.up), 0.05f);
                 _animator.SetTrigger("Attack");
                 _attackStarted = true;
                 _currentWeaponCharges--;
@@ -303,8 +352,8 @@ namespace Core.Entities
                 {
                     DeactivateWeapon();
                 }
-                
-                
+
+
                 /*for (float i = 0; i < 0.5f;  i = Mathf.Clamp(i + Time.deltaTime * _jumpSpeed, 0 ,0.5f))
                 {
                     TempVector3 = Vector3.Lerp(_currentTileBox.transform.position, obj.Tile.transform.position,
@@ -326,30 +375,40 @@ namespace Core.Entities
                 }*/
             }
         }
+
         public IEnumerator Pickup(BaseTilableObject obj) //Enter-alt
         {
             if (LevelController.Instance.TurnState == TurnState.Player)
             {
                 obj.CallbackForPlayerMoves(PlayerCallbackType.Pickup, this);
             }
+
             yield break;
         }
+
         public IEnumerator Exit(BaseTilableObject obj) //Enter-alt
         {
             if (LevelController.Instance.TurnState == TurnState.Player)
             {
                 obj.CallbackForPlayerMoves(PlayerCallbackType.Exit, this);
             }
+
             yield break;
         }
-        
 
-    public void LoadStatsFormPrefs()
+
+        public void LoadStatsFormPrefs()
         {
         }
 
         public void SavePrefs()
         {
+        }
+
+        private void OnDisable()
+        {
+            UIEvents.Instance.OnShowPlayerUi -= UiShowed;
+            UIEvents.Instance.OnHidePlayerUi -= UiHided;
         }
     }
 }

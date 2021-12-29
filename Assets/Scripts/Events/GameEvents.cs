@@ -1,5 +1,6 @@
 using System;
 using Core.UtilitsSpace;
+using UnityEngine;
 
 namespace Core
 {
@@ -65,6 +66,12 @@ namespace Core
         public void HideLevelUI()
         {
             OnHideLevelUI?.Invoke();
+        }
+
+        public Action<Vector3> OnSwipeFromArrow;
+        public void SwipeFromArrow(Vector3 dir)
+        {
+            OnSwipeFromArrow?.Invoke(dir);
         }
     }
 }

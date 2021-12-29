@@ -65,4 +65,18 @@ public class UIEvents : Singleton<UIEvents>
         OnButtonBodyLeft?.Invoke();
     }
     #endregion
+
+    #region PlayerUi
+    public event Action OnShowPlayerUi;
+    public void ShowPlayerUi()
+    {
+        OnShowPlayerUi?.Invoke();
+    }
+    public event Action OnHidePlayerUi;
+    public void HidePlayerUi()
+    {
+        OnHidePlayerUi?.Invoke();
+    }
+
+    #endregion
 }

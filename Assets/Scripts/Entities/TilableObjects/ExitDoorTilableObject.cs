@@ -13,6 +13,7 @@ namespace Core.Entities
 
         protected override IEnumerator InteractionWithPlayer(TileBox box, TurnState state)
         {
+            transform.parent = TileController.Instance.transform;
             transform.DOLookAt(new Vector3(0, 0, -1), 0.1f);
             transform.DOScale(new Vector3(1.5f, 1.5f, 1.5f), 0.1f);
             bool doorOpened = false;
@@ -38,7 +39,7 @@ namespace Core.Entities
             transform.DORotate(Vector3.zero, 1f, RotateMode.FastBeyond360);
             doorScaled = false;
             yield return new WaitUntil(() => doorScaled);
-            player.GoToExitDoor();
+            player.GoToExitDoor(_config);
             yield return null;
         }
 

@@ -16,7 +16,7 @@ public class SoundController : Singleton<SoundController>
 
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         _mainTrackSound.Play(Vector3.zero, 1f);
     }
 
