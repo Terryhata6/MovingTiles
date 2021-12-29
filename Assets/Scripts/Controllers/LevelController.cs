@@ -28,7 +28,6 @@ namespace Core
         [Header("Camera")]
         [SerializeField] private CinemachineVirtualCamera _mobileCamera;
         [SerializeField] private CinemachineVirtualCamera _pcCamera;
-        
 
 
         public TurnState TurnState => _currentTurnState;
